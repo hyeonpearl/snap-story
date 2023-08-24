@@ -1,5 +1,5 @@
-function App() {
-  return <div></div>;
-}
+import PageRouter from './_zlib/components/PageRouter';
 
-export default App;
+export default function App() {
+  return <PageRouter />;
+}
