@@ -5,12 +5,15 @@ import Auth from '../../pages/Auth';
 import Profile from '../../pages/Profile';
 import EditProfile from '../../pages/EditProfile';
 
-export default function PageRouter() {
+export default function PageRouter({ isSignedIn }) {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/auth' element={<Auth />} />
+        {isSignedIn ? (
+          <Route path='/' element={<Home />} />
+        ) : (
+          <Route path='/' element={<Auth />} />
+        )}
         <Route path='/profile' element={<Profile />} />
         <Route path='/edit-profile' element={<EditProfile />} />
       </Routes>
