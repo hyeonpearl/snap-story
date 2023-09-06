@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
+import { auth } from './_zlib/server/firebase';
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,8 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   const initialFirebase = async () => {
-    setTimeout(() => setIsLoading(false), 2000);
+    await auth.authStateReady();
+    setIsLoading(false);
   };
 
   useEffect(() => {
