@@ -3,13 +3,15 @@ import { useEffect, useState } from 'react';
 
 import PageLayout from './_zlib/components/PageLayout';
 import Loading from './_zlib/components/Loading';
+import Wrapper from './_zlib/components/Wrapper';
 import GlobalStyles from './_zlib/styles/GlobalStyles';
+
+import { auth } from './_zlib/server/firebase';
 
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
-import { auth } from './_zlib/server/firebase';
 
 const router = createBrowserRouter([
   {
@@ -44,8 +46,10 @@ export default function App() {
 
   return (
     <>
-      <GlobalStyles />
-      {isLoading ? <Loading /> : <RouterProvider router={router} />}
+      <Wrapper>
+        <GlobalStyles />
+        {isLoading ? <Loading /> : <RouterProvider router={router} />}
+      </Wrapper>
     </>
   );
 }

@@ -1,7 +1,20 @@
-import { styled } from 'styled-components';
+import { HTMLAttributes } from 'react';
+import { css, styled } from 'styled-components';
 
-export default function Txt({ ...props }) {
-  return <StyledTxt {...props} />;
+interface Props extends HTMLAttributes<HTMLSpanElement> {
+  typography?: string;
 }
 
-export const StyledTxt = styled.span``;
+export default function Txt({ typography, ...props }: Props) {
+  return <StyledTxt typography={typography} {...props} />;
+}
+
+export const StyledTxt = styled.span<Props>`
+  font-size: 1rem;
+
+  ${({ typography }) =>
+    typography === 'title' &&
+    css`
+      font-size: 48px;
+    `};
+`;
