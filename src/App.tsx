@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import PageLayout from './_zlib/components/PageLayout';
 import Loading from './_zlib/components/Loading';
