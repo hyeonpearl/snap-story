@@ -8,6 +8,7 @@ import Txt from '../_zlib/components/Txt';
 export default function SignUp() {
   const initialForm = { name: '', email: '', password: '' };
   const [form, setForm] = useState(initialForm);
+  const [error, setError] = useState('');
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -77,6 +78,7 @@ export default function SignUp() {
         />
         <Input value={'계정 만들기'} type={'submit'} required />
       </Form>
+      {error ? <Txt typography='error'>{error}</Txt> : null}
     </Wrapper>
   );
 }

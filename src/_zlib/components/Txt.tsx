@@ -10,11 +10,17 @@ export default function Txt({ typography, ...props }: Props) {
 }
 
 export const StyledTxt = styled.span<Props>`
-  font-size: 1rem;
-
   ${({ typography }) =>
     typography === 'title' &&
     css`
       font-size: 48px;
+    `};
+
+  ${({ typography }) =>
+    typography === 'error' &&
+    css`
+      margin-top: 10px;
+      font-weight: 600;
+      color: tomato;
     `};
 `;
