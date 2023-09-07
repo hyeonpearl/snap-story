@@ -1,10 +1,10 @@
-import React from 'react';
-import { Text, Wrapper } from '../styles/default.styles';
+import Wrapper from './Wrapper';
+import Txt from './Txt';
 
 export default function Loading() {
   return (
     <Wrapper>
-      <Text>Loading...</Text>
+      <Txt>Loading...</Txt>
     </Wrapper>
   );
 }
