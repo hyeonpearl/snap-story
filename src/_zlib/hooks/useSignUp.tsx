@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { setUserProfile, signUpWithEmailAndPassword } from '../server/firebase';
+import { auth } from '../server/firebase';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 export default function useSignUp() {
   const initialForm = { name: '', email: '', password: '' };
@@ -46,13 +47,14 @@ export default function useSignUp() {
       return;
     try {
       // 계정 생성
-      const credentials = await signUpWithEmailAndPassword(
+      const credentials = await createUserWithEmailAndPassword(
+        auth,
         form.email,
         form.password
       );
       console.log(credentials.user);
       // 사용자 이름 설정
-      await setUserProfile(credentials.user, form.name);
+      await updateProfile(credentials.user, { displayName: form.name });
       // 홈으로 리다이렉트
       navigate('/');
     } catch (error) {
