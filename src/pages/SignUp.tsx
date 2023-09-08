@@ -1,52 +1,11 @@
-import React, { useState } from 'react';
-
 import Wrapper from '../_zlib/components/Wrapper';
 import Form from '../_zlib/components/Form';
 import Input from '../_zlib/components/Input';
 import Txt from '../_zlib/components/Txt';
+import useSignUp from '../_zlib/hooks/useSignUp';
 
 export default function SignUp() {
-  const initialForm = { name: '', email: '', password: '' };
-  const [form, setForm] = useState(initialForm);
-  const [error, setError] = useState('');
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { name, value },
-    } = e;
-
-    switch (true) {
-      case name === 'name': {
-        setForm(prev => ({ ...prev, name: value }));
-        break;
-      }
-      case name === 'email': {
-        setForm(prev => ({ ...prev, email: value }));
-        break;
-      }
-      case name === 'password': {
-        setForm(prev => ({ ...prev, password: value }));
-        break;
-      }
-      default: {
-        return;
-      }
-    }
-  };
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      // 계정 생성
-      // 사용자 이름 설정
-      // 홈페이지로 redirect
-      console.log(form);
-    } catch (error) {
-      // setError
-      console.log(error);
-    } finally {
-      // setLoading(false)
-    }
-  };
+  const { form, error, onChange, onSubmit } = useSignUp();
 
   return (
     <Wrapper type={'form'}>
