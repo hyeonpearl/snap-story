@@ -2,5 +2,5 @@
 <rect width="600" height="600" fill="black"/>
 <line x1="74" y1="82" x2="524" y2="82" stroke="white" stroke-width="40"/>
 <line x1="75" y1="481" x2="525" y2="481" stroke="white" stroke-width="40"/>
-<path d="M86.8802 457L471.941 105H512.728L132.043 457H86.8802Z" fill="black" stroke="white" stroke-width="10"/>
+<path d="M85.5208 457L414.67 105H513.711L194.285 457H85.5208Z" fill="black" stroke="white" stroke-width="10"/>
 </svg>
