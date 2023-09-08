@@ -1,7 +1,7 @@
-import { HTMLAttributes } from 'react';
+import React from 'react';
 import { css, styled } from 'styled-components';
 
-interface Props extends HTMLAttributes<HTMLSpanElement> {
+interface Props extends React.HTMLAttributes<HTMLSpanElement> {
   typography?: string;
 }
 

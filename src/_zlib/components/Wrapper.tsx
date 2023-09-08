@@ -1,7 +1,7 @@
-import { HTMLAttributes } from 'react';
+import React from 'react';
 import { css, styled } from 'styled-components';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type?: string;
   direction?: 'horizontal' | 'vertical';
 }

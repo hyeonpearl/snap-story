@@ -1,5 +1,5 @@
+import React from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 
 import PageLayout from './_zlib/components/PageLayout';
 import Loading from './_zlib/components/Loading';
@@ -33,14 +33,14 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const initialFirebase = async () => {
     await auth.authStateReady();
     setIsLoading(false);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     initialFirebase();
   }, []);
 
