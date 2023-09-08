@@ -12,24 +12,29 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
+import ProtectedRoute from './_zlib/components/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <PageLayout />,
-    children: [
-      {
-        path: '',
-        element: <Home />,
-      },
-      {
-        path: 'profile',
-        element: <Profile />,
-      },
-    ],
+    path: '/home',
+    element: (
+      <ProtectedRoute>
+        <PageLayout />
+        <Home />
+      </ProtectedRoute>
+    ),
   },
-  { path: 'signup', element: <SignUp /> },
-  { path: 'signin', element: <SignIn /> },
+  {
+    path: '/profile',
+    element: (
+      <ProtectedRoute>
+        <PageLayout />
+        <Profile />
+      </ProtectedRoute>
+    ),
+  },
+  { path: '/', element: <SignUp /> },
+  { path: '/signin', element: <SignIn /> },
 ]);
 
 export default function App() {
