@@ -1,4 +1,5 @@
 import { Form } from '../_zlib/components/Form';
+import { Icon } from '../_zlib/components/Icon';
 import { Input } from '../_zlib/components/Input';
 import { Txt } from '../_zlib/components/Txt';
 import { Wrapper } from '../_zlib/components/Wrapper';
@@ -10,6 +11,7 @@ export default function SignUp() {
   return (
     <>
       <Wrapper type={'form'}>
+        <Icon width={250} height={250} />
         <Txt typography={'h1'}>지금 일어나고 있는 일</Txt>
         <Form onSubmit={onSubmit}>
           <Input
