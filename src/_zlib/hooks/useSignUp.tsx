@@ -43,8 +43,10 @@ export default function useSignUp() {
       form.name === '' ||
       form.email === '' ||
       form.password === ''
-    )
+    ) {
       return;
+    }
+
     try {
       // 계정 생성
       const credentials = await createUserWithEmailAndPassword(
@@ -56,13 +58,14 @@ export default function useSignUp() {
       // 사용자 이름 설정
       await updateProfile(credentials.user, { displayName: form.name });
       // 홈으로 리다이렉트
-      navigate('/');
+      navigate('/home');
     } catch (error) {
       //   setError(error);
     } finally {
       setIsLoading(false);
     }
   };
+  const moveToSignIn = () => navigate('/signin');
 
-  return { form, error, onChange, onSubmit };
+  return { form, error, onChange, onSubmit, moveToSignIn };
 }

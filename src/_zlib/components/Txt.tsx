@@ -11,9 +11,15 @@ export default function Txt({ typography, ...props }: Props) {
 
 export const StyledTxt = styled.span<Props>`
   ${({ typography }) =>
-    typography === 'title' &&
+    typography === 'h1' &&
     css`
       font-size: 48px;
+    `};
+
+  ${({ typography }) =>
+    typography === 'h4' &&
+    css`
+      font-size: 24px;
     `};
 
   ${({ typography }) =>

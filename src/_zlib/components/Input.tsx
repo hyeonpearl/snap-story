@@ -10,7 +10,8 @@ const StyledInput = styled.input`
   border: none;
   font-size: 16px;
 
-  &[type='submit'] {
+  &[type='submit'],
+  &[type='button'] {
     cursor: pointer;
 
     &:hover {
