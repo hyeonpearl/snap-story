@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export default function Input({ ...props }) {
+export function Input({ ...props }) {
   return <StyledInput {...props} />;
 }
 

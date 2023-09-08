@@ -1,12 +1,12 @@
-import React from 'react';
 import { css, styled } from 'styled-components';
+import { HTMLAttributes } from 'react';
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   type?: string;
   direction?: 'horizontal' | 'vertical';
 }
 
-export default function Wrapper({ type, direction, ...props }: Props) {
+export function Wrapper({ type, direction, ...props }: Props) {
   return <StyledWrapper type={type} direction={direction} {...props} />;
 }
 

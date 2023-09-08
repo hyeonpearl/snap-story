@@ -1,11 +1,11 @@
-import React from 'react';
 import { css, styled } from 'styled-components';
+import { HTMLAttributes } from 'react';
 
-interface Props extends React.HTMLAttributes<HTMLSpanElement> {
+interface Props extends HTMLAttributes<HTMLSpanElement> {
   typography?: string;
 }
 
-export default function Txt({ typography, ...props }: Props) {
+export function Txt({ typography, ...props }: Props) {
   return <StyledTxt typography={typography} {...props} />;
 }
 

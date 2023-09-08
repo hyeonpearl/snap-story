@@ -1,7 +1,7 @@
-import Wrapper from '../_zlib/components/Wrapper';
-import Form from '../_zlib/components/Form';
-import Input from '../_zlib/components/Input';
-import Txt from '../_zlib/components/Txt';
+import { Form } from '../_zlib/components/Form';
+import { Input } from '../_zlib/components/Input';
+import { Txt } from '../_zlib/components/Txt';
+import { Wrapper } from '../_zlib/components/Wrapper';
 import useSignUp from '../_zlib/hooks/useSignUp';
 
 export default function SignUp() {

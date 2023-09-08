@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export default function Form({ ...props }) {
+export function Form({ ...props }) {
   return <StyledForm {...props} />;
 }
 

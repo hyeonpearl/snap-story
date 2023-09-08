@@ -1,15 +1,14 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
 import { auth } from '../server/firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function useSignUp() {
   const initialForm = { name: '', email: '', password: '' };
 
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [form, setForm] = React.useState(initialForm);
-  const [error, setError] = React.useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [form, setForm] = useState(initialForm);
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 

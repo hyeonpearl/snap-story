@@ -1,18 +1,16 @@
-import React from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-
-import PageLayout from './_zlib/components/PageLayout';
 import Loading from './_zlib/components/Loading';
-import Wrapper from './_zlib/components/Wrapper';
-import GlobalStyles from './_zlib/styles/GlobalStyles';
-
+import { PageLayout } from './_zlib/components/PageLayout';
+import ProtectedRoute from './_zlib/components/ProtectedRoute';
+import { Wrapper } from './_zlib/components/Wrapper';
 import { auth } from './_zlib/server/firebase';
-
+import GlobalStyles from './_zlib/styles/GlobalStyles';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
-import ProtectedRoute from './_zlib/components/ProtectedRoute';
+
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const router = createBrowserRouter([
   {
@@ -38,14 +36,14 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const initialFirebase = async () => {
     await auth.authStateReady();
     setIsLoading(false);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     initialFirebase();
   }, []);
 
