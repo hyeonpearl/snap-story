@@ -5,9 +5,8 @@ export function Form({ ...props }) {
 }
 
 const StyledForm = styled.form`
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
   gap: 10px;
 `;

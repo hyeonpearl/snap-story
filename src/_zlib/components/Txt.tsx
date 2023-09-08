@@ -2,7 +2,7 @@ import { css, styled } from 'styled-components';
 import { HTMLAttributes } from 'react';
 
 interface Props extends HTMLAttributes<HTMLSpanElement> {
-  typography?: string;
+  typography: 'h1' | 'h4' | 'error';
 }
 
 export function Txt({ typography, ...props }: Props) {
