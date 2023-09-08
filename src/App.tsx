@@ -1,35 +1,38 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-
-import PageLayout from './_zlib/components/PageLayout';
 import Loading from './_zlib/components/Loading';
-import Wrapper from './_zlib/components/Wrapper';
-import GlobalStyles from './_zlib/styles/GlobalStyles';
-
+import { PageLayout } from './_zlib/components/PageLayout';
+import ProtectedRoute from './_zlib/components/ProtectedRoute';
+import { Wrapper } from './_zlib/components/Wrapper';
 import { auth } from './_zlib/server/firebase';
-
+import GlobalStyles from './_zlib/styles/GlobalStyles';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <PageLayout />,
-    children: [
-      {
-        path: '',
-        element: <Home />,
-      },
-      {
-        path: 'profile',
-        element: <Profile />,
-      },
-    ],
+    path: '/home',
+    element: (
+      <ProtectedRoute>
+        <PageLayout />
+        <Home />
+      </ProtectedRoute>
+    ),
   },
-  { path: 'signup', element: <SignUp /> },
-  { path: 'signin', element: <SignIn /> },
+  {
+    path: '/profile',
+    element: (
+      <ProtectedRoute>
+        <PageLayout />
+        <Profile />
+      </ProtectedRoute>
+    ),
+  },
+  { path: '/', element: <SignUp /> },
+  { path: '/signin', element: <SignIn /> },
 ]);
 
 export default function App() {

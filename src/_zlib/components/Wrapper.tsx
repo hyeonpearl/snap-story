@@ -1,13 +1,12 @@
-import { HTMLAttributes } from 'react';
 import { css, styled } from 'styled-components';
+import { HTMLAttributes } from 'react';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   type?: string;
-  direction?: 'horizontal' | 'vertical';
 }
 
-export default function Wrapper({ type, direction, ...props }: Props) {
-  return <StyledWrapper type={type} direction={direction} {...props} />;
+export function Wrapper({ type, ...props }: Props) {
+  return <StyledWrapper type={type} {...props} />;
 }
 
 const StyledWrapper = styled.div<Props>`
@@ -18,6 +17,7 @@ const StyledWrapper = styled.div<Props>`
   ${({ type }) =>
     type === 'form' &&
     css`
+      margin-top: 50px;
       flex-direction: column;
       align-items: center;
       width: 420px;

@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export default function Input({ ...props }) {
+export function Input({ ...props }) {
   return <StyledInput {...props} />;
 }
 
@@ -10,7 +10,8 @@ const StyledInput = styled.input`
   border: none;
   font-size: 16px;
 
-  &[type='submit'] {
+  &[type='submit'],
+  &[type='button'] {
     cursor: pointer;
 
     &:hover {
