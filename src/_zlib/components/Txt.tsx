@@ -7,10 +7,12 @@ export function Txt({ ...props }) {
 export const StyledTxt = styled.span`
   &[typography='h1'] {
     font-size: 48px;
+    font-weight: 600;
   }
 
   &[typography='h4'] {
     font-size: 24px;
+    font-weight: 500;
   }
 
   &[typography='anker'] {

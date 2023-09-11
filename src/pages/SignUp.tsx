@@ -2,6 +2,7 @@ import { Button } from '../_zlib/components/Button';
 import { Form } from '../_zlib/components/Form';
 import { Icon } from '../_zlib/components/Icon';
 import { Input } from '../_zlib/components/Input';
+import { LineBreak } from '../_zlib/components/LineBreak';
 import { Spacing } from '../_zlib/components/Spacing';
 import { Txt } from '../_zlib/components/Txt';
 import { Wrapper } from '../_zlib/components/Wrapper';
@@ -19,6 +20,17 @@ export default function SignUp() {
         <Spacing direction='vertical' size={50} />
         <Txt typography={'h4'}>지금 가입하세요.</Txt>
         <Spacing direction='vertical' size={30} />
+
+        <Form>
+          <Button type={'social'}>
+            <Icon src='github.svg' width={20} height={20} />
+            Github로 가입하기
+          </Button>
+        </Form>
+
+        <Spacing direction='vertical' size={20} />
+        <LineBreak text='또는' />
+        <Spacing direction='vertical' size={20} />
 
         <Form onSubmit={onSubmit}>
           <Input
@@ -52,10 +64,11 @@ export default function SignUp() {
             required
           />
           {error ? <Txt typography='error'>{error}</Txt> : null}
-          <Spacing direction={'vertical'} size={20} />
+          <Spacing direction={'vertical'} size={25} />
 
           <Txt typography='h4'>이미 가입하셨나요?</Txt>
-          <Button styled={'secondary'} type={'button'} onClick={moveToSignIn}>
+          <Spacing direction='vertical' size={5} />
+          <Button type={'secondary'} onClick={moveToSignIn}>
             로그인
           </Button>
         </Form>

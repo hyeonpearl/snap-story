@@ -1,6 +1,8 @@
+import { Button } from '../_zlib/components/Button';
 import { Form } from '../_zlib/components/Form';
 import { Icon } from '../_zlib/components/Icon';
 import { Input } from '../_zlib/components/Input';
+import { LineBreak } from '../_zlib/components/LineBreak';
 import { Spacing } from '../_zlib/components/Spacing';
 import { Txt } from '../_zlib/components/Txt';
 import { Wrapper } from '../_zlib/components/Wrapper';
@@ -16,6 +18,17 @@ export default function SignIn() {
         <Icon src='/z.svg' width={250} height={250} />
         <Txt typography={'h1'}>로그인하기</Txt>
         <Spacing direction='vertical' size={50} />
+
+        <Form>
+          <Button type={'social'}>
+            <Icon src='github.svg' width={20} height={20} />
+            Github로 가입하기
+          </Button>
+        </Form>
+
+        <Spacing direction='vertical' size={20} />
+        <LineBreak text='또는' />
+        <Spacing direction='vertical' size={20} />
 
         <Form onSubmit={onSubmit}>
           <Input

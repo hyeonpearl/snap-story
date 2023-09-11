@@ -15,13 +15,20 @@ const StyledButton = styled.button`
     opacity: 0.8;
   }
 
-  &[styled='primary'] {
+  &[type='primary'] {
     background: #1d9bf0;
     color: white;
   }
-  &[styled='secondary'] {
+  &[type='secondary'] {
     background: black;
     color: #1d9bf0;
     border: 1px solid #1d9bf0;
+  }
+  &[type='social'] {
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
   }
 `;
