@@ -9,10 +9,15 @@ const StyledWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  &[type='form'] {
+  &[type='page'] {
     height: 100vh;
     flex-direction: column;
-    align-items: center;
     width: 420px;
+  }
+
+  &[type='form'] {
+    flex-direction: column;
+    width: 80%;
+    gap: 10px;
   }
 `;

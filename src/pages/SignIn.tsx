@@ -9,22 +9,29 @@ import { Wrapper } from '../_zlib/components/Wrapper';
 import useSignIn from '../_zlib/hooks/useSignIn';
 
 export default function SignIn() {
-  const { isLoading, form, error, onChange, onSubmit, moveToSignUp } =
-    useSignIn();
+  const {
+    isLoading,
+    form,
+    error,
+    onChange,
+    onSubmit,
+    onSignInGithub,
+    moveToSignUp,
+  } = useSignIn();
 
   return (
     <>
-      <Wrapper type={'form'}>
+      <Wrapper type={'page'}>
         <Icon src='/z.svg' width={250} height={250} />
         <Txt typography={'h1'}>로그인하기</Txt>
         <Spacing direction='vertical' size={50} />
 
-        <Form>
-          <Button type={'social'}>
+        <Wrapper type='form'>
+          <Button styled={'social'} onClick={onSignInGithub}>
             <Icon src='github.svg' width={20} height={20} />
-            Github로 가입하기
+            Github로 로그인하기
           </Button>
-        </Form>
+        </Wrapper>
 
         <Spacing direction='vertical' size={20} />
         <LineBreak text='또는' />
@@ -47,11 +54,9 @@ export default function SignIn() {
             onChange={onChange}
             required
           />
-          <Input
-            value={isLoading ? '로그인 중...' : '로그인'}
-            type={'submit'}
-            required
-          />
+          <Button styled={'primary'} type={'submit'} required>
+            {isLoading ? '로그인 중...' : '로그인'}
+          </Button>
           {error ? <Txt typography='error'>{error}</Txt> : null}
           <Spacing direction='vertical' size={20} />
 

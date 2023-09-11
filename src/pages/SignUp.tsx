@@ -9,24 +9,31 @@ import { Wrapper } from '../_zlib/components/Wrapper';
 import useSignUp from '../_zlib/hooks/useSignUp';
 
 export default function SignUp() {
-  const { isLoading, form, error, onChange, onSubmit, moveToSignIn } =
-    useSignUp();
+  const {
+    isLoading,
+    form,
+    error,
+    onChange,
+    onSubmit,
+    onSignInGithub,
+    moveToSignIn,
+  } = useSignUp();
 
   return (
     <>
-      <Wrapper type={'form'}>
+      <Wrapper type={'page'}>
         <Icon src='/z.svg' width={250} height={250} />
         <Txt typography={'h1'}>지금 일어나고 있는 일</Txt>
         <Spacing direction='vertical' size={50} />
         <Txt typography={'h4'}>지금 가입하세요.</Txt>
         <Spacing direction='vertical' size={30} />
 
-        <Form>
-          <Button type={'social'}>
+        <Wrapper type={'form'}>
+          <Button styled={'social'} onClick={onSignInGithub}>
             <Icon src='github.svg' width={20} height={20} />
             Github로 가입하기
           </Button>
-        </Form>
+        </Wrapper>
 
         <Spacing direction='vertical' size={20} />
         <LineBreak text='또는' />
@@ -57,18 +64,15 @@ export default function SignUp() {
             onChange={onChange}
             required
           />
-          <Input
-            value={isLoading ? '만드는 중...' : '계정 만들기'}
-            styled={'primary'}
-            type={'submit'}
-            required
-          />
+          <Button styled={'primary'} type={'submit'} required>
+            {isLoading ? '만드는 중...' : '계정 만들기'}
+          </Button>
           {error ? <Txt typography='error'>{error}</Txt> : null}
           <Spacing direction={'vertical'} size={25} />
 
           <Txt typography='h4'>이미 가입하셨나요?</Txt>
           <Spacing direction='vertical' size={5} />
-          <Button type={'secondary'} onClick={moveToSignIn}>
+          <Button styled={'secondary'} onClick={moveToSignIn}>
             로그인
           </Button>
         </Form>
