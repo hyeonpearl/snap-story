@@ -3,7 +3,7 @@ import { Wrapper } from './Wrapper';
 
 export default function Loading() {
   return (
-    <Wrapper>
+    <Wrapper type='page'>
       <Txt typography='h4'>Loading...</Txt>
     </Wrapper>
   );

@@ -1,3 +1,4 @@
+import { Wrapper } from '../_zlib/components/Wrapper';
 import { auth } from '../_zlib/server/firebase';
 
 export default function Home() {
@@ -5,5 +6,9 @@ export default function Home() {
   const signOut = () => {
     auth.signOut();
   };
-  return <button onClick={signOut}>로그아웃</button>;
+  return (
+    <Wrapper type='page'>
+      <button onClick={signOut}>로그아웃</button>
+    </Wrapper>
+  );
 }
