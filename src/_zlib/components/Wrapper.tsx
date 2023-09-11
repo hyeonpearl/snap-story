@@ -17,7 +17,6 @@ const StyledWrapper = styled.div<Props>`
   ${({ type }) =>
     type === 'form' &&
     css`
-      margin-top: 50px;
       flex-direction: column;
       align-items: center;
       width: 420px;
