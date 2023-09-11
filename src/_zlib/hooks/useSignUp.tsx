@@ -1,5 +1,10 @@
 import { auth } from '../server/firebase';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {
+  GithubAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  updateProfile,
+} from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -62,7 +67,25 @@ export default function useSignUp() {
       setIsLoading(false);
     }
   };
+  // useSignUp hook에 중복된 함수
+  const onSignInGithub = async () => {
+    try {
+      const provider = new GithubAuthProvider();
+      await signInWithPopup(auth, provider);
+      navigate('/home');
+    } catch (error) {
+      if (error instanceof FirebaseError) setError(error.message);
+    }
+  };
   const moveToSignIn = () => navigate('/signin');
 
-  return { isLoading, form, error, onChange, onSubmit, moveToSignIn };
+  return {
+    isLoading,
+    form,
+    error,
+    onChange,
+    onSubmit,
+    onSignInGithub,
+    moveToSignIn,
+  };
 }
