@@ -1,32 +1,31 @@
-import { css, styled } from 'styled-components';
-import { HTMLAttributes } from 'react';
+import { styled } from 'styled-components';
 
-interface Props extends HTMLAttributes<HTMLSpanElement> {
-  typography: 'h1' | 'h4' | 'error';
+export function Txt({ ...props }) {
+  return <StyledTxt {...props} />;
 }
 
-export function Txt({ typography, ...props }: Props) {
-  return <StyledTxt typography={typography} {...props} />;
-}
+export const StyledTxt = styled.span`
+  &[typography='h1'] {
+    font-size: 48px;
+    font-weight: 600;
+  }
 
-export const StyledTxt = styled.span<Props>`
-  ${({ typography }) =>
-    typography === 'h1' &&
-    css`
-      font-size: 48px;
-    `};
+  &[typography='h4'] {
+    font-size: 24px;
+    font-weight: 500;
+  }
 
-  ${({ typography }) =>
-    typography === 'h4' &&
-    css`
-      font-size: 24px;
-    `};
+  &[typography='anker'] {
+    color: #1d9bf0;
+    cursor: pointer;
 
-  ${({ typography }) =>
-    typography === 'error' &&
-    css`
-      margin-top: 10px;
-      font-weight: 600;
-      color: tomato;
-    `};
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &[typography='error'] {
+    font-weight: 600;
+    color: tomato;
+  }
 `;

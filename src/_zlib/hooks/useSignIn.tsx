@@ -1,16 +1,15 @@
 import { auth } from '../server/firebase';
 import {
   GithubAuthProvider,
-  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   signInWithPopup,
-  updateProfile,
 } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-export default function useSignUp() {
-  const initialForm = { name: '', email: '', password: '' };
+export default function useSignIn() {
+  const initialForm = { email: '', password: '' };
 
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState(initialForm);
@@ -24,10 +23,6 @@ export default function useSignUp() {
     } = e;
 
     switch (true) {
-      case name === 'name': {
-        setForm(prev => ({ ...prev, name: value }));
-        break;
-      }
       case name === 'email': {
         setForm(prev => ({ ...prev, email: value }));
         break;
@@ -44,22 +39,11 @@ export default function useSignUp() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
-    if (
-      isLoading ||
-      form.name === '' ||
-      form.email === '' ||
-      form.password === ''
-    )
-      return;
+    if (isLoading || form.email === '' || form.password === '') return;
 
     try {
       setIsLoading(true);
-      const credentials = await createUserWithEmailAndPassword(
-        auth,
-        form.email,
-        form.password
-      );
-      await updateProfile(credentials.user, { displayName: form.name });
+      await signInWithEmailAndPassword(auth, form.email, form.password);
       navigate('/home');
     } catch (error) {
       if (error instanceof FirebaseError) setError(error.message);
@@ -67,7 +51,7 @@ export default function useSignUp() {
       setIsLoading(false);
     }
   };
-  // useSignUp hook에 중복된 함수
+  // useSignIn hook에 중복된 함수
   const onSignInGithub = async () => {
     try {
       const provider = new GithubAuthProvider();
@@ -77,7 +61,7 @@ export default function useSignUp() {
       if (error instanceof FirebaseError) setError(error.message);
     }
   };
-  const moveToSignIn = () => navigate('/signin');
+  const moveToSignUp = () => navigate('/');
 
   return {
     isLoading,
@@ -86,6 +70,6 @@ export default function useSignUp() {
     onChange,
     onSubmit,
     onSignInGithub,
-    moveToSignIn,
+    moveToSignUp,
   };
 }

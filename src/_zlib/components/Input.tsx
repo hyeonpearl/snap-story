@@ -9,13 +9,4 @@ const StyledInput = styled.input`
   border-radius: 50px;
   border: none;
   font-size: 16px;
-
-  &[type='submit'],
-  &[type='button'] {
-    cursor: pointer;
-
-    &:hover {
-      opacity: 0.8;
-    }
-  }
 `;
