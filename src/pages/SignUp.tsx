@@ -7,7 +7,8 @@ import { Wrapper } from '../_zlib/components/Wrapper';
 import useSignUp from '../_zlib/hooks/useSignUp';
 
 export default function SignUp() {
-  const { form, error, onChange, onSubmit, moveToSignIn } = useSignUp();
+  const { isLoading, form, error, onChange, onSubmit, moveToSignIn } =
+    useSignUp();
 
   return (
     <>
@@ -43,13 +44,17 @@ export default function SignUp() {
             onChange={onChange}
             required
           />
-          <Input value={'계정 만들기'} type={'submit'} required />
+          <Input
+            value={isLoading ? '만드는 중...' : '계정 만들기'}
+            type={'submit'}
+            required
+          />
+          {error ? <Txt typography='error'>{error}</Txt> : null}
           <Spacing direction={'vertical'} size={20} />
 
           <Txt typography='h4'>이미 가입하셨나요?</Txt>
           <Input value={'로그인'} type={'button'} onClick={moveToSignIn} />
         </Form>
-        {error ? <Txt typography='error'>{error}</Txt> : null}
       </Wrapper>
     </>
   );

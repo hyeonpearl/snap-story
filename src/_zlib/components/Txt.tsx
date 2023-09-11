@@ -25,7 +25,6 @@ export const StyledTxt = styled.span<Props>`
   ${({ typography }) =>
     typography === 'error' &&
     css`
-      margin-top: 10px;
       font-weight: 600;
       color: tomato;
     `};
