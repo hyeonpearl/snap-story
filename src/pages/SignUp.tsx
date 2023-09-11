@@ -1,3 +1,4 @@
+import { Button } from '../_zlib/components/Button';
 import { Form } from '../_zlib/components/Form';
 import { Icon } from '../_zlib/components/Icon';
 import { Input } from '../_zlib/components/Input';
@@ -13,7 +14,7 @@ export default function SignUp() {
   return (
     <>
       <Wrapper type={'form'}>
-        <Icon width={250} height={250} />
+        <Icon src='/z.svg' width={250} height={250} />
         <Txt typography={'h1'}>지금 일어나고 있는 일</Txt>
         <Spacing direction='vertical' size={50} />
         <Txt typography={'h4'}>지금 가입하세요.</Txt>
@@ -54,12 +55,9 @@ export default function SignUp() {
           <Spacing direction={'vertical'} size={20} />
 
           <Txt typography='h4'>이미 가입하셨나요?</Txt>
-          <Input
-            value={'로그인'}
-            styled={'secondary'}
-            type={'button'}
-            onClick={moveToSignIn}
-          />
+          <Button styled={'secondary'} type={'button'} onClick={moveToSignIn}>
+            로그인
+          </Button>
         </Form>
       </Wrapper>
     </>

@@ -13,7 +13,7 @@ export default function SignIn() {
   return (
     <>
       <Wrapper type={'form'}>
-        <Icon width={250} height={250} />
+        <Icon src='/z.svg' width={250} height={250} />
         <Txt typography={'h1'}>로그인하기</Txt>
         <Spacing direction='vertical' size={50} />
 
