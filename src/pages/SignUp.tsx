@@ -46,6 +46,7 @@ export default function SignUp() {
           />
           <Input
             value={isLoading ? '만드는 중...' : '계정 만들기'}
+            styled={'primary'}
             type={'submit'}
             required
           />
@@ -53,7 +54,12 @@ export default function SignUp() {
           <Spacing direction={'vertical'} size={20} />
 
           <Txt typography='h4'>이미 가입하셨나요?</Txt>
-          <Input value={'로그인'} type={'button'} onClick={moveToSignIn} />
+          <Input
+            value={'로그인'}
+            styled={'secondary'}
+            type={'button'}
+            onClick={moveToSignIn}
+          />
         </Form>
       </Wrapper>
     </>
