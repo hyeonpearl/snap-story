@@ -1,5 +1,5 @@
-import { Txt } from './Txt';
-import { Wrapper } from './Wrapper';
+import { Txt } from './common/Txt';
+import { Wrapper } from './common/Wrapper';
 
 export default function Loading() {
   return (

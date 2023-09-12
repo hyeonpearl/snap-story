@@ -1,7 +1,7 @@
+import { Wrapper } from './_zlib/components/common/Wrapper';
 import Loading from './_zlib/components/Loading';
-import { PageLayout } from './_zlib/components/PageLayout';
+import PageLayout from './_zlib/components/PageLayout';
 import ProtectedRoute from './_zlib/components/ProtectedRoute';
-import { Wrapper } from './_zlib/components/Wrapper';
 import { auth } from './_zlib/server/firebase';
 import GlobalStyles from './_zlib/styles/GlobalStyles';
 import Home from './pages/Home';
@@ -49,7 +49,7 @@ export default function App() {
 
   return (
     <>
-      <Wrapper>
+      <Wrapper type='root'>
         <GlobalStyles />
         {isLoading ? <Loading /> : <RouterProvider router={router} />}
       </Wrapper>

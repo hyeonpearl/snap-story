@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Txt } from './Txt';
 
 interface Props {
   text: string;
@@ -9,7 +8,7 @@ export function LineBreak({ text, ...props }: Props) {
   return (
     <StyledLineBreak {...props}>
       <hr />
-      <Txt typography={'p'}>{text}</Txt>
+      <span>{text}</span>
       <hr />
     </StyledLineBreak>
   );
@@ -24,4 +23,15 @@ const StyledLineBreak = styled.div`
   & hr {
     width: 40%;
   }
+`;
+
+LineBreak.Hr = () => {
+  return <StyledHr />;
+};
+
+const StyledHr = styled.hr`
+  width: 100%;
+  height: 1px;
+  border: 0;
+  background: gray;
 `;
