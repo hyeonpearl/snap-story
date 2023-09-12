@@ -1,15 +1,14 @@
 import styled from 'styled-components';
-import { Txt } from './common/Txt';
 
 interface Props {
   text: string;
 }
 
-export default function LineBreak({ text, ...props }: Props) {
+export function LineBreak({ text, ...props }: Props) {
   return (
     <StyledLineBreak {...props}>
       <hr />
-      <Txt typography={'p'}>{text}</Txt>
+      <span>{text}</span>
       <hr />
     </StyledLineBreak>
   );
