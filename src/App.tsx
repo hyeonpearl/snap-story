@@ -49,7 +49,7 @@ export default function App() {
 
   return (
     <>
-      <Wrapper>
+      <Wrapper type='root'>
         <GlobalStyles />
         {isLoading ? <Loading /> : <RouterProvider router={router} />}
       </Wrapper>

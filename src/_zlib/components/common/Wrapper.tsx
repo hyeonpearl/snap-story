@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 import { HTMLAttributes } from 'react';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  type?: 'page' | 'form';
+  type?: 'root' | 'page' | 'form' | 'bar';
 }
 
 export function Wrapper({ ...props }: Props) {
@@ -12,17 +12,32 @@ export function Wrapper({ ...props }: Props) {
 const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+
+  &[type='root'] {
+    height: 100vh;
+  }
 
   &[type='page'] {
     height: 100vh;
     flex-direction: column;
+    align-items: center;
     width: 420px;
   }
 
   &[type='form'] {
     flex-direction: column;
+    align-items: center;
     width: 80%;
     gap: 10px;
+  }
+
+  &[type='bar'] {
+    display: gird;
+    gap: 20px;
+    grid-template-columns: 1fr 4fr;
+    height: 100%;
+    padding: 50px;
+    width: 100%;
+    max-width: 200px;
   }
 `;

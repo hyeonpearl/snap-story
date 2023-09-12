@@ -1,14 +1,10 @@
+import { Txt } from '../_zlib/components/common/Txt';
 import { Wrapper } from '../_zlib/components/common/Wrapper';
-import { auth } from '../_zlib/server/firebase';
 
 export default function Home() {
-  // 로그아웃 테스트
-  const signOut = () => {
-    auth.signOut();
-  };
   return (
     <Wrapper type='page'>
-      <button onClick={signOut}>로그아웃</button>
+      <Txt typography='h1'>Home</Txt>
     </Wrapper>
   );
 }
