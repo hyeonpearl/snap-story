@@ -36,8 +36,7 @@ const StyledWrapper = styled.div`
     gap: 20px;
     grid-template-columns: 1fr 4fr;
     height: 100%;
-    padding: 50px;
-    width: 100%;
-    max-width: 200px;
+    padding: 0 20px;
+    border-right: 1px solid gray;
   }
 `;
