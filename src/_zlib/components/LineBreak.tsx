@@ -5,7 +5,7 @@ interface Props {
   text: string;
 }
 
-export function LineBreak({ text, ...props }: Props) {
+export default function LineBreak({ text, ...props }: Props) {
   return (
     <StyledLineBreak {...props}>
       <hr />

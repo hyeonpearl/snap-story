@@ -2,10 +2,10 @@ import { Button } from '../_zlib/components/common/Button';
 import { Form } from '../_zlib/components/common/Form';
 import { Icon } from '../_zlib/components/common/Icon';
 import { Input } from '../_zlib/components/common/Input';
-import { LineBreak } from '../_zlib/components/LineBreak';
 import { Spacing } from '../_zlib/components/common/Spacing';
 import { Txt } from '../_zlib/components/common/Txt';
 import { Wrapper } from '../_zlib/components/common/Wrapper';
+import LineBreak from '../_zlib/components/LineBreak';
 import useSignUp from '../_zlib/hooks/useSignUp';
 
 export default function SignUp() {

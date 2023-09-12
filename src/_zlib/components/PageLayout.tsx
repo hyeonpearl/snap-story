@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-export function PageLayout() {
+export default function PageLayout() {
   return (
     <>
       <Outlet />
