@@ -1,4 +1,4 @@
-import { Wrapper } from '../_zlib/components/Wrapper';
+import { Wrapper } from '../_zlib/components/common/Wrapper';
 import { auth } from '../_zlib/server/firebase';
 
 export default function Home() {

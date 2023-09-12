@@ -1,7 +1,7 @@
 import Loading from './_zlib/components/Loading';
 import { PageLayout } from './_zlib/components/PageLayout';
 import ProtectedRoute from './_zlib/components/ProtectedRoute';
-import { Wrapper } from './_zlib/components/Wrapper';
+import { Wrapper } from './_zlib/components/common/Wrapper';
 import { auth } from './_zlib/server/firebase';
 import GlobalStyles from './_zlib/styles/GlobalStyles';
 import Home from './pages/Home';

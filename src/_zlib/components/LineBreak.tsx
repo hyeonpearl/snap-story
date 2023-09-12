@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Txt } from './Txt';
+import { Txt } from './common/Txt';
 
 interface Props {
   text: string;
