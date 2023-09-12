@@ -1,6 +1,11 @@
 import { styled } from 'styled-components';
+import { HTMLAttributes } from 'react';
 
-export function Wrapper({ ...props }) {
+interface Props extends HTMLAttributes<HTMLDivElement> {
+  type?: 'page' | 'form';
+}
+
+export function Wrapper({ ...props }: Props) {
   return <StyledWrapper {...props} />;
 }
 

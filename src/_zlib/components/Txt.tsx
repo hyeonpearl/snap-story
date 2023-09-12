@@ -1,6 +1,11 @@
 import { styled } from 'styled-components';
+import { HTMLAttributes } from 'react';
 
-export function Txt({ ...props }) {
+interface Props extends HTMLAttributes<HTMLSpanElement> {
+  typography: 'h1' | 'h4' | 'p' | 'anker' | 'error';
+}
+
+export function Txt({ ...props }: Props) {
   return <StyledTxt {...props} />;
 }
 
