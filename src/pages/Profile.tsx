@@ -3,8 +3,8 @@ import { Wrapper } from '../_zlib/components/common/Wrapper';
 
 export default function Profile() {
   return (
-    <Wrapper type='page'>
-      <Txt typography='h1'>Profile</Txt>
+    <Wrapper className='app'>
+      <Txt typography={'h1'}>Profile</Txt>
     </Wrapper>
   );
 }

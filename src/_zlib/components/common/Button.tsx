@@ -16,16 +16,16 @@ const StyledButton = styled.button`
     opacity: 0.8;
   }
 
-  &[styled='primary'] {
+  &.primary {
     background: #1d9bf0;
     color: white;
   }
-  &[styled='secondary'] {
+  &.secondary {
     background: black;
     color: #1d9bf0;
     border: 1px solid #1d9bf0;
   }
-  &[styled='social'] {
+  &.social {
     font-weight: 500;
     display: flex;
     justify-content: center;

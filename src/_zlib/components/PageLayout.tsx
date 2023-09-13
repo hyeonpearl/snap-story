@@ -16,7 +16,7 @@ export default function PageLayout() {
   };
 
   return (
-    <Wrapper type='bar'>
+    <Wrapper className='navbar'>
       <Menu>
         <Link to={'/home'}>
           <div>
