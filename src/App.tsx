@@ -6,8 +6,8 @@ import { auth } from './_zlib/server/firebase';
 import GlobalStyles from './_zlib/styles/GlobalStyles';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -31,8 +31,8 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-  { path: '/', element: <SignUp /> },
   { path: '/signin', element: <SignIn /> },
+  { path: '/', element: <SignUp /> },
 ]);
 
 export default function App() {
@@ -49,7 +49,7 @@ export default function App() {
 
   return (
     <>
-      <Wrapper type='root'>
+      <Wrapper className='app'>
         <GlobalStyles />
         {isLoading ? <Loading /> : <RouterProvider router={router} />}
       </Wrapper>

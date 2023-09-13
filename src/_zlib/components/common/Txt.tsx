@@ -1,3 +1,4 @@
+import colors from '../../constants/colors';
 import { styled } from 'styled-components';
 import { HTMLAttributes } from 'react';
 
@@ -31,6 +32,6 @@ export const StyledTxt = styled.span`
 
   &[typography='error'] {
     font-weight: 600;
-    color: tomato;
+    color: ${colors.red01};
   }
 `;

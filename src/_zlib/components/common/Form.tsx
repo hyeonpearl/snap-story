@@ -7,6 +7,13 @@ export function Form({ ...props }) {
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  width: 80%;
   gap: 10px;
+
+  &.sign-form {
+    width: 80%;
+  }
+
+  &.post-tweet {
+    width: 100%;
+  }
 `;

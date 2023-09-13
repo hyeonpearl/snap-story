@@ -1,42 +1,62 @@
+import colors from '../../constants/colors';
 import { styled } from 'styled-components';
-import { HTMLAttributes } from 'react';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
-  type?: 'root' | 'page' | 'form' | 'bar';
-}
-
-export function Wrapper({ ...props }: Props) {
+export function Wrapper({ ...props }) {
   return <StyledWrapper {...props} />;
 }
 
 const StyledWrapper = styled.div`
   display: flex;
-  justify-content: center;
 
-  &[type='root'] {
+  &.app {
     height: 100vh;
+
+    justify-content: center;
+  }
+  &.loading {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  &[type='page'] {
-    height: 100vh;
+  &.sign-form {
+    height: 100%;
     flex-direction: column;
     align-items: center;
     width: 420px;
+    padding: 50px 0px;
   }
-
-  &[type='form'] {
+  &.form {
     flex-direction: column;
     align-items: center;
     width: 80%;
     gap: 10px;
   }
 
-  &[type='bar'] {
+  &.navbar {
     display: gird;
     gap: 20px;
     grid-template-columns: 1fr 4fr;
     height: 100%;
     padding: 0 20px;
-    border-right: 1px solid gray;
+    border-right: 1px solid ${colors.gray01};
+  }
+
+  &.home {
+    display: grid;
+    gap: 50px;
+    grid-template-rows: 1fr 5fr;
+    border-right: 1px solid ${colors.gray01};
+  }
+  &.post-tweet {
+    width: 600px;
+    justify-content: center;
+    align-items: center;
+  }
+  &.buttons {
+    padding: 0 1rem;
+    justify-content: space-between;
+    align-items: center;
   }
 `;

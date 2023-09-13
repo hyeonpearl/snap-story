@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import colors from '../../constants/colors';
+import { styled } from 'styled-components';
 
 export function Menu({ ...props }) {
   return <StyledMenu {...props} />;
@@ -21,18 +22,11 @@ const StyledMenu = styled.div`
 
     svg {
       width: 30px;
-      fill: white;
     }
 
     &:hover {
-      background: gray;
+      background: ${colors.gray01};
       opacity: 0.8;
-    }
-    &.sign-out {
-      border-color: tomato;
-      svg {
-        fill: tomato;
-      }
     }
   }
 `;
