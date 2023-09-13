@@ -1,3 +1,4 @@
+import colors from '../../constants/colors';
 import styled from 'styled-components';
 
 interface Props {
@@ -33,5 +34,5 @@ const StyledHr = styled.hr`
   width: 100%;
   height: 1px;
   border: 0;
-  background: #2f3336;
+  background: ${colors.gray01};
 `;

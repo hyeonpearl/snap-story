@@ -1,3 +1,4 @@
+import colors from '../../constants/colors';
 import { styled } from 'styled-components';
 
 export function Input({ ...props }) {
@@ -32,8 +33,8 @@ const StyledTextField = styled.textarea`
   border: none;
   padding: 1rem;
   font-size: 20px;
-  color: white;
-  background-color: black;
+  color: ${colors.white};
+  background-color: ${colors.black};
   resize: none;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -43,6 +44,5 @@ const StyledTextField = styled.textarea`
   }
   &:focus {
     outline: none;
-    border-color: #1d9bf0;
   }
 `;

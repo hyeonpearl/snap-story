@@ -4,6 +4,7 @@ import { Icon } from './common/Icon';
 import { Input } from './common/Input';
 import { LineBreak } from './common/LineBreak';
 import { Wrapper } from './common/Wrapper';
+import colors from '../constants/colors';
 import usePostTweet from '../hooks/usePostTweet';
 
 export default function PostTweet() {
@@ -24,7 +25,7 @@ export default function PostTweet() {
 
         <Wrapper className='buttons'>
           <Input.Label htmlFor='file'>
-            <Icon.Photo color={'#1d9bf0'} />
+            <Icon.Photo color={colors.primary} />
           </Input.Label>
           <Input
             id='file'

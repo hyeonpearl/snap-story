@@ -1,3 +1,4 @@
+import colors from '../../constants/colors';
 import { styled } from 'styled-components';
 
 export function Wrapper({ ...props }) {
@@ -39,14 +40,14 @@ const StyledWrapper = styled.div`
     grid-template-columns: 1fr 4fr;
     height: 100%;
     padding: 0 20px;
-    border-right: 1px solid #2f3336;
+    border-right: 1px solid ${colors.gray01};
   }
 
   &.home {
     display: grid;
     gap: 50px;
     grid-template-rows: 1fr 5fr;
-    border-right: 1px solid #2f3336;
+    border-right: 1px solid ${colors.gray01};
   }
   &.post-tweet {
     width: 600px;

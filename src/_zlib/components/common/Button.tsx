@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import colors from '../../constants/colors';
+import { styled } from 'styled-components';
 
 export function Button({ ...props }) {
   return <StyledButton {...props} />;
@@ -9,7 +10,6 @@ const StyledButton = styled.button`
   border-radius: 50px;
   border: none;
   font-size: 16px;
-
   cursor: pointer;
 
   &:hover {
@@ -17,13 +17,13 @@ const StyledButton = styled.button`
   }
 
   &.primary {
-    background: #1d9bf0;
-    color: white;
+    background: ${colors.primary};
+    color: ${colors.white};
   }
   &.secondary {
-    background: black;
-    color: #1d9bf0;
-    border: 1px solid #1d9bf0;
+    background: ${colors.black};
+    color: ${colors.primary};
+    border: 1px solid ${colors.primary};
   }
   &.social {
     width: 100%;
