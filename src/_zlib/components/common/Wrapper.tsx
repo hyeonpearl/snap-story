@@ -21,7 +21,6 @@ const StyledWrapper = styled.div`
 
   &.sign-form {
     height: 100%;
-
     flex-direction: column;
     align-items: center;
     width: 420px;
@@ -40,14 +39,14 @@ const StyledWrapper = styled.div`
     grid-template-columns: 1fr 4fr;
     height: 100%;
     padding: 0 20px;
-    border-right: 1px solid gray;
+    border-right: 1px solid #2f3336;
   }
 
   &.home {
     display: grid;
     gap: 50px;
     grid-template-rows: 1fr 5fr;
-    border-right: 1px solid gray;
+    border-right: 1px solid #2f3336;
   }
   &.post-tweet {
     width: 600px;

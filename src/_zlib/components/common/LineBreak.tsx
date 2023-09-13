@@ -33,5 +33,5 @@ const StyledHr = styled.hr`
   width: 100%;
   height: 1px;
   border: 0;
-  background: gray;
+  background: #2f3336;
 `;
