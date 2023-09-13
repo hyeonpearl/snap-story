@@ -1,3 +1,4 @@
+import colors from '../constants/colors';
 import reset from 'styled-reset';
 import { createGlobalStyle } from 'styled-components';
 
@@ -7,15 +8,15 @@ const GlobalStyles = styled.createGlobalStyle`
   ${reset}
 
   body {
-    background: black;
-    color: white;
+    background: ${colors.black};
+    color: ${colors.white};
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
       Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
       sans-serif;
   }
 
   a {
-    color: white;
+    color: ${colors.white};
   }
 `;
 
