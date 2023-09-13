@@ -21,7 +21,6 @@ Input.Label = ({ ...props }) => {
 
 const StyledLabel = styled.label`
   width: 30px;
-
   cursor: pointer;
 `;
 

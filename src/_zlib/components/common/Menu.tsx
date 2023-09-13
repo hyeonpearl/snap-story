@@ -21,18 +21,11 @@ const StyledMenu = styled.div`
 
     svg {
       width: 30px;
-      fill: white;
     }
 
     &:hover {
       background: gray;
       opacity: 0.8;
-    }
-    &.sign-out {
-      border-color: tomato;
-      svg {
-        fill: tomato;
-      }
     }
   }
 `;

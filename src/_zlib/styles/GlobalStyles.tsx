@@ -13,6 +13,10 @@ const GlobalStyles = styled.createGlobalStyle`
       Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
       sans-serif;
   }
+
+  a {
+    color: white;
+  }
 `;
 
 export default GlobalStyles;
