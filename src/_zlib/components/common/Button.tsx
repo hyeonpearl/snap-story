@@ -9,7 +9,7 @@ const StyledButton = styled.button`
   border-radius: 50px;
   border: none;
   font-size: 16px;
-  width: 100%;
+
   cursor: pointer;
 
   &:hover {
@@ -26,6 +26,7 @@ const StyledButton = styled.button`
     border: 1px solid #1d9bf0;
   }
   &.social {
+    width: 100%;
     font-weight: 500;
     display: flex;
     justify-content: center;

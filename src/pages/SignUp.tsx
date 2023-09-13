@@ -21,15 +21,15 @@ export default function SignUp() {
 
   return (
     <>
-      <Wrapper className={'sign-form'}>
+      <Wrapper className='sign-form'>
         <Icon src='/z.svg' width={250} height={250} />
         <Txt typography={'h1'}>지금 일어나고 있는 일</Txt>
         <Spacing direction='vertical' size={50} />
         <Txt typography={'h4'}>지금 가입하세요.</Txt>
         <Spacing direction='vertical' size={30} />
 
-        <Wrapper className={'form'}>
-          <Button className={'social'} onClick={onSignInGithub}>
+        <Wrapper className='form'>
+          <Button className='social' onClick={onSignInGithub}>
             <Icon src='github.svg' width={20} height={20} />
             Github로 가입하기
           </Button>
@@ -39,7 +39,7 @@ export default function SignUp() {
         <LineBreak text='또는' />
         <Spacing direction='vertical' size={20} />
 
-        <Form onSubmit={onSubmit}>
+        <Form className='sign-form' onSubmit={onSubmit}>
           <Input
             name={'name'}
             placeholder={'이름'}

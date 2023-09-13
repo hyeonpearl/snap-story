@@ -37,7 +37,7 @@ export default function SignIn() {
         <LineBreak text={'또는'} />
         <Spacing direction={'vertical'} size={20} />
 
-        <Form onSubmit={onSubmit}>
+        <Form className='sign-form' onSubmit={onSubmit}>
           <Input
             name='email'
             placeholder='이메일'
