@@ -2,17 +2,16 @@ import { Button } from './common/Button';
 import { Form } from './common/Form';
 import { Icon } from './common/Icon';
 import { Input } from './common/Input';
-import { LineBreak } from './common/LineBreak';
 import { Wrapper } from './common/Wrapper';
 import colors from '../constants/colors';
 import usePostTweet from '../hooks/usePostTweet';
 
 export default function PostTweet() {
-  const { isLoading, tweet, onChange, onFileChange } = usePostTweet();
+  const { isLoading, tweet, onChange, onFileChange, onSubmit } = usePostTweet();
 
   return (
     <Wrapper className='post-tweet'>
-      <Form className='post-tweet'>
+      <Form className='post-tweet' onSubmit={onSubmit}>
         <Input.TextField
           placeholder='무슨 일이 일어나고 있나요?'
           value={tweet}
@@ -21,7 +20,6 @@ export default function PostTweet() {
           maxLength={180}
           required
         />
-        <LineBreak.Hr />
 
         <Wrapper className='buttons'>
           <Input.Label htmlFor='file'>
