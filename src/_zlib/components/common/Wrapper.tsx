@@ -36,16 +36,16 @@ const StyledWrapper = styled.div`
 
   &.navbar {
     display: gird;
-    gap: 20px;
+    gap: 1rem;
     grid-template-columns: 1fr 4fr;
     height: 100%;
-    padding: 0 20px;
+    padding: 0 1rem;
     border-right: 1px solid ${colors.gray01};
   }
 
   &.home {
     display: grid;
-    gap: 50px;
+    gap: 10px;
     grid-template-rows: 1fr 5fr;
     border-right: 1px solid ${colors.gray01};
   }
@@ -55,7 +55,9 @@ const StyledWrapper = styled.div`
     align-items: center;
   }
   &.buttons {
-    padding: 0 1rem;
+    border-top: 1px solid ${colors.gray01};
+    margin: 0 1rem;
+    padding: 1rem 0 0 0;
     justify-content: space-between;
     align-items: center;
   }
