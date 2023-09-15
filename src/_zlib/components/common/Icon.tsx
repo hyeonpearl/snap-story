@@ -1,3 +1,5 @@
+import colors from '../../constants/colors';
+import styled from 'styled-components';
 import { HTMLAttributes } from 'react';
 
 interface Props extends HTMLAttributes<HTMLImageElement> {
@@ -6,9 +8,16 @@ interface Props extends HTMLAttributes<HTMLImageElement> {
   height: number;
 }
 
-export function Icon({ src, width, height }: Props) {
-  return <img src={src} width={width} height={height} />;
+export function Icon({ src, width, height, ...props }: Props) {
+  return <StyledImg src={src} width={width} height={height} {...props} />;
 }
+
+const StyledImg = styled.img`
+  &.upload {
+    border: 1px solid ${colors.gray01};
+    border-radius: 1rem;
+  }
+`;
 
 Icon.Home = ({ color }: { color?: string }) => {
   return (

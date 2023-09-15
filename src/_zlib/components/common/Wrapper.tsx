@@ -6,28 +6,42 @@ export function Wrapper({ ...props }) {
 }
 
 const StyledWrapper = styled.div`
-  display: flex;
+  &.row {
+    display: flex;
+    align-items: center;
+  }
+  &.column {
+    display: flex;
+    flex-direction: column;
+  }
+  &.column-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
   &.app {
-    height: 100vh;
-
+    display: flex;
     justify-content: center;
+    height: 100vh;
   }
   &.loading {
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
   }
 
   &.sign-form {
-    height: 100%;
+    display: flex;
     flex-direction: column;
     align-items: center;
     width: 420px;
+    height: 100%;
     padding: 50px 0px;
   }
   &.form {
+    display: flex;
     flex-direction: column;
     align-items: center;
     width: 80%;
@@ -35,9 +49,6 @@ const StyledWrapper = styled.div`
   }
 
   &.navbar {
-    display: gird;
-    gap: 1rem;
-    grid-template-columns: 1fr 4fr;
     height: 100%;
     padding: 0 1rem;
     border-right: 1px solid ${colors.gray01};
@@ -45,29 +56,29 @@ const StyledWrapper = styled.div`
 
   &.home {
     display: grid;
-    gap: 10px;
+    overflow-y: scroll;
     grid-template-rows: 1fr 5fr;
     border-right: 1px solid ${colors.gray01};
   }
   &.post-tweet {
-    width: 600px;
+    display: flex;
     justify-content: center;
     align-items: center;
+    width: 600px;
   }
   &.buttons {
     border-top: 1px solid ${colors.gray01};
+    border-bottom: 1px solid ${colors.gray01};
     margin: 0 1rem;
-    padding: 1rem 0 0 0;
+    padding: 1rem 0;
+    display: flex;
     justify-content: space-between;
     align-items: center;
-
-    & div {
-      display: flex;
-      align-items: center;
-
-      & span {
-        margin-left: 10px;
-      }
-    }
+  }
+  &.tweet {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid ${colors.gray01};
   }
 `;
