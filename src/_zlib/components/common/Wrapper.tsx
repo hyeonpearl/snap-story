@@ -60,5 +60,14 @@ const StyledWrapper = styled.div`
     padding: 1rem 0 0 0;
     justify-content: space-between;
     align-items: center;
+
+    & div {
+      display: flex;
+      align-items: center;
+
+      & span {
+        margin-left: 10px;
+      }
+    }
   }
 `;

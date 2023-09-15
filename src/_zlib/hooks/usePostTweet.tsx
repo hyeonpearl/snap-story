@@ -1,12 +1,19 @@
 import { auth, database, storage } from '../server/firebase';
 import { addDoc, collection, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function usePostTweet() {
   const [isLoading, setIsLoading] = useState(false);
   const [tweet, setTweet] = useState('');
   const [file, setFile] = useState<File | null>(null);
+
+  useEffect(() => {
+    if (file && file?.size > 1024 * 1024) {
+      alert('1MB 미만 크기의 파일만 업로드 가능합니다.');
+      setFile(null);
+    }
+  }, [file]);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTweet(e.target.value);
