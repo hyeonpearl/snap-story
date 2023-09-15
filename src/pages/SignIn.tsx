@@ -60,7 +60,7 @@ export default function SignIn() {
           {error ? <Txt typography={'error'}>{error}</Txt> : null}
           <Spacing direction={'vertical'} size={20} />
 
-          <Wrapper>
+          <Wrapper className='row'>
             <Txt typography={'p'}>계정이 없으신가요?</Txt>
             <Spacing direction={'horizontal'} size={10} />
             <Txt typography={'anker'} onClick={moveToSignUp}>

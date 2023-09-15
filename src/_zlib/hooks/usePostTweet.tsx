@@ -1,11 +1,19 @@
-import { auth, database } from '../server/firebase';
-import { addDoc, collection } from 'firebase/firestore';
-import { useState } from 'react';
+import { auth, database, storage } from '../server/firebase';
+import { addDoc, collection, updateDoc } from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { useEffect, useState } from 'react';
 
 export default function usePostTweet() {
   const [isLoading, setIsLoading] = useState(false);
   const [tweet, setTweet] = useState('');
   const [file, setFile] = useState<File | null>(null);
+
+  useEffect(() => {
+    if (file && file?.size > 1024 * 1024) {
+      alert('1MB 미만 크기의 파일만 업로드 가능합니다.');
+      setFile(null);
+    }
+  }, [file]);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTweet(e.target.value);
@@ -22,12 +30,26 @@ export default function usePostTweet() {
 
     try {
       setIsLoading(true);
-      await addDoc(collection(database, 'tweets'), {
+      const doc = await addDoc(collection(database, 'tweets'), {
         tweet,
         createdAt: Date.now(),
         username: user.displayName || '익명',
         userId: user.uid,
       });
+
+      if (file) {
+        const locationRef = ref(
+          storage,
+          `tweets/${user.uid}_${user.displayName}/${doc.id}`
+        );
+        const uploaded = await uploadBytes(locationRef, file);
+        const url = await getDownloadURL(uploaded.ref);
+
+        await updateDoc(doc, { photo: url });
+      }
+
+      setTweet('');
+      setFile(null);
     } catch (error) {
       console.log(error);
     } finally {
