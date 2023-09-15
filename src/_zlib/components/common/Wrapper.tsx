@@ -69,8 +69,7 @@ const StyledWrapper = styled.div`
   &.buttons {
     border-top: 1px solid ${colors.gray01};
     border-bottom: 1px solid ${colors.gray01};
-    margin: 0 1rem;
-    padding: 1rem 0;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
