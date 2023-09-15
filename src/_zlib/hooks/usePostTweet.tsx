@@ -1,5 +1,6 @@
-import { auth, database } from '../server/firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { auth, database, storage } from '../server/firebase';
+import { addDoc, collection, updateDoc } from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useState } from 'react';
 
 export default function usePostTweet() {
@@ -22,12 +23,26 @@ export default function usePostTweet() {
 
     try {
       setIsLoading(true);
-      await addDoc(collection(database, 'tweets'), {
+      const doc = await addDoc(collection(database, 'tweets'), {
         tweet,
         createdAt: Date.now(),
         username: user.displayName || '익명',
         userId: user.uid,
       });
+
+      if (file) {
+        const locationRef = ref(
+          storage,
+          `tweets/${user.uid}_${user.displayName}/${doc.id}`
+        );
+        const uploaded = await uploadBytes(locationRef, file);
+        const url = await getDownloadURL(uploaded.ref);
+
+        await updateDoc(doc, { photo: url });
+      }
+
+      setTweet('');
+      setFile(null);
     } catch (error) {
       console.log(error);
     } finally {
