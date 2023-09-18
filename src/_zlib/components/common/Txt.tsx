@@ -3,7 +3,15 @@ import { styled } from 'styled-components';
 import { HTMLAttributes } from 'react';
 
 interface Props extends HTMLAttributes<HTMLSpanElement> {
-  typography: 'p' | 'h1' | 'h4' | 'name' | 'check' | 'error' | 'anker';
+  typography:
+    | 'p'
+    | 'h1'
+    | 'h4'
+    | 'name'
+    | 'check'
+    | 'error'
+    | 'anker'
+    | 'delete';
 }
 
 export function Txt({ ...props }: Props) {
@@ -32,6 +40,14 @@ export const StyledTxt = styled.span`
   }
   &[typography='anker'] {
     color: ${colors.primary};
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  &[typography='delete'] {
+    color: ${colors.red01};
     cursor: pointer;
 
     &:hover {

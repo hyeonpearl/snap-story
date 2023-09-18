@@ -10,6 +10,11 @@ const StyledWrapper = styled.div`
     display: flex;
     align-items: center;
   }
+  &.row-spacing {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
   &.column {
     display: flex;
     flex-direction: column;

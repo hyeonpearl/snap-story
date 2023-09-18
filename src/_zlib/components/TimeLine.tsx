@@ -1,13 +1,13 @@
 import Tweet from './Tweet';
-import useLoadTweets from '../hooks/useLoadTweets';
+import useTweets from '../hooks/useTweets';
 
 export default function TimeLine() {
-  const { tweets } = useLoadTweets();
+  const { user, tweets, onDelete } = useTweets();
 
   return (
     <>
       {tweets.map(tweet => (
-        <Tweet key={tweet.id} {...tweet} />
+        <Tweet key={tweet.id} {...tweet} user={user} onDelete={onDelete} />
       ))}
     </>
   );
