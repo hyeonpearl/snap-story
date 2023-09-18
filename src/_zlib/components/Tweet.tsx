@@ -3,21 +3,40 @@ import { Spacing } from './common/Spacing';
 import { Txt } from './common/Txt';
 import { Wrapper } from './common/Wrapper';
 import { TweetType } from '../hooks/useTweets';
+import { database, storage } from '../server/firebase';
 import { User } from 'firebase/auth';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { deleteObject, ref } from 'firebase/storage';
 
 interface Props extends TweetType {
   user?: User | null;
-  onDelete: () => void;
 }
 
 export default function Tweet({
+  id,
   photo,
   tweet,
   user,
   userId,
   username,
-  onDelete,
 }: Props) {
+  // 비즈니스 로직이라 이곳에 작성되면 안됨.
+  // 추후에 리팩토링해야함.
+  const onDelete = async () => {
+    const ok = confirm('트윗을 삭제하시겠습니까?');
+    if (!ok || user?.uid !== userId) return;
+
+    try {
+      await deleteDoc(doc(database, 'tweets', id));
+      if (photo) {
+        const photoRef = ref(storage, `tweets/${user?.uid}/${id}`);
+        await deleteObject(photoRef);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Wrapper className='tweet'>
       <Wrapper className='row-spacing'>

@@ -1,5 +1,5 @@
-import { Unsubscribe } from 'firebase/auth';
 import { auth, database } from '../server/firebase';
+import { Unsubscribe } from 'firebase/auth';
 import {
   collection,
   limit,
@@ -21,8 +21,6 @@ export interface TweetType {
 export default function useTweets() {
   const [tweets, setTweets] = useState<TweetType[]>([]);
   const user = auth.currentUser;
-
-  const onDelete = async () => {};
 
   useEffect(() => {
     let unsubscribe: Unsubscribe | null = null;
@@ -55,5 +53,5 @@ export default function useTweets() {
     };
   }, []);
 
-  return { user, tweets, onDelete };
+  return { user, tweets };
 }
