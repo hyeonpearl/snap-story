@@ -1,14 +1,15 @@
+import { Wrapper } from './common/Wrapper';
 import Tweet from './Tweet';
-import useLoadTweets from '../hooks/useLoadTweets';
+import useTweets from '../hooks/useTweets';
 
 export default function TimeLine() {
-  const { tweets } = useLoadTweets();
+  const { user, tweets } = useTweets();
 
   return (
-    <>
+    <Wrapper className='column'>
       {tweets.map(tweet => (
-        <Tweet key={tweet.id} {...tweet} />
+        <Tweet key={tweet.id} {...tweet} user={user} />
       ))}
-    </>
+    </Wrapper>
   );
 }
