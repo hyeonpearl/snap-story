@@ -38,10 +38,7 @@ export default function usePostTweet() {
       });
 
       if (file) {
-        const locationRef = ref(
-          storage,
-          `tweets/${user.uid}_${user.displayName}/${doc.id}`
-        );
+        const locationRef = ref(storage, `tweets/${user.uid}/${doc.id}`);
         const uploaded = await uploadBytes(locationRef, file);
         const url = await getDownloadURL(uploaded.ref);
 
