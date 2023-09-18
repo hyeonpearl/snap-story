@@ -8,6 +8,10 @@ import { FirebaseError } from 'firebase/app';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
+/**
+ * @name 로그인 Hook
+ * @description 입력 받은 데이터로 로그인
+ */
 export default function useSignIn() {
   const initialForm = { email: '', password: '' };
 
@@ -51,7 +55,10 @@ export default function useSignIn() {
       setIsLoading(false);
     }
   };
-  // useSignIn hook에 중복된 함수
+  /**
+   * @name Github 소셜 로그인 함수
+   * @description Sign In hook에도 중복된 코드가 있음. 리팩토링 필요
+   */
   const onSignInGithub = async () => {
     try {
       const provider = new GithubAuthProvider();

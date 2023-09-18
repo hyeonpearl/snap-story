@@ -20,8 +20,10 @@ export default function Tweet({
   userId,
   username,
 }: Props) {
-  // 비즈니스 로직이라 이곳에 작성되면 안됨.
-  // 추후에 리팩토링해야함.
+  /**
+   * @name Tweet 삭제 함수
+   * @description 내비게이션 로직이라 이곳에 작성되면 안됨. 리팩토링 필요
+   */
   const onDelete = async () => {
     const ok = confirm('트윗을 삭제하시겠습니까?');
     if (!ok || user?.uid !== userId) return;

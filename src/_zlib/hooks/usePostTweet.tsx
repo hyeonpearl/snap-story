@@ -3,6 +3,10 @@ import { addDoc, collection, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useEffect, useState } from 'react';
 
+/**
+ * @name Tweet 게시 Hook
+ * @description Tweet을 게시하는 기능
+ */
 export default function usePostTweet() {
   const [isLoading, setIsLoading] = useState(false);
   const [tweet, setTweet] = useState('');

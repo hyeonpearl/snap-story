@@ -18,6 +18,10 @@ export interface TweetType {
   username: string;
 }
 
+/**
+ * @name Tweet 관리 Hook
+ * @description Tweet 데이터 불러오는 기능
+ */
 export default function useTweets() {
   const [tweets, setTweets] = useState<TweetType[]>([]);
   const user = auth.currentUser;
