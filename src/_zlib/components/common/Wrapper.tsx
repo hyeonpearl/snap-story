@@ -8,10 +8,12 @@ export function Wrapper({ ...props }) {
 const StyledWrapper = styled.div`
   &.row {
     display: flex;
+    flex-direction: row;
     align-items: center;
   }
   &.row-spacing {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
   }
