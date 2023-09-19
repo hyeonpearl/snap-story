@@ -23,6 +23,13 @@ export default function Tweet({
   username,
 }: Props) {
   /**
+   * Tweet을 수정하는 함수.
+   * 비즈니스 로직이라 이곳에 작성되면 안됨. 리팩토링 필요.
+   */
+  const onEdit = async () => {
+    console.log('Edit');
+  };
+  /**
    * Tweet을 삭제하는 함수.
    * 비즈니스 로직이라 이곳에 작성되면 안됨. 리팩토링 필요.
    */
@@ -47,7 +54,7 @@ export default function Tweet({
         <Txt typography={'bold'}>{username}</Txt>
         {user?.uid === userId && (
           <Menu>
-            <Menu.Item className='tweet-control'>
+            <Menu.Item className='tweet-control' onClick={onEdit}>
               <Icon.Edit color={colors.gray02} />
             </Menu.Item>
             <Menu.Item className='tweet-control' onClick={onDelete}>
@@ -56,6 +63,8 @@ export default function Tweet({
           </Menu>
         )}
       </Wrapper>
+      {user?.uid !== userId && <Spacing direction={'vertical'} size={8} />}
+
       <Txt typography={'p'}>{tweet}</Txt>
       {photo && (
         <>
