@@ -21,25 +21,25 @@ export default function PageLayout() {
 
   return (
     <Wrapper className='navbar'>
-      <Menu>
-        <Link to={'/home'}>
-          <div>
+      <Menu className='column'>
+        <Menu.Item className='navbar'>
+          <Link to={'/home'}>
             <Icon src='/z.svg' width={30} height={30} />
-          </div>
-        </Link>
-        <Link to={'/home'}>
-          <div>
+          </Link>
+        </Menu.Item>
+        <Menu.Item className='navbar'>
+          <Link to={'/home'}>
             <Icon.Home />
-          </div>
-        </Link>
-        <Link to={'/profile'}>
-          <div>
+          </Link>
+        </Menu.Item>
+        <Menu.Item className='navbar'>
+          <Link to={'/profile'}>
             <Icon.Profile />
-          </div>
-        </Link>
-        <div className='sign-out' onClick={onSignOut}>
+          </Link>
+        </Menu.Item>
+        <Menu.Item className='navbar' onClick={onSignOut}>
           <Icon.SignOut />
-        </div>
+        </Menu.Item>
       </Menu>
       <Outlet />
     </Wrapper>
