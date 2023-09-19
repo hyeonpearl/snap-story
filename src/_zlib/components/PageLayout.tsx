@@ -8,8 +8,8 @@ export default function PageLayout() {
   const navigate = useNavigate();
 
   /**
-   * @name 로그아웃 함수
-   * @description 내비게이션 로직이라 이곳에 작성되면 안됨. 리팩토링 필요
+   * 로그아웃 함수.
+   * 비즈니스 로직이라 이곳에 작성되면 안됨. 리팩토링 필요.
    */
   const onSignOut = async () => {
     const ok = confirm('로그아웃하시겠습니까?');
@@ -21,25 +21,25 @@ export default function PageLayout() {
 
   return (
     <Wrapper className='navbar'>
-      <Menu>
-        <Link to={'/home'}>
-          <div>
+      <Menu className='column'>
+        <Menu.Item className='navbar'>
+          <Link to={'/home'}>
             <Icon src='/z.svg' width={30} height={30} />
-          </div>
-        </Link>
-        <Link to={'/home'}>
-          <div>
+          </Link>
+        </Menu.Item>
+        <Menu.Item className='navbar'>
+          <Link to={'/home'}>
             <Icon.Home />
-          </div>
-        </Link>
-        <Link to={'/profile'}>
-          <div>
+          </Link>
+        </Menu.Item>
+        <Menu.Item className='navbar'>
+          <Link to={'/profile'}>
             <Icon.Profile />
-          </div>
-        </Link>
-        <div className='sign-out' onClick={onSignOut}>
+          </Link>
+        </Menu.Item>
+        <Menu.Item className='navbar' onClick={onSignOut}>
           <Icon.SignOut />
-        </div>
+        </Menu.Item>
       </Menu>
       <Outlet />
     </Wrapper>

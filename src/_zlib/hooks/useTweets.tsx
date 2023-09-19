@@ -19,8 +19,7 @@ export interface TweetType {
 }
 
 /**
- * @name Tweet 관리 Hook
- * @description Tweet 데이터 불러오는 기능
+ * Tweet 정보를 불러오는 함수
  */
 export default function useTweets() {
   const [tweets, setTweets] = useState<TweetType[]>([]);

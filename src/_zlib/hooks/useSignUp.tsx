@@ -10,8 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 /**
- * @name 계정 생성 Hook
- * @description 입력 받은 데이터로 계정 생성
+ * 입력 받은 데이터로 계정을 생성하는 함수
  */
 export default function useSignUp() {
   const initialForm = { name: '', email: '', password: '' };

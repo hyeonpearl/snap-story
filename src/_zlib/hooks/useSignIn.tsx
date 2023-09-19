@@ -9,8 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 /**
- * @name 로그인 Hook
- * @description 입력 받은 데이터로 로그인
+ * 입력 받은 데이터로 로그인 하는 함수
  */
 export default function useSignIn() {
   const initialForm = { email: '', password: '' };

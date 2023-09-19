@@ -7,11 +7,20 @@ export function Menu({ ...props }) {
 
 const StyledMenu = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 20px;
 
-  div {
+  &.column {
+    gap: 20px;
+    flex-direction: column;
+  }
+`;
+
+Menu.Item = ({ ...props }) => {
+  return <StyledItem {...props} />;
+};
+
+const StyledItem = styled.div`
+  &.navbar {
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -27,6 +36,18 @@ const StyledMenu = styled.div`
     &:hover {
       background: ${colors.gray01};
       opacity: 0.8;
+    }
+  }
+  &.tweet-control {
+    svg {
+      width: 1.25rem;
+      padding: 0.5rem;
+      border-radius: 0.75rem;
+      cursor: pointer;
+
+      &:hover {
+        background: ${colors.gray01};
+      }
     }
   }
 `;

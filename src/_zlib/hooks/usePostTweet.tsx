@@ -4,8 +4,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useEffect, useState } from 'react';
 
 /**
- * @name Tweet 게시 Hook
- * @description Tweet을 게시하는 기능
+ * 입력 받은 Tweet을 게시하는 함수
  */
 export default function usePostTweet() {
   const [isLoading, setIsLoading] = useState(false);

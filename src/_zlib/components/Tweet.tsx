@@ -1,7 +1,9 @@
 import { Icon } from './common/Icon';
+import { Menu } from './common/Menu';
 import { Spacing } from './common/Spacing';
 import { Txt } from './common/Txt';
 import { Wrapper } from './common/Wrapper';
+import colors from '../constants/colors';
 import { TweetType } from '../hooks/useTweets';
 import { database, storage } from '../server/firebase';
 import { User } from 'firebase/auth';
@@ -21,8 +23,15 @@ export default function Tweet({
   username,
 }: Props) {
   /**
-   * @name Tweet 삭제 함수
-   * @description 내비게이션 로직이라 이곳에 작성되면 안됨. 리팩토링 필요
+   * Tweet을 수정하는 함수.
+   * 비즈니스 로직이라 이곳에 작성되면 안됨. 리팩토링 필요.
+   */
+  const onEdit = async () => {
+    console.log('Edit');
+  };
+  /**
+   * Tweet을 삭제하는 함수.
+   * 비즈니스 로직이라 이곳에 작성되면 안됨. 리팩토링 필요.
    */
   const onDelete = async () => {
     const ok = confirm('트윗을 삭제하시겠습니까?');
@@ -42,14 +51,20 @@ export default function Tweet({
   return (
     <Wrapper className='tweet'>
       <Wrapper className='row-spacing'>
-        <Txt typography={'name'}>{username}</Txt>
+        <Txt typography={'bold'}>{username}</Txt>
         {user?.uid === userId && (
-          <Txt typography={'delete'} onClick={onDelete}>
-            X
-          </Txt>
+          <Menu>
+            <Menu.Item className='tweet-control' onClick={onEdit}>
+              <Icon.Edit color={colors.gray02} />
+            </Menu.Item>
+            <Menu.Item className='tweet-control' onClick={onDelete}>
+              <Icon.Cancel color={colors.gray02} />
+            </Menu.Item>
+          </Menu>
         )}
       </Wrapper>
-      <Spacing direction={'vertical'} size={10} />
+      {user?.uid !== userId && <Spacing direction={'vertical'} size={8} />}
+
       <Txt typography={'p'}>{tweet}</Txt>
       {photo && (
         <>
