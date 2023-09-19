@@ -21,8 +21,8 @@ export default function Tweet({
   username,
 }: Props) {
   /**
-   * @name Tweet 삭제 함수
-   * @description 내비게이션 로직이라 이곳에 작성되면 안됨. 리팩토링 필요
+   * Tweet을 삭제하는 함수.
+   * 비즈니스 로직이라 이곳에 작성되면 안됨. 리팩토링 필요.
    */
   const onDelete = async () => {
     const ok = confirm('트윗을 삭제하시겠습니까?');
