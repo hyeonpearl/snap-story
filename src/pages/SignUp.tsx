@@ -1,4 +1,3 @@
-import Loading from '../_zlib/components/Loading';
 import { Button } from '../_zlib/components/common/Button';
 import { Form } from '../_zlib/components/common/Form';
 import { Icon } from '../_zlib/components/common/Icon';
@@ -7,6 +6,8 @@ import { LineBreak } from '../_zlib/components/common/LineBreak';
 import { Spacing } from '../_zlib/components/common/Spacing';
 import { Txt } from '../_zlib/components/common/Txt';
 import { Wrapper } from '../_zlib/components/common/Wrapper';
+import Loading from '../_zlib/components/Loading';
+import colors from '../_zlib/constants/colors';
 import useSignUp from '../_zlib/hooks/useSignUp';
 
 export default function SignUp() {
@@ -39,44 +40,48 @@ export default function SignUp() {
             </Button>
           </Wrapper>
 
-          <Spacing direction='vertical' size={20} />
-          <LineBreak text='또는' />
-          <Spacing direction='vertical' size={20} />
+          <Spacing direction={'vertical'} size={20} />
+          <LineBreak text={'또는'} />
+          <Spacing direction={'vertical'} size={20} />
 
           <Form className='sign-form' onSubmit={onSubmit}>
             <Input
-              name={'name'}
-              placeholder={'이름'}
+              name='name'
+              placeholder='이름'
+              type='text'
               value={form.name}
-              type={'text'}
               onChange={onChange}
               required
             />
             <Input
-              name={'email'}
-              placeholder={'이메일'}
+              name='email'
+              placeholder='이메일'
+              type='email'
               value={form.email}
-              type={'email'}
               onChange={onChange}
               required
             />
             <Input
-              name={'password'}
-              placeholder={'비밀번호'}
+              name='password'
+              placeholder='비밀번호'
+              type='password'
               value={form.password}
-              type={'password'}
               onChange={onChange}
               required
             />
-            <Button className={'primary'} type={'submit'} required>
+            <Button className='primary' type='submit' required>
               계정 만들기
             </Button>
-            {error ? <Txt typography='error'>{error}</Txt> : null}
+            {error ? (
+              <Txt typography={'p'} color={colors.red01}>
+                {error}
+              </Txt>
+            ) : null}
             <Spacing direction={'vertical'} size={25} />
 
             <Txt typography='h4'>이미 가입하셨나요?</Txt>
-            <Spacing direction='vertical' size={5} />
-            <Button className={'secondary'} onClick={moveToSignIn}>
+            <Spacing direction={'vertical'} size={5} />
+            <Button className='secondary' onClick={moveToSignIn}>
               로그인
             </Button>
           </Form>

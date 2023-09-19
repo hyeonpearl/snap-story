@@ -7,6 +7,7 @@ import { Spacing } from '../_zlib/components/common/Spacing';
 import { Txt } from '../_zlib/components/common/Txt';
 import { Wrapper } from '../_zlib/components/common/Wrapper';
 import Loading from '../_zlib/components/Loading';
+import colors from '../_zlib/constants/colors';
 import useSignIn from '../_zlib/hooks/useSignIn';
 
 export default function SignIn() {
@@ -61,13 +62,23 @@ export default function SignIn() {
             <Button className='primary' type='submit' required>
               로그인
             </Button>
-            {error ? <Txt typography={'error'}>{error}</Txt> : null}
+            {error ? (
+              <Txt typography={'p'} color={colors.red01}>
+                {error}
+              </Txt>
+            ) : null}
             <Spacing direction={'vertical'} size={20} />
 
             <Wrapper className='row'>
-              <Txt typography={'p'}>계정이 없으신가요?</Txt>
+              <Txt typography={'p'} color={colors.gray02}>
+                계정이 없으신가요?
+              </Txt>
               <Spacing direction={'horizontal'} size={10} />
-              <Txt typography={'anker'} onClick={moveToSignUp}>
+              <Txt
+                typography={'anker'}
+                color={colors.primary}
+                onClick={moveToSignUp}
+              >
                 가입하기
               </Txt>
             </Wrapper>

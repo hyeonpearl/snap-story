@@ -1,7 +1,9 @@
 import { Icon } from './common/Icon';
+import { Menu } from './common/Menu';
 import { Spacing } from './common/Spacing';
 import { Txt } from './common/Txt';
 import { Wrapper } from './common/Wrapper';
+import colors from '../constants/colors';
 import { TweetType } from '../hooks/useTweets';
 import { database, storage } from '../server/firebase';
 import { User } from 'firebase/auth';
@@ -42,14 +44,18 @@ export default function Tweet({
   return (
     <Wrapper className='tweet'>
       <Wrapper className='row-spacing'>
-        <Txt typography={'name'}>{username}</Txt>
+        <Txt typography={'bold'}>{username}</Txt>
         {user?.uid === userId && (
-          <Txt typography={'delete'} onClick={onDelete}>
-            X
-          </Txt>
+          <Menu>
+            <Menu.Item className='tweet-control'>
+              <Icon.Edit color={colors.gray02} />
+            </Menu.Item>
+            <Menu.Item className='tweet-control' onClick={onDelete}>
+              <Icon.Cancel color={colors.gray02} />
+            </Menu.Item>
+          </Menu>
         )}
       </Wrapper>
-      <Spacing direction={'vertical'} size={10} />
       <Txt typography={'p'}>{tweet}</Txt>
       {photo && (
         <>

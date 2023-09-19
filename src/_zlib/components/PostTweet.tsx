@@ -40,7 +40,11 @@ export default function PostTweet() {
                 onChange={onFileChange}
               />
               <Spacing direction={'horizontal'} size={10} />
-              {file && <Txt typography={'check'}>파일이 업로드되었습니다.</Txt>}
+              {file && (
+                <Txt typography={'p'} color={colors.green01}>
+                  파일이 업로드되었습니다.
+                </Txt>
+              )}
             </Wrapper>
             <Button className='primary' type='submit'>
               게시하기
