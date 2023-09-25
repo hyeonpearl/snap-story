@@ -63,7 +63,7 @@ export default function Tweet({
           </Menu>
         )}
       </Wrapper>
-      {user?.uid !== userId && <Spacing direction={'vertical'} size={8} />}
+      {user?.uid !== userId && <Spacing direction={'vertical'} size={12} />}
 
       <Txt typography={'p'}>{tweet}</Txt>
       {photo && (
