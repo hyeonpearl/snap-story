@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { css, styled } from 'styled-components';
 import { HTMLAttributes } from 'react';
 
 interface Props extends HTMLAttributes<HTMLSpanElement> {
@@ -6,29 +6,42 @@ interface Props extends HTMLAttributes<HTMLSpanElement> {
   color?: string;
 }
 
-export function Txt({ color, ...props }: Props) {
-  return <StyledTxt color={color} {...props} />;
+export function Txt({ typography, color, ...props }: Props) {
+  return <StyledTxt typography={typography} color={color} {...props} />;
 }
 
-export const StyledTxt = styled.span`
+export const StyledTxt = styled.span<Props>`
   color: ${({ color }) => color && color};
 
-  &[typography='h1'] {
-    font-size: 48px;
-    font-weight: 600;
-  }
-  &[typography='h4'] {
-    font-size: 24px;
-    font-weight: 500;
-  }
-  &[typography='bold'] {
-    font-weight: 600;
-  }
-  &[typography='anker'] {
-    cursor: pointer;
+  ${({ typography }) =>
+    typography === 'p' &&
+    css`
+      font-size: 16px;
+    `}
+  ${({ typography }) =>
+    typography === 'h1' &&
+    css`
+      font-size: 48px;
+      font-weight: 600;
+    `}
+  ${({ typography }) =>
+    typography === 'h4' &&
+    css`
+      font-size: 24px;
+      font-weight: 500;
+    `}
+    ${({ typography }) =>
+    typography === 'bold' &&
+    css`
+      font-weight: 600;
+    `}
+    ${({ typography }) =>
+    typography === 'anker' &&
+    css`
+      cursor: pointer;
 
-    &:hover {
-      opacity: 0.8;
-    }
-  }
+      &:hover {
+        opacity: 0.8;
+      }
+    `}
 `;

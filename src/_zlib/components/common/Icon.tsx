@@ -1,5 +1,5 @@
 import colors from '../../constants/colors';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import { HTMLAttributes } from 'react';
 
 interface Props extends HTMLAttributes<HTMLImageElement> {
