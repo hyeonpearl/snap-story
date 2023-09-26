@@ -7,7 +7,7 @@ import colors from '../constants/colors';
 import { TweetType } from '../hooks/useTweets';
 import { database, storage } from '../server/firebase';
 import { User } from 'firebase/auth';
-import { deleteDoc, doc } from 'firebase/firestore';
+import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
 
 interface Props extends TweetType {
@@ -22,12 +22,19 @@ export default function Tweet({
   userId,
   username,
 }: Props) {
+  const tweetRef = doc(database, 'tweets', id);
+
   /**
    * Tweet을 수정하는 함수.
    * 비즈니스 로직이라 이곳에 작성되면 안됨. 리팩토링 필요.
+   * 사진 수정 기능도 추가해야함.
    */
   const onEdit = async () => {
-    console.log('Edit');
+    const edit = prompt('수정할 내용을 입력해주세요.', '');
+    if (edit === '') return;
+    await updateDoc(tweetRef, {
+      tweet: edit,
+    });
   };
   /**
    * Tweet을 삭제하는 함수.
@@ -38,7 +45,7 @@ export default function Tweet({
     if (!ok || user?.uid !== userId) return;
 
     try {
-      await deleteDoc(doc(database, 'tweets', id));
+      await deleteDoc(tweetRef);
       if (photo) {
         const photoRef = ref(storage, `tweets/${user?.uid}/${id}`);
         await deleteObject(photoRef);
@@ -63,7 +70,7 @@ export default function Tweet({
           </Menu>
         )}
       </Wrapper>
-      {user?.uid !== userId && <Spacing direction={'vertical'} size={8} />}
+      {user?.uid !== userId && <Spacing direction={'vertical'} size={12} />}
 
       <Txt typography={'p'}>{tweet}</Txt>
       {photo && (
