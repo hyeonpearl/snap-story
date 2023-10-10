@@ -23,6 +23,29 @@ Input.Label = ({ ...props }) => {
 const StyledLabel = styled.label`
   width: 30px;
   cursor: pointer;
+
+  &.profile {
+    width: 80px;
+    height: 80px;
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    svg {
+      width: 50px;
+      border-radius: 50%;
+      border: 1px solid ${colors.gray01};
+      padding: 1rem;
+    }
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 1px solid ${colors.gray01};
+    }
+  }
 `;
 
 Input.TextField = ({ ...props }) => {

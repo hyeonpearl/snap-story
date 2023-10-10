@@ -6,6 +6,7 @@ export function Wrapper({ ...props }) {
 }
 
 const StyledWrapper = styled.div`
+  // Common
   &.row {
     display: flex;
     flex-direction: row;
@@ -27,6 +28,7 @@ const StyledWrapper = styled.div`
     align-items: center;
   }
 
+  // Layout
   &.app {
     display: flex;
     justify-content: center;
@@ -38,7 +40,13 @@ const StyledWrapper = styled.div`
     align-items: center;
     height: 100vh;
   }
+  &.navbar {
+    height: 100%;
+    padding: 0 1rem;
+    border-right: 1px solid ${colors.gray01};
+  }
 
+  // Sign
   &.sign-form {
     display: flex;
     flex-direction: column;
@@ -55,12 +63,7 @@ const StyledWrapper = styled.div`
     gap: 10px;
   }
 
-  &.navbar {
-    height: 100%;
-    padding: 0 1rem;
-    border-right: 1px solid ${colors.gray01};
-  }
-
+  // Home
   &.home {
     display: grid;
     overflow-y: scroll;
@@ -86,5 +89,24 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     padding: 20px;
     border: 1px solid ${colors.gray01};
+  }
+
+  // Profile
+  &.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    border-right: 1px solid ${colors.gray01};
+  }
+  &.profile-date {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    svg {
+      width: 20px;
+      margin-right: 5px;
+    }
   }
 `;

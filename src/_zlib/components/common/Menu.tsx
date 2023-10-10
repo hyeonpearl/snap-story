@@ -40,9 +40,9 @@ const StyledItem = styled.div`
   }
   &.tweet-control {
     svg {
-      width: 1.25rem;
-      padding: 0.5rem;
-      border-radius: 0.75rem;
+      width: 1rem;
+      margin-left: 0.5rem;
+      border-radius: 50%;
       cursor: pointer;
 
       &:hover {
