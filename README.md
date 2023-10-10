@@ -13,7 +13,8 @@ X(트위터)의 클론 코딩 레포지토리입니다.
 
 ## File Tree
 
-```src
+```
+src
  ┣ _zlib
  ┃ ┣ components
  ┃ ┃ ┣ common
@@ -36,6 +37,7 @@ X(트위터)의 클론 코딩 레포지토리입니다.
  ┃ ┃ ┗ colors.ts
  ┃ ┣ hooks
  ┃ ┃ ┣ usePostTweet.tsx
+ ┃ ┃ ┣ useProfile.tsx
  ┃ ┃ ┣ useSignIn.tsx
  ┃ ┃ ┣ useSignUp.tsx
  ┃ ┃ ┗ useTweets.tsx
@@ -50,6 +52,5 @@ X(트위터)의 클론 코딩 레포지토리입니다.
  ┃ ┗ SignUp.tsx
  ┣ App.tsx
  ┣ main.tsx
- ┗ vite-env.d.ts```
-
-
+ ┗ vite-env.d.ts
+```
