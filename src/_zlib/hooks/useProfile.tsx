@@ -5,6 +5,7 @@ import { updateProfile } from 'firebase/auth';
 
 export default function useProfile() {
   const user = auth.currentUser;
+  const createAt = user?.metadata.creationTime;
   const [picture, setPicture] = useState(user?.photoURL);
 
   const onPictureChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,5 +25,5 @@ export default function useProfile() {
     }
   };
 
-  return { user, picture, onPictureChange };
+  return { user, picture, createAt, onPictureChange };
 }
