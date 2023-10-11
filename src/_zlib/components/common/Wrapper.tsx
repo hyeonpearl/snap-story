@@ -21,6 +21,7 @@ const StyledWrapper = styled.div`
   &.column {
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
   &.column-center {
     display: flex;
@@ -65,16 +66,14 @@ const StyledWrapper = styled.div`
 
   // Home
   &.home {
-    display: grid;
     overflow-y: scroll;
-    grid-template-rows: 1fr 5fr;
+    width: 600px;
     border-right: 1px solid ${colors.gray01};
   }
   &.post-tweet {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 600px;
   }
   &.buttons {
     border-top: 1px solid ${colors.gray01};
@@ -86,9 +85,15 @@ const StyledWrapper = styled.div`
   }
   &.tweet {
     display: flex;
-    flex-direction: column;
-    padding: 20px;
     border: 1px solid ${colors.gray01};
+    padding: 1rem;
+
+    > div > svg {
+      width: 1.5rem;
+      border: 1px solid ${colors.gray01};
+      border-radius: 50%;
+      margin-right: 10px;
+    }
   }
 
   // Profile
@@ -98,6 +103,11 @@ const StyledWrapper = styled.div`
     align-items: center;
     width: 600px;
     border-right: 1px solid ${colors.gray01};
+  }
+  &.profile-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
   }
   &.profile-date {
     display: flex;
