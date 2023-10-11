@@ -38,7 +38,7 @@ export default function Profile() {
         <Txt typography={'h4'}>{user?.displayName ?? '익명'}</Txt>
         <Spacing direction={'vertical'} size={4} />
         <Txt typography={'p'} color={colors.gray02}>
-          @{user?.email}
+          {user?.email}
         </Txt>
         <Spacing direction={'vertical'} size={20} />
 
