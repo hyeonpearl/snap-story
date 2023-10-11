@@ -11,12 +11,14 @@ export function Txt({ typography, color, ...props }: Props) {
 }
 
 export const StyledTxt = styled.span<Props>`
+  white-space: pre-wrap;
+  word-break: break-all;
   color: ${({ color }) => color && color};
 
   ${({ typography }) =>
     typography === 'p' &&
     css`
-      font-size: 16px;
+      font-size: 15px;
     `}
   ${({ typography }) =>
     typography === 'h1' &&
