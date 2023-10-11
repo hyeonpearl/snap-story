@@ -30,7 +30,7 @@ export default function Tweet({
    * 사진 수정 기능도 추가해야함.
    */
   const onEdit = async () => {
-    const edit = prompt('수정할 내용을 입력해주세요.', '');
+    const edit = prompt('수정할 내용을 입력해주세요.', tweet);
     if (edit === '') return;
     await updateDoc(tweetRef, {
       tweet: edit,
@@ -57,30 +57,37 @@ export default function Tweet({
 
   return (
     <Wrapper className='tweet'>
-      <Wrapper className='row-spacing'>
-        <Txt typography={'bold'}>{username}</Txt>
-        {user?.uid === userId && (
-          <Menu>
-            <Menu.Item className='tweet-control' onClick={onEdit}>
-              <Icon.Edit color={colors.gray02} />
-            </Menu.Item>
-            <Menu.Item className='tweet-control' onClick={onDelete}>
-              <Icon.Cancel color={colors.gray02} />
-            </Menu.Item>
-          </Menu>
+      <Wrapper>
+        <Icon.Profile />
+      </Wrapper>
+      <Wrapper className='column'>
+        <Wrapper className='row-spacing'>
+          <Txt typography={'bold'}>{username}</Txt>
+          {user?.uid === userId && (
+            <Menu>
+              <Menu.Item className='tweet-control' onClick={onEdit}>
+                <Icon.Edit color={colors.gray02} />
+              </Menu.Item>
+              <Menu.Item className='tweet-control' onClick={onDelete}>
+                <Icon.Cancel color={colors.gray02} />
+              </Menu.Item>
+            </Menu>
+          )}
+        </Wrapper>
+        <Spacing direction={'vertical'} size={8} />
+
+        <Wrapper className='row'>
+          <Txt typography={'p'}>{tweet}</Txt>
+        </Wrapper>
+        {photo && (
+          <>
+            <Wrapper className='column-center'>
+              <Spacing direction={'vertical'} size={20} />
+              <Icon className='upload' src={photo} width={500} height={500} />
+            </Wrapper>
+          </>
         )}
       </Wrapper>
-      <Spacing direction={'vertical'} size={8} />
-
-      <Txt typography={'p'}>{tweet}</Txt>
-      {photo && (
-        <>
-          <Wrapper className='column-center'>
-            <Spacing direction={'vertical'} size={20} />
-            <Icon className='upload' src={photo} width={550} height={550} />
-          </Wrapper>
-        </>
-      )}
     </Wrapper>
   );
 }
