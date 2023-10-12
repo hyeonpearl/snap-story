@@ -5,6 +5,7 @@ import useTweets from '../_zlib/hooks/useTweets';
 
 export default function Home() {
   const { user, tweets } = useTweets();
+
   return (
     <Wrapper className='home'>
       <PostTweet />

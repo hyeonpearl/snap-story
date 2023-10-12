@@ -1,6 +1,6 @@
 import { auth, database, storage } from '../server/firebase';
 import { TweetType } from './useTweets';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth';
 import {
@@ -14,10 +14,28 @@ import {
 
 export default function useProfile() {
   const user = auth.currentUser;
-  const creationTime = user?.metadata.creationTime;
-  const [picture, setPicture] = useState(user?.photoURL);
+  const initialProfile = {
+    username: user?.displayName,
+    email: user?.email,
+    picture: user?.photoURL,
+    creationTime: user?.metadata.creationTime,
+  };
+  const [profile, setProfile] = useState(initialProfile);
   const [tweets, setTweets] = useState<TweetType[]>([]);
 
+  const onNameChange = async () => {
+    const name = prompt('이름을 입력해주세요.', user?.displayName ?? '익명');
+
+    if (!user) return;
+
+    setProfile(prev => ({
+      ...prev,
+      username: name,
+    }));
+    await updateProfile(user, {
+      displayName: name,
+    });
+  };
   const onPictureChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
 
@@ -28,13 +46,16 @@ export default function useProfile() {
       const locationRef = ref(storage, `profile/${user?.uid}`);
       const result = await uploadBytes(locationRef, file);
       const pictureUrl = await getDownloadURL(result.ref);
-      setPicture(pictureUrl);
+      setProfile(prev => ({
+        ...prev,
+        picture: pictureUrl,
+      }));
       await updateProfile(user, {
         photoURL: pictureUrl,
       });
     }
   };
-  const fetchData = async () => {
+  const fetchTweet = useCallback(async () => {
     const tweetQuery = query(
       collection(database, 'tweets'),
       where('userId', '==', user?.uid),
@@ -54,7 +75,11 @@ export default function useProfile() {
       };
     });
     setTweets(tweets);
-  };
+  }, [user]);
 
-  return { user, tweets, picture, creationTime, onPictureChange, fetchData };
+  useEffect(() => {
+    fetchTweet();
+  }, [fetchTweet]);
+
+  return { user, tweets, profile, onNameChange, onPictureChange };
 }

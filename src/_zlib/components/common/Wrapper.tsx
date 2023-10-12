@@ -98,6 +98,7 @@ const StyledWrapper = styled.div`
 
   // Profile
   &.profile {
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -105,9 +106,14 @@ const StyledWrapper = styled.div`
     border-right: 1px solid ${colors.gray01};
   }
   &.profile-info {
-    padding: 1rem;
+    width: 100%;
+    padding: 1rem 0;
     display: flex;
     flex-direction: column;
+    border-bottom: 1px solid ${colors.gray01};
+  }
+  &.profile-detail {
+    padding: 0 1rem;
   }
   &.profile-date {
     display: flex;
