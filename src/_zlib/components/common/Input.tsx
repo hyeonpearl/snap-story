@@ -33,17 +33,17 @@ const StyledLabel = styled.label`
     align-items: center;
     cursor: pointer;
 
-    svg {
-      width: 50px;
-      border-radius: 50%;
-      border: 1px solid ${colors.gray01};
-      padding: 1rem;
-    }
-    img {
+    > img {
       width: 80px;
       height: 80px;
       border-radius: 50%;
       border: 1px solid ${colors.gray01};
+    }
+    > svg {
+      width: 50px;
+      border-radius: 50%;
+      border: 1px solid ${colors.gray01};
+      padding: 1rem;
     }
   }
 `;
