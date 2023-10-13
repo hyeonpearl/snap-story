@@ -38,6 +38,7 @@ export default function usePostTweet() {
         createdAt: Date.now(),
         username: user.displayName || '익명',
         userId: user.uid,
+        picture: user.photoURL,
       });
 
       if (file) {

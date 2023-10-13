@@ -21,6 +21,7 @@ export default function Tweet({
   user,
   userId,
   username,
+  picture,
 }: Props) {
   const tweetRef = doc(database, 'tweets', id);
 
@@ -58,7 +59,11 @@ export default function Tweet({
   return (
     <Wrapper className='tweet'>
       <Wrapper>
-        <Icon.Profile />
+        {picture ? (
+          <Icon src={picture} width={20} height={20} />
+        ) : (
+          <Icon.Profile />
+        )}
       </Wrapper>
       <Wrapper className='column'>
         <Wrapper className='row-spacing'>
