@@ -16,6 +16,7 @@ export interface TweetType {
   tweet: string;
   userId: string;
   username: string;
+  userEmail: string;
   picture: string;
 }
 
@@ -37,8 +38,15 @@ export default function useTweets() {
       );
       unsubscribe = onSnapshot(tweetsQuery, snapshot => {
         const tweets = snapshot.docs.map(doc => {
-          const { createdAt, photo, tweet, userId, username, picture } =
-            doc.data();
+          const {
+            createdAt,
+            photo,
+            tweet,
+            userId,
+            username,
+            userEmail,
+            picture,
+          } = doc.data();
           return {
             id: doc.id,
             createdAt,
@@ -46,6 +54,7 @@ export default function useTweets() {
             tweet,
             userId,
             username,
+            userEmail,
             picture,
           };
         });
