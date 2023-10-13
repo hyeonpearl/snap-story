@@ -1,6 +1,6 @@
 import { auth, database, storage } from '../server/firebase';
 import { TweetType } from './useTweets';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth';
 import {
@@ -43,9 +43,16 @@ export default function useProfile() {
 
     if (files && files.length === 1) {
       const file = files[0];
+
+      if (file && file?.size > 1024 * 1024) {
+        alert('1MB 미만 크기의 파일만 업로드 가능합니다.');
+        return;
+      }
+
       const locationRef = ref(storage, `profile/${user?.uid}`);
       const result = await uploadBytes(locationRef, file);
       const pictureUrl = await getDownloadURL(result.ref);
+
       setProfile(prev => ({
         ...prev,
         picture: pictureUrl,
@@ -55,32 +62,33 @@ export default function useProfile() {
       });
     }
   };
-  const fetchTweet = useCallback(async () => {
-    const tweetQuery = query(
-      collection(database, 'tweets'),
-      where('userId', '==', user?.uid),
-      orderBy('createdAt', 'desc'),
-      limit(25)
-    );
-    const snapshot = await getDocs(tweetQuery);
-    const tweets = snapshot.docs.map(doc => {
-      const { createdAt, tweet, userId, username, photo, picture } = doc.data();
-      return {
-        id: doc.id,
-        createdAt,
-        photo,
-        tweet,
-        userId,
-        username,
-        picture,
-      };
-    });
-    setTweets(tweets);
-  }, [user]);
 
   useEffect(() => {
+    const fetchTweet = async () => {
+      const tweetQuery = query(
+        collection(database, 'tweets'),
+        where('userId', '==', user?.uid),
+        orderBy('createdAt', 'desc'),
+        limit(25)
+      );
+      const snapshot = await getDocs(tweetQuery);
+      const tweets = snapshot.docs.map(doc => {
+        const { createdAt, tweet, userId, username, photo, picture } =
+          doc.data();
+        return {
+          id: doc.id,
+          createdAt,
+          photo,
+          tweet,
+          userId,
+          username,
+          picture,
+        };
+      });
+      setTweets(tweets);
+    };
     fetchTweet();
-  }, [fetchTweet]);
+  }, [user?.uid, tweets]);
 
   return { user, tweets, profile, onNameChange, onPictureChange };
 }
