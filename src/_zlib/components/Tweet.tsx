@@ -95,7 +95,7 @@ export default function Tweet({
           <>
             <Wrapper className='column-center'>
               <Spacing direction={'vertical'} size={20} />
-              <Icon className='upload' src={photo} width={500} height={500} />
+              <Icon className='upload' src={photo} width={1} height={1} />
             </Wrapper>
           </>
         )}
