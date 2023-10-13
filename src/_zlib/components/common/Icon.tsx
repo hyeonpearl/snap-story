@@ -14,6 +14,8 @@ export function Icon({ src, width, height, ...props }: Props) {
 
 const StyledImg = styled.img`
   &.upload {
+    width: 100%;
+    height: 500px;
     border: 1px solid ${colors.gray01};
     border-radius: 1rem;
   }

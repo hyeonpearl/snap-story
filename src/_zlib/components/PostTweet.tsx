@@ -24,7 +24,7 @@ export default function PostTweet() {
             value={tweet}
             onChange={onChange}
             rows={3}
-            maxlength={180}
+            maxLength={180}
             required
           />
 

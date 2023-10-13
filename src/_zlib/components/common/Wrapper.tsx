@@ -94,6 +94,11 @@ const StyledWrapper = styled.div`
       border-radius: 50%;
       margin-right: 10px;
     }
+    > div > img {
+      border: 1px solid ${colors.gray01};
+      border-radius: 50%;
+      margin-right: 10px;
+    }
   }
 
   // Profile
