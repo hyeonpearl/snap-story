@@ -90,7 +90,7 @@ const StyledWrapper = styled.div`
   }
   &.tweet {
     display: flex;
-    border: 1px solid ${colors.gray01};
+    border-bottom: 1px solid ${colors.gray01};
     padding: 1rem;
 
     > div > svg {
