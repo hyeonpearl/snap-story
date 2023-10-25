@@ -5,6 +5,7 @@ import { Spacing } from '../_zlib/components/common/Spacing';
 import { Txt } from '../_zlib/components/common/Txt';
 import { Wrapper } from '../_zlib/components/common/Wrapper';
 import TimeLine from '../_zlib/components/TimeLine';
+import Title from '../_zlib/components/Title';
 import colors from '../_zlib/constants/colors';
 import useProfile from '../_zlib/hooks/useProfile';
 
@@ -12,22 +13,25 @@ export default function Profile() {
   const { user, tweets, profile, onNameChange, onPictureChange } = useProfile();
 
   return (
-    <Wrapper className='profile'>
-      <Spacing direction={'vertical'} size={100} />
-      <Input.Label className='profile' htmlFor='picture'>
-        {profile.picture ? (
-          <Icon width={50} height={50} src={profile.picture} />
-        ) : (
-          <Icon.Profile />
-        )}
-      </Input.Label>
-      <Input
-        onChange={onPictureChange}
-        id='picture'
-        type='file'
-        accept='image/*'
-      />
-      <Spacing direction={'vertical'} size={16} />
+    <Wrapper className='page'>
+      <Title title={'프로필'} />
+      <Spacing direction={'vertical'} size={30} />
+      <Wrapper className='row'>
+        <Spacing direction={'horizontal'} size={30} />
+        <Input.Label className='profile' htmlFor='picture'>
+          {profile.picture ? (
+            <Icon width={50} height={50} src={profile.picture} />
+          ) : (
+            <Icon.Profile />
+          )}
+        </Input.Label>
+        <Input
+          onChange={onPictureChange}
+          id='picture'
+          type='file'
+          accept='image/*'
+        />
+      </Wrapper>
 
       <Wrapper className='profile-info'>
         <Wrapper className='profile-detail'>

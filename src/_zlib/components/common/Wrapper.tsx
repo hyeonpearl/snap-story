@@ -46,6 +46,16 @@ const StyledWrapper = styled.div`
     padding: 0 1rem;
     border-right: 1px solid ${colors.gray01};
   }
+  &.page {
+    overflow-y: scroll;
+    width: 600px;
+    border-right: 1px solid ${colors.gray01};
+  }
+  &.title {
+    padding: 1rem;
+    width: 100%;
+    border-bottom: 1px solid ${colors.gray01};
+  }
 
   // Sign
   &.sign-form {
@@ -65,11 +75,6 @@ const StyledWrapper = styled.div`
   }
 
   // Home
-  &.home {
-    overflow-y: scroll;
-    width: 600px;
-    border-right: 1px solid ${colors.gray01};
-  }
   &.post-tweet {
     display: flex;
     justify-content: center;
@@ -85,7 +90,7 @@ const StyledWrapper = styled.div`
   }
   &.tweet {
     display: flex;
-    border: 1px solid ${colors.gray01};
+    border-bottom: 1px solid ${colors.gray01};
     padding: 1rem;
 
     > div > svg {
