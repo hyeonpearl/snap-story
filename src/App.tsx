@@ -48,11 +48,9 @@ export default function App() {
   }, []);
 
   return (
-    <>
-      <Wrapper className='app'>
-        <GlobalStyles />
-        {isLoading ? <Loading /> : <RouterProvider router={router} />}
-      </Wrapper>
-    </>
+    <Wrapper className='app'>
+      <GlobalStyles />
+      {isLoading ? <Loading /> : <RouterProvider router={router} />}
+    </Wrapper>
   );
 }
