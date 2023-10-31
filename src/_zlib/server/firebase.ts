@@ -4,12 +4,12 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBuas3PZaBN_-spa_6s08n5y3bHP8VFm5M',
-  authDomain: 'z-app-29616.firebaseapp.com',
-  projectId: 'z-app-29616',
-  storageBucket: 'z-app-29616.appspot.com',
-  messagingSenderId: '703465153333',
-  appId: '1:703465153333:web:f2e277b787fc61a43f627c',
+  apiKey: 'AIzaSyC6oKblvapCXVocLJBf2LPlqcM-YYy4O6g',
+  authDomain: 'zwitter-app.firebaseapp.com',
+  projectId: 'zwitter-app',
+  storageBucket: 'zwitter-app.appspot.com',
+  messagingSenderId: '496879371330',
+  appId: '1:496879371330:web:b44355af0e8d64de3b59db',
 };
 
 // Initialize Firebase
