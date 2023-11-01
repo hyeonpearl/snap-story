@@ -94,7 +94,7 @@ const StyledWrapper = styled.div`
     padding: 1rem;
 
     > div > svg {
-      width: 1.5rem;
+      width: 40px;
       border: 1px solid ${colors.gray01};
       border-radius: 50%;
       margin-right: 10px;

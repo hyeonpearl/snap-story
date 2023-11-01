@@ -27,10 +27,9 @@ export default function SignUp() {
         <Loading text='계정 만드는 중...' />
       ) : (
         <Wrapper className='sign-form'>
-          <Icon src='/z.svg' width={250} height={250} />
-          <Txt typography={'h1'}>지금 일어나고 있는 일</Txt>
-          <Spacing direction='vertical' size={50} />
-          <Txt typography={'h4'}>지금 가입하세요.</Txt>
+          <Icon src='/z.svg' width={200} height={200} />
+          <Spacing direction='vertical' size={30} />
+          <Txt typography={'h1'}>지금 가입하세요.</Txt>
           <Spacing direction='vertical' size={30} />
 
           <Wrapper className='form'>

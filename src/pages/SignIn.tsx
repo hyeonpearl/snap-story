@@ -27,7 +27,7 @@ export default function SignIn() {
         <Loading text='로그인 중...' />
       ) : (
         <Wrapper className='sign-form'>
-          <Icon src='/z.svg' width={250} height={250} />
+          <Icon src='/z.svg' width={200} height={200} />
           <Txt typography={'h1'}>로그인하기</Txt>
           <Spacing direction={'vertical'} size={50} />
 
