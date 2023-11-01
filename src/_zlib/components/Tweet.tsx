@@ -61,7 +61,7 @@ export default function Tweet({
     <Wrapper className='tweet'>
       <Wrapper>
         {picture ? (
-          <Icon src={picture} width={20} height={20} />
+          <Icon src={picture} width={40} height={40} />
         ) : (
           <Icon.Profile />
         )}
@@ -72,7 +72,7 @@ export default function Tweet({
             <Txt typography={'bold'}>{username}</Txt>
             <Spacing direction={'horizontal'} size={5} />
             <Txt typography={'p'} color={colors.gray02}>
-              {userEmail}
+              {userEmail} • 00월 00일
             </Txt>
           </Wrapper>
           {user?.uid === userId && (
