@@ -10,7 +10,7 @@ export function Txt({ typography, color, ...props }: Props) {
   return <StyledTxt typography={typography} color={color} {...props} />;
 }
 
-export const StyledTxt = styled.span<Props>`
+const StyledTxt = styled.span<Props>`
   white-space: pre-wrap;
   word-break: break-all;
   color: ${({ color }) => color && color};
