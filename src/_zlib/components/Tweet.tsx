@@ -5,7 +5,7 @@ import { Txt } from './common/Txt';
 import { Wrapper } from './common/Wrapper';
 import colors from '../constants/colors';
 import { TweetType } from '../hooks/useTweets';
-import { database, storage } from '../server/firebase';
+import { db, storage } from '../server/firebase';
 import { User } from 'firebase/auth';
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
@@ -24,7 +24,7 @@ export default function Tweet({
   userEmail,
   picture,
 }: Props) {
-  const tweetRef = doc(database, 'tweets', id);
+  const tweetRef = doc(db, 'tweets', id);
 
   /**
    * Tweet을 수정하는 함수.

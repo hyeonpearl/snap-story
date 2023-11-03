@@ -1,12 +1,12 @@
-import { auth, database, storage } from '../server/firebase';
+import { auth, db, storage } from '../server/firebase';
 import { TweetType } from './useTweets';
 import { useEffect, useState } from 'react';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { updateProfile } from 'firebase/auth';
+import { Unsubscribe, updateProfile } from 'firebase/auth';
 import {
   collection,
-  getDocs,
   limit,
+  onSnapshot,
   orderBy,
   query,
   where,
@@ -64,39 +64,46 @@ export default function useProfile() {
   };
 
   useEffect(() => {
+    let unsubscribe: Unsubscribe | null = null;
+
     const fetchTweet = async () => {
       const tweetQuery = query(
-        collection(database, 'tweets'),
+        collection(db, 'tweets'),
         where('userId', '==', user?.uid),
         orderBy('createdAt', 'desc'),
         limit(25)
       );
-      const snapshot = await getDocs(tweetQuery);
-      const tweets = snapshot.docs.map(doc => {
-        const {
-          createdAt,
-          tweet,
-          userId,
-          username,
-          photo,
-          userEmail,
-          picture,
-        } = doc.data();
-        return {
-          id: doc.id,
-          createdAt,
-          photo,
-          tweet,
-          userId,
-          username,
-          userEmail,
-          picture,
-        };
+      unsubscribe = onSnapshot(tweetQuery, snapshot => {
+        const tweets = snapshot.docs.map(doc => {
+          const {
+            createdAt,
+            tweet,
+            userId,
+            username,
+            photo,
+            userEmail,
+            picture,
+          } = doc.data();
+          return {
+            id: doc.id,
+            createdAt,
+            photo,
+            tweet,
+            userId,
+            username,
+            userEmail,
+            picture,
+          };
+        });
+        setTweets(tweets);
       });
-      setTweets(tweets);
     };
     fetchTweet();
-  }, [user?.uid, tweets]);
+
+    return () => {
+      unsubscribe && unsubscribe();
+    };
+  }, [user?.uid]);
 
   return { user, tweets, profile, onNameChange, onPictureChange };
 }
