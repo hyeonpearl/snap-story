@@ -19,6 +19,9 @@ export default function useSign() {
 
   const navigate = useNavigate();
 
+  /**
+   * Form 데이터 관리
+   */
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
@@ -93,6 +96,13 @@ export default function useSign() {
       if (error instanceof FirebaseError) setError(error.message);
     }
   };
+  const onSignOut = async () => {
+    const ok = confirm('로그아웃하시겠습니까?');
+    if (ok) {
+      await auth.signOut();
+      navigate('/signin');
+    }
+  };
 
   const moveToSignUp = () => navigate('/');
   const moveToSignIn = () => navigate('/signin');
@@ -105,6 +115,7 @@ export default function useSign() {
     onSignUp,
     onSignIn,
     onSignInGithub,
+    onSignOut,
     moveToSignUp,
     moveToSignIn,
   };
