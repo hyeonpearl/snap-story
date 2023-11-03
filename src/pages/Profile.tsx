@@ -22,7 +22,7 @@ export default function Profile() {
           {profile.picture ? (
             <Icon width={50} height={50} src={profile.picture} />
           ) : (
-            <Icon.Profile />
+            <Icon.Profile type='fill' />
           )}
         </Input.Label>
         <Input

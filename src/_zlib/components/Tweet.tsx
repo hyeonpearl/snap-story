@@ -63,7 +63,7 @@ export default function Tweet({
         {picture ? (
           <Icon src={picture} width={40} height={40} />
         ) : (
-          <Icon.Profile />
+          <Icon.Profile type='fill' />
         )}
       </Wrapper>
       <Wrapper className='column'>

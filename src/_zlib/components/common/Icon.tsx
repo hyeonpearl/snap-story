@@ -21,7 +21,7 @@ const StyledImg = styled.img`
   }
 `;
 
-Icon.Home = ({ type, color }: { type: string; color?: string }) => {
+Icon.Home = ({ type, color }: { type: 'fill' | 'stroke'; color?: string }) => {
   return (
     <svg
       fill={type === 'fill' ? color ?? 'currentColor' : 'none'}
@@ -39,7 +39,13 @@ Icon.Home = ({ type, color }: { type: string; color?: string }) => {
   );
 };
 
-Icon.Profile = ({ type, color }: { type: string; color?: string }) => {
+Icon.Profile = ({
+  type,
+  color,
+}: {
+  type: 'fill' | 'stroke';
+  color?: string;
+}) => {
   return (
     <svg
       fill={type === 'fill' ? color ?? 'currentColor' : 'none'}
