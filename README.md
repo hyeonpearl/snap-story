@@ -32,14 +32,14 @@ src
  ┃ ┃ ┣ PostTweet.tsx
  ┃ ┃ ┣ ProtectedRoute.tsx
  ┃ ┃ ┣ TimeLine.tsx
+ ┃ ┃ ┣ Title.tsx
  ┃ ┃ ┗ Tweet.tsx
  ┃ ┣ constants
  ┃ ┃ ┗ colors.ts
  ┃ ┣ hooks
  ┃ ┃ ┣ usePostTweet.tsx
  ┃ ┃ ┣ useProfile.tsx
- ┃ ┃ ┣ useSignIn.tsx
- ┃ ┃ ┣ useSignUp.tsx
+ ┃ ┃ ┣ useSign.tsx
  ┃ ┃ ┗ useTweets.tsx
  ┃ ┣ server
  ┃ ┃ ┗ firebase.ts
