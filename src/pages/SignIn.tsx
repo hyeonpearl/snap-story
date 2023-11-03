@@ -28,8 +28,9 @@ export default function SignIn() {
       ) : (
         <Wrapper className='sign-form'>
           <Icon src='/z.svg' width={200} height={200} />
+          <Spacing direction='vertical' size={30} />
           <Txt typography={'h1'}>로그인하기</Txt>
-          <Spacing direction={'vertical'} size={50} />
+          <Spacing direction={'vertical'} size={30} />
 
           <Wrapper className='form'>
             <Button className='social' onClick={onSignInGithub}>

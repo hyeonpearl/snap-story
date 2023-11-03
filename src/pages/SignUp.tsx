@@ -76,7 +76,7 @@ export default function SignUp() {
                 {error}
               </Txt>
             ) : null}
-            <Spacing direction={'vertical'} size={25} />
+            <Spacing direction={'vertical'} size={20} />
 
             <Txt typography='h4'>이미 가입하셨나요?</Txt>
             <Spacing direction={'vertical'} size={5} />
