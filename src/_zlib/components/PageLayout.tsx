@@ -2,7 +2,7 @@ import { Icon } from './common/Icon';
 import { Menu } from './common/Menu';
 import { Wrapper } from './common/Wrapper';
 import useSign from '../hooks/useSign';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 
 export default function PageLayout() {
   const { onSignOut } = useSign();
@@ -16,14 +16,26 @@ export default function PageLayout() {
           </Link>
         </Menu.Item>
         <Menu.Item className='navbar'>
-          <Link to={'/home'}>
-            <Icon.Home />
-          </Link>
+          <NavLink to={'/home'}>
+            {({ isActive }) =>
+              isActive ? (
+                <Icon.Home type={'fill'} />
+              ) : (
+                <Icon.Home type={'stroke'} />
+              )
+            }
+          </NavLink>
         </Menu.Item>
         <Menu.Item className='navbar'>
-          <Link to={'/profile'}>
-            <Icon.Profile />
-          </Link>
+          <NavLink to={'/profile'}>
+            {({ isActive }) =>
+              isActive ? (
+                <Icon.Profile type={'fill'} />
+              ) : (
+                <Icon.Profile type={'stroke'} />
+              )
+            }
+          </NavLink>
         </Menu.Item>
         <Menu.Item className='navbar' onClick={onSignOut}>
           <Icon.SignOut />
