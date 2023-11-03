@@ -1,18 +1,17 @@
 import { auth } from '../server/firebase';
 import {
   GithubAuthProvider,
+  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
+  updateProfile,
 } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-/**
- * 입력 받은 데이터로 로그인 하는 함수
- */
-export default function useSignIn() {
-  const initialForm = { email: '', password: '' };
+export default function useSign() {
+  const initialForm = { name: '', email: '', password: '' };
 
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState(initialForm);
@@ -26,6 +25,10 @@ export default function useSignIn() {
     } = e;
 
     switch (true) {
+      case name === 'name': {
+        setForm(prev => ({ ...prev, name: value }));
+        break;
+      }
       case name === 'email': {
         setForm(prev => ({ ...prev, email: value }));
         break;
@@ -39,7 +42,34 @@ export default function useSignIn() {
       }
     }
   };
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
+  const onSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError('');
+    if (
+      isLoading ||
+      form.name === '' ||
+      form.email === '' ||
+      form.password === ''
+    )
+      return;
+
+    try {
+      setIsLoading(true);
+      const credentials = await createUserWithEmailAndPassword(
+        auth,
+        form.email,
+        form.password
+      );
+      await updateProfile(credentials.user, { displayName: form.name });
+      navigate('/home');
+    } catch (error) {
+      if (error instanceof FirebaseError) setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const onSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
     if (isLoading || form.email === '' || form.password === '') return;
@@ -54,10 +84,6 @@ export default function useSignIn() {
       setIsLoading(false);
     }
   };
-  /**
-   * @name Github 소셜 로그인 함수
-   * @description Sign In hook에도 중복된 코드가 있음. 리팩토링 필요
-   */
   const onSignInGithub = async () => {
     try {
       const provider = new GithubAuthProvider();
@@ -67,15 +93,19 @@ export default function useSignIn() {
       if (error instanceof FirebaseError) setError(error.message);
     }
   };
+
   const moveToSignUp = () => navigate('/');
+  const moveToSignIn = () => navigate('/signin');
 
   return {
     isLoading,
     form,
     error,
     onChange,
-    onSubmit,
+    onSignUp,
+    onSignIn,
     onSignInGithub,
     moveToSignUp,
+    moveToSignIn,
   };
 }
