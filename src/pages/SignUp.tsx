@@ -8,7 +8,7 @@ import { Txt } from '../_zlib/components/common/Txt';
 import { Wrapper } from '../_zlib/components/common/Wrapper';
 import Loading from '../_zlib/components/Loading';
 import colors from '../_zlib/constants/colors';
-import useSignUp from '../_zlib/hooks/useSignUp';
+import useSign from '../_zlib/hooks/useSign';
 
 export default function SignUp() {
   const {
@@ -16,10 +16,10 @@ export default function SignUp() {
     form,
     error,
     onChange,
-    onSubmit,
+    onSignUp,
     onSignInGithub,
     moveToSignIn,
-  } = useSignUp();
+  } = useSign();
 
   return (
     <>
@@ -43,7 +43,7 @@ export default function SignUp() {
           <LineBreak text={'또는'} />
           <Spacing direction={'vertical'} size={20} />
 
-          <Form className='sign-form' onSubmit={onSubmit}>
+          <Form className='sign-form' onSubmit={onSignUp}>
             <Input
               name='name'
               placeholder='이름'
@@ -76,7 +76,7 @@ export default function SignUp() {
                 {error}
               </Txt>
             ) : null}
-            <Spacing direction={'vertical'} size={25} />
+            <Spacing direction={'vertical'} size={20} />
 
             <Txt typography='h4'>이미 가입하셨나요?</Txt>
             <Spacing direction={'vertical'} size={5} />

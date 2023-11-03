@@ -1,4 +1,4 @@
-import { auth, database } from '../server/firebase';
+import { auth, db } from '../server/firebase';
 import { Unsubscribe } from 'firebase/auth';
 import {
   collection,
@@ -32,7 +32,7 @@ export default function useTweets() {
 
     const fetchTweet = async () => {
       const tweetsQuery = query(
-        collection(database, 'tweets'),
+        collection(db, 'tweets'),
         orderBy('createdAt', 'desc'),
         limit(25)
       );

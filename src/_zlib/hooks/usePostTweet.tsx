@@ -1,4 +1,4 @@
-import { auth, database, storage } from '../server/firebase';
+import { auth, db, storage } from '../server/firebase';
 import { addDoc, collection, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useEffect, useState } from 'react';
@@ -33,7 +33,7 @@ export default function usePostTweet() {
 
     try {
       setIsLoading(true);
-      const doc = await addDoc(collection(database, 'tweets'), {
+      const doc = await addDoc(collection(db, 'tweets'), {
         tweet,
         createdAt: Date.now(),
         username: user.displayName || '익명',
