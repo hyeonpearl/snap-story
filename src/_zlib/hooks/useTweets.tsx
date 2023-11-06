@@ -24,8 +24,9 @@ export interface TweetType {
  * Tweet 정보를 불러오는 함수
  */
 export default function useTweets() {
-  const [tweets, setTweets] = useState<TweetType[]>([]);
   const user = auth.currentUser;
+
+  const [tweets, setTweets] = useState<TweetType[]>([]);
 
   useEffect(() => {
     let unsubscribe: Unsubscribe | null = null;

@@ -5,6 +5,14 @@ export function Input({ ...props }) {
   return <StyledInput {...props} />;
 }
 
+Input.Label = ({ ...props }) => {
+  return <StyledLabel {...props} />;
+};
+
+Input.TextField = ({ ...props }) => {
+  return <StyledTextField {...props} />;
+};
+
 const StyledInput = styled.input`
   padding: 10px 20px;
   border-radius: 50px;
@@ -15,10 +23,6 @@ const StyledInput = styled.input`
     display: none;
   }
 `;
-
-Input.Label = ({ ...props }) => {
-  return <StyledLabel {...props} />;
-};
 
 const StyledLabel = styled.label`
   width: 30px;
@@ -47,10 +51,6 @@ const StyledLabel = styled.label`
     }
   }
 `;
-
-Input.TextField = ({ ...props }) => {
-  return <StyledTextField {...props} />;
-};
 
 const StyledTextField = styled.textarea`
   border: none;

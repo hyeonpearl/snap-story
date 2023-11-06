@@ -15,6 +15,10 @@ export function LineBreak({ text, ...props }: Props) {
   );
 }
 
+LineBreak.Hr = () => {
+  return <StyledHr />;
+};
+
 const StyledLineBreak = styled.div`
   display: flex;
   justify-content: center;
@@ -25,10 +29,6 @@ const StyledLineBreak = styled.div`
     width: 40%;
   }
 `;
-
-LineBreak.Hr = () => {
-  return <StyledHr />;
-};
 
 const StyledHr = styled.hr`
   width: 100%;

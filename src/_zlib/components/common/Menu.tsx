@@ -5,6 +5,10 @@ export function Menu({ ...props }) {
   return <StyledMenu {...props} />;
 }
 
+Menu.Item = ({ ...props }) => {
+  return <StyledItem {...props} />;
+};
+
 const StyledMenu = styled.div`
   display: flex;
   align-items: center;
@@ -14,10 +18,6 @@ const StyledMenu = styled.div`
     flex-direction: column;
   }
 `;
-
-Menu.Item = ({ ...props }) => {
-  return <StyledItem {...props} />;
-};
 
 const StyledItem = styled.div`
   &.navbar {

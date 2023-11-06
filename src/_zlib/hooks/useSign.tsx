@@ -19,9 +19,6 @@ export default function useSign() {
 
   const navigate = useNavigate();
 
-  /**
-   * Form 데이터 관리
-   */
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
