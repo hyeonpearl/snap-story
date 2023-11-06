@@ -14,12 +14,14 @@ import {
 
 export default function useProfile() {
   const user = auth.currentUser;
+
   const initialProfile = {
     username: user?.displayName,
     email: user?.email,
     picture: user?.photoURL,
     creationTime: user?.metadata.creationTime,
   };
+
   const [profile, setProfile] = useState(initialProfile);
   const [tweets, setTweets] = useState<TweetType[]>([]);
 
