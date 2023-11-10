@@ -19,7 +19,7 @@ export default function useSign() {
 
   const navigate = useNavigate();
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
     } = e;
@@ -43,7 +43,7 @@ export default function useSign() {
     }
   };
 
-  const onSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
     if (
@@ -69,7 +69,7 @@ export default function useSign() {
       setIsLoading(false);
     }
   };
-  const onSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
     if (isLoading || form.email === '' || form.password === '') return;
@@ -84,7 +84,7 @@ export default function useSign() {
       setIsLoading(false);
     }
   };
-  const onSignInGithub = async () => {
+  const handleSignInGithub = async () => {
     try {
       const provider = new GithubAuthProvider();
       await signInWithPopup(auth, provider);
@@ -93,7 +93,7 @@ export default function useSign() {
       if (error instanceof FirebaseError) setError(error.message);
     }
   };
-  const onSignOut = async () => {
+  const handleSignOut = async () => {
     const ok = confirm('로그아웃하시겠습니까?');
     if (ok) {
       await auth.signOut();
@@ -108,11 +108,11 @@ export default function useSign() {
     isLoading,
     form,
     error,
-    onChange,
-    onSignUp,
-    onSignIn,
-    onSignInGithub,
-    onSignOut,
+    handleFormChange,
+    handleSignUp,
+    handleSignIn,
+    handleSignInGithub,
+    handleSignOut,
     moveToSignUp,
     moveToSignIn,
   };

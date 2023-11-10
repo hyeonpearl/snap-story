@@ -14,6 +14,7 @@ import {
 
 export default function useProfile() {
   const user = auth.currentUser;
+  let unsubscribe: Unsubscribe | null = null;
 
   const initialProfile = {
     username: user?.displayName,
@@ -25,7 +26,7 @@ export default function useProfile() {
   const [profile, setProfile] = useState(initialProfile);
   const [tweets, setTweets] = useState<TweetType[]>([]);
 
-  const onNameChange = async () => {
+  const handleNameChange = async () => {
     const name = prompt('이름을 입력해주세요.', user?.displayName ?? '익명');
 
     if (!user) return;
@@ -38,7 +39,9 @@ export default function useProfile() {
       displayName: name,
     });
   };
-  const onPictureChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePictureChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { files } = e.target;
 
     if (!user) return;
@@ -64,42 +67,40 @@ export default function useProfile() {
       });
     }
   };
+  const fetchTweet = async () => {
+    const tweetQuery = query(
+      collection(db, 'tweets'),
+      where('userId', '==', user?.uid),
+      orderBy('createdAt', 'desc'),
+      limit(25)
+    );
+    unsubscribe = onSnapshot(tweetQuery, snapshot => {
+      const tweets = snapshot.docs.map(doc => {
+        const {
+          createdAt,
+          tweet,
+          userId,
+          username,
+          photo,
+          userEmail,
+          picture,
+        } = doc.data();
+        return {
+          id: doc.id,
+          createdAt,
+          photo,
+          tweet,
+          userId,
+          username,
+          userEmail,
+          picture,
+        };
+      });
+      setTweets(tweets);
+    });
+  };
 
   useEffect(() => {
-    let unsubscribe: Unsubscribe | null = null;
-
-    const fetchTweet = async () => {
-      const tweetQuery = query(
-        collection(db, 'tweets'),
-        where('userId', '==', user?.uid),
-        orderBy('createdAt', 'desc'),
-        limit(25)
-      );
-      unsubscribe = onSnapshot(tweetQuery, snapshot => {
-        const tweets = snapshot.docs.map(doc => {
-          const {
-            createdAt,
-            tweet,
-            userId,
-            username,
-            photo,
-            userEmail,
-            picture,
-          } = doc.data();
-          return {
-            id: doc.id,
-            createdAt,
-            photo,
-            tweet,
-            userId,
-            username,
-            userEmail,
-            picture,
-          };
-        });
-        setTweets(tweets);
-      });
-    };
     fetchTweet();
 
     return () => {
@@ -107,5 +108,5 @@ export default function useProfile() {
     };
   }, [user?.uid]);
 
-  return { user, tweets, profile, onNameChange, onPictureChange };
+  return { user, tweets, profile, handleNameChange, handlePictureChange };
 }

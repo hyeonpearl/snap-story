@@ -4,11 +4,9 @@ import { styled } from 'styled-components';
 export function Input({ ...props }) {
   return <StyledInput {...props} />;
 }
-
 Input.Label = ({ ...props }) => {
   return <StyledLabel {...props} />;
 };
-
 Input.TextField = ({ ...props }) => {
   return <StyledTextField {...props} />;
 };
@@ -23,7 +21,6 @@ const StyledInput = styled.input`
     display: none;
   }
 `;
-
 const StyledLabel = styled.label`
   width: 30px;
   cursor: pointer;
@@ -51,7 +48,6 @@ const StyledLabel = styled.label`
     }
   }
 `;
-
 const StyledTextField = styled.textarea`
   border: none;
   padding: 1rem;

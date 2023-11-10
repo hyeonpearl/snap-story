@@ -25,43 +25,43 @@ export interface TweetType {
  */
 export default function useTweets() {
   const user = auth.currentUser;
+  let unsubscribe: Unsubscribe | null = null;
 
   const [tweets, setTweets] = useState<TweetType[]>([]);
 
-  useEffect(() => {
-    let unsubscribe: Unsubscribe | null = null;
-
-    const fetchTweet = async () => {
-      const tweetsQuery = query(
-        collection(db, 'tweets'),
-        orderBy('createdAt', 'desc'),
-        limit(25)
-      );
-      unsubscribe = onSnapshot(tweetsQuery, snapshot => {
-        const tweets = snapshot.docs.map(doc => {
-          const {
-            createdAt,
-            photo,
-            tweet,
-            userId,
-            username,
-            userEmail,
-            picture,
-          } = doc.data();
-          return {
-            id: doc.id,
-            createdAt,
-            photo,
-            tweet,
-            userId,
-            username,
-            userEmail,
-            picture,
-          };
-        });
-        setTweets(tweets);
+  const fetchTweet = async () => {
+    const tweetsQuery = query(
+      collection(db, 'tweets'),
+      orderBy('createdAt', 'desc'),
+      limit(25)
+    );
+    unsubscribe = onSnapshot(tweetsQuery, snapshot => {
+      const tweets = snapshot.docs.map(doc => {
+        const {
+          createdAt,
+          photo,
+          tweet,
+          userId,
+          username,
+          userEmail,
+          picture,
+        } = doc.data();
+        return {
+          id: doc.id,
+          createdAt,
+          photo,
+          tweet,
+          userId,
+          username,
+          userEmail,
+          picture,
+        };
       });
-    };
+      setTweets(tweets);
+    });
+  };
+
+  useEffect(() => {
     fetchTweet();
 
     return () => {

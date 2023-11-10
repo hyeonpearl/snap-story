@@ -10,19 +10,25 @@ import colors from '../constants/colors';
 import usePostTweet from '../hooks/usePostTweet';
 
 export default function PostTweet() {
-  const { isLoading, tweet, file, onChange, onFileChange, onSubmit } =
-    usePostTweet();
+  const {
+    isLoading,
+    tweet,
+    file,
+    handleTweetChange,
+    handleFileChange,
+    handleSubmit,
+  } = usePostTweet();
 
   return (
     <Wrapper className='post-tweet'>
       {isLoading ? (
         <Loading text='게시 중...' />
       ) : (
-        <Form className='post-tweet' onSubmit={onSubmit}>
+        <Form className='post-tweet' onSubmit={handleSubmit}>
           <Input.TextField
             placeholder='무슨 일이 일어나고 있나요?'
             value={tweet}
-            onChange={onChange}
+            onChange={handleTweetChange}
             rows={3}
             maxLength={180}
             required
@@ -31,13 +37,13 @@ export default function PostTweet() {
           <Wrapper className='buttons'>
             <Wrapper className='row'>
               <Input.Label htmlFor='file'>
-                <Icon.Photo color={colors.primary} />
+                <Icon.Photo type={'stroke'} color={colors.primary} />
               </Input.Label>
               <Input
                 id='file'
                 type='file'
                 accept='image/*'
-                onChange={onFileChange}
+                onChange={handleFileChange}
               />
               <Spacing direction={'horizontal'} size={10} />
               {file && (

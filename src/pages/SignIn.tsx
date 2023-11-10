@@ -15,9 +15,9 @@ export default function SignIn() {
     isLoading,
     form,
     error,
-    onChange,
-    onSignIn,
-    onSignInGithub,
+    handleFormChange,
+    handleSignIn,
+    handleSignInGithub,
     moveToSignUp,
   } = useSign();
 
@@ -33,7 +33,7 @@ export default function SignIn() {
           <Spacing direction={'vertical'} size={30} />
 
           <Wrapper className='form'>
-            <Button className='social' onClick={onSignInGithub}>
+            <Button className='social' onClick={handleSignInGithub}>
               <Icon src='github.svg' width={20} height={20} />
               Github로 로그인하기
             </Button>
@@ -43,13 +43,13 @@ export default function SignIn() {
           <LineBreak text={'또는'} />
           <Spacing direction={'vertical'} size={20} />
 
-          <Form className='sign-form' onSubmit={onSignIn}>
+          <Form className='sign-form' onSubmit={handleSignIn}>
             <Input
               name='email'
               placeholder='이메일'
               type='email'
               value={form.email}
-              onChange={onChange}
+              onChange={handleFormChange}
               required
             />
             <Input
@@ -57,7 +57,7 @@ export default function SignIn() {
               placeholder='비밀번호'
               type='password'
               value={form.password}
-              onChange={onChange}
+              onChange={handleFormChange}
               required
             />
             <Button className='primary' type='submit' required>

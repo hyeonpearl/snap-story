@@ -5,7 +5,7 @@ import useSign from '../hooks/useSign';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 
 export default function PageLayout() {
-  const { onSignOut } = useSign();
+  const { handleSignOut } = useSign();
 
   return (
     <Wrapper className='navbar'>
@@ -37,8 +37,8 @@ export default function PageLayout() {
             }
           </NavLink>
         </Menu.Item>
-        <Menu.Item className='navbar' onClick={onSignOut}>
-          <Icon.SignOut />
+        <Menu.Item className='navbar' onClick={handleSignOut}>
+          <Icon.SignOut type={'stroke'} />
         </Menu.Item>
       </Menu>
       <Outlet />
