@@ -78,10 +78,10 @@ export default function Tweet({
           {user?.uid === userId && (
             <Menu>
               <Menu.Item className='tweet-control' onClick={onEdit}>
-                <Icon.Edit color={colors.gray02} />
+                <Icon.Edit type={'stroke'} color={colors.gray02} />
               </Menu.Item>
               <Menu.Item className='tweet-control' onClick={onDelete}>
-                <Icon.Cancel color={colors.gray02} />
+                <Icon.Delete type={'stroke'} color={colors.gray02} />
               </Menu.Item>
             </Menu>
           )}

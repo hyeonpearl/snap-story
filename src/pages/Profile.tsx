@@ -49,7 +49,7 @@ export default function Profile() {
           <Spacing direction={'vertical'} size={20} />
 
           <Wrapper className='profile-date'>
-            <Icon.Calendar color={colors.gray02} />
+            <Icon.Calendar type={'stroke'} color={colors.gray02} />
             <Txt typography={'p'} color={colors.gray02}>
               가입일 : {profile.creationTime}
             </Txt>

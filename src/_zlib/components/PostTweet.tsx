@@ -37,7 +37,7 @@ export default function PostTweet() {
           <Wrapper className='buttons'>
             <Wrapper className='row'>
               <Input.Label htmlFor='file'>
-                <Icon.Photo color={colors.primary} />
+                <Icon.Photo type={'stroke'} color={colors.primary} />
               </Input.Label>
               <Input
                 id='file'

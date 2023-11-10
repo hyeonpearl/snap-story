@@ -38,7 +38,7 @@ export default function PageLayout() {
           </NavLink>
         </Menu.Item>
         <Menu.Item className='navbar' onClick={handleSignOut}>
-          <Icon.SignOut />
+          <Icon.SignOut type={'stroke'} />
         </Menu.Item>
       </Menu>
       <Outlet />
