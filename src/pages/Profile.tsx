@@ -10,7 +10,8 @@ import colors from '../_zlib/constants/colors';
 import useProfile from '../_zlib/hooks/useProfile';
 
 export default function Profile() {
-  const { user, tweets, profile, onNameChange, onPictureChange } = useProfile();
+  const { user, tweets, profile, handleNameChange, handlePictureChange } =
+    useProfile();
 
   return (
     <Wrapper className='page'>
@@ -26,7 +27,7 @@ export default function Profile() {
           )}
         </Input.Label>
         <Input
-          onChange={onPictureChange}
+          onChange={handlePictureChange}
           id='picture'
           type='file'
           accept='image/*'
@@ -37,7 +38,7 @@ export default function Profile() {
         <Wrapper className='profile-detail'>
           <Wrapper className='row-spacing'>
             <Txt typography={'h4'}>{profile.username ?? '익명'}</Txt>
-            <Button className='secondary' onClick={onNameChange}>
+            <Button className='secondary' onClick={handleNameChange}>
               이름 변경
             </Button>
           </Wrapper>
