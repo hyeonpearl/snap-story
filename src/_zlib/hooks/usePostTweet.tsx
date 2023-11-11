@@ -40,7 +40,7 @@ export default function usePostTweet() {
         postedAt: { month: date.getMonth() + 1, day: date.getDate() },
         username: user.displayName || '익명',
         userId: user.uid,
-        userEmail: user.email,
+        userEmail: user.email?.split('@')[0],
         profilePicture: user.photoURL,
       });
 

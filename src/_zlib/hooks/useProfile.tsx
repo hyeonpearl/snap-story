@@ -6,11 +6,23 @@ import { updateProfile } from 'firebase/auth';
 export default function useProfile() {
   const user = auth.currentUser;
 
+  let formattedDate = null;
+  const accountDate = user?.metadata?.creationTime
+    ? new Date(user.metadata.creationTime)
+    : null;
+  if (accountDate) {
+    formattedDate = accountDate.toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  }
+
   const initialProfile = {
     username: user?.displayName,
     email: user?.email,
     profilePicture: user?.photoURL,
-    creationTime: user?.metadata.creationTime,
+    creationTime: formattedDate,
   };
   const [profile, setProfile] = useState(initialProfile);
 

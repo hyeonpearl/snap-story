@@ -45,7 +45,7 @@ export default function Profile() {
           </Wrapper>
 
           <Txt typography={'p'} color={colors.gray02}>
-            {profile.email}
+            @{profile.email?.split('@')[0]}
           </Txt>
           <Spacing direction={'vertical'} size={20} />
 

@@ -73,7 +73,7 @@ export default function Tweet({
             <Txt typography={'bold'}>{username}</Txt>
             <Spacing direction={'horizontal'} size={5} />
             <Txt typography={'p'} color={colors.gray02}>
-              {userEmail} • {postedAt.month}월 {postedAt.day}일
+              @{userEmail} • {postedAt.month}월 {postedAt.day}일
             </Txt>
           </Wrapper>
           {user?.uid === userId && (
