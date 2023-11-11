@@ -22,7 +22,7 @@ export default function Tweet({
   userId,
   username,
   userEmail,
-  picture,
+  profilePicture,
 }: Props) {
   const tweetRef = doc(db, 'tweets', id);
 
@@ -60,8 +60,8 @@ export default function Tweet({
   return (
     <Wrapper className='tweet'>
       <Wrapper>
-        {picture ? (
-          <Icon src={picture} width={40} height={40} />
+        {profilePicture ? (
+          <Icon src={profilePicture} width={40} height={40} />
         ) : (
           <Icon.Profile type='fill' />
         )}

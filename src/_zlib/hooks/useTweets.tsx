@@ -6,6 +6,7 @@ import {
   onSnapshot,
   orderBy,
   query,
+  where,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
@@ -17,24 +18,33 @@ export interface TweetType {
   userId: string;
   username: string;
   userEmail: string;
-  picture: string;
+  profilePicture: string;
 }
 
 /**
  * Tweet 정보를 불러오는 함수
  */
-export default function useTweets() {
+export default function useTweets(order: 'all' | 'userId') {
   const user = auth.currentUser;
   let unsubscribe: Unsubscribe | null = null;
 
   const [tweets, setTweets] = useState<TweetType[]>([]);
 
   const fetchTweet = async () => {
-    const tweetsQuery = query(
-      collection(db, 'tweets'),
-      orderBy('createdAt', 'desc'),
-      limit(25)
-    );
+    const tweetsQuery =
+      order === 'userId'
+        ? query(
+            collection(db, 'tweets'),
+            where('userId', '==', user?.uid),
+            orderBy('createdAt', 'desc'),
+            limit(25)
+          )
+        : query(
+            collection(db, 'tweets'),
+            orderBy('createdAt', 'desc'),
+            limit(25)
+          );
+
     unsubscribe = onSnapshot(tweetsQuery, snapshot => {
       const tweets = snapshot.docs.map(doc => {
         const {
@@ -44,7 +54,7 @@ export default function useTweets() {
           userId,
           username,
           userEmail,
-          picture,
+          profilePicture,
         } = doc.data();
         return {
           id: doc.id,
@@ -54,7 +64,7 @@ export default function useTweets() {
           userId,
           username,
           userEmail,
-          picture,
+          profilePicture,
         };
       });
       setTweets(tweets);

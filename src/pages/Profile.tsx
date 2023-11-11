@@ -8,10 +8,11 @@ import TimeLine from '../_zlib/components/TimeLine';
 import Title from '../_zlib/components/Title';
 import colors from '../_zlib/constants/colors';
 import useProfile from '../_zlib/hooks/useProfile';
+import useTweets from '../_zlib/hooks/useTweets';
 
 export default function Profile() {
-  const { user, tweets, profile, handleNameChange, handlePictureChange } =
-    useProfile();
+  const { user, profile, handleNameChange, handlePictureChange } = useProfile();
+  const { tweets } = useTweets('userId');
 
   return (
     <Wrapper className='page'>
@@ -20,8 +21,8 @@ export default function Profile() {
       <Wrapper className='row'>
         <Spacing direction={'horizontal'} size={30} />
         <Input.Label className='profile' htmlFor='picture'>
-          {profile.picture ? (
-            <Icon width={50} height={50} src={profile.picture} />
+          {profile.profilePicture ? (
+            <Icon width={50} height={50} src={profile.profilePicture} />
           ) : (
             <Icon.Profile type='fill' />
           )}

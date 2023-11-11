@@ -1,30 +1,18 @@
-import { auth, db, storage } from '../server/firebase';
-import { TweetType } from './useTweets';
-import { useEffect, useState } from 'react';
+import { auth, storage } from '../server/firebase';
+import { useState } from 'react';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { Unsubscribe, updateProfile } from 'firebase/auth';
-import {
-  collection,
-  limit,
-  onSnapshot,
-  orderBy,
-  query,
-  where,
-} from 'firebase/firestore';
+import { updateProfile } from 'firebase/auth';
 
 export default function useProfile() {
   const user = auth.currentUser;
-  let unsubscribe: Unsubscribe | null = null;
 
   const initialProfile = {
     username: user?.displayName,
     email: user?.email,
-    picture: user?.photoURL,
+    profilePicture: user?.photoURL,
     creationTime: user?.metadata.creationTime,
   };
-
   const [profile, setProfile] = useState(initialProfile);
-  const [tweets, setTweets] = useState<TweetType[]>([]);
 
   const handleNameChange = async () => {
     const name = prompt('이름을 입력해주세요.', user?.displayName ?? '익명');
@@ -60,53 +48,13 @@ export default function useProfile() {
 
       setProfile(prev => ({
         ...prev,
-        picture: pictureUrl,
+        profilePicture: pictureUrl,
       }));
       await updateProfile(user, {
         photoURL: pictureUrl,
       });
     }
   };
-  const fetchTweet = async () => {
-    const tweetQuery = query(
-      collection(db, 'tweets'),
-      where('userId', '==', user?.uid),
-      orderBy('createdAt', 'desc'),
-      limit(25)
-    );
-    unsubscribe = onSnapshot(tweetQuery, snapshot => {
-      const tweets = snapshot.docs.map(doc => {
-        const {
-          createdAt,
-          tweet,
-          userId,
-          username,
-          photo,
-          userEmail,
-          picture,
-        } = doc.data();
-        return {
-          id: doc.id,
-          createdAt,
-          photo,
-          tweet,
-          userId,
-          username,
-          userEmail,
-          picture,
-        };
-      });
-      setTweets(tweets);
-    });
-  };
 
-  useEffect(() => {
-    fetchTweet();
-
-    return () => {
-      unsubscribe && unsubscribe();
-    };
-  }, [user?.uid]);
-
-  return { user, tweets, profile, handleNameChange, handlePictureChange };
+  return { user, profile, handleNameChange, handlePictureChange };
 }

@@ -39,7 +39,7 @@ export default function usePostTweet() {
         username: user.displayName || '익명',
         userId: user.uid,
         userEmail: user.email,
-        picture: user.photoURL,
+        profilePicture: user.photoURL,
       });
 
       if (file) {
