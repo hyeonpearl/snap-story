@@ -16,13 +16,14 @@ interface Props extends TweetType {
 
 export default function Tweet({
   id,
+  postedAt,
   photo,
   tweet,
   user,
   userId,
   username,
   userEmail,
-  picture,
+  profilePicture,
 }: Props) {
   const tweetRef = doc(db, 'tweets', id);
 
@@ -60,8 +61,8 @@ export default function Tweet({
   return (
     <Wrapper className='tweet'>
       <Wrapper>
-        {picture ? (
-          <Icon src={picture} width={40} height={40} />
+        {profilePicture ? (
+          <Icon src={profilePicture} width={40} height={40} />
         ) : (
           <Icon.Profile type='fill' />
         )}
@@ -72,7 +73,7 @@ export default function Tweet({
             <Txt typography={'bold'}>{username}</Txt>
             <Spacing direction={'horizontal'} size={5} />
             <Txt typography={'p'} color={colors.gray02}>
-              {userEmail} • 00월 00일
+              @{userEmail} • {postedAt.month}월 {postedAt.day}일
             </Txt>
           </Wrapper>
           {user?.uid === userId && (

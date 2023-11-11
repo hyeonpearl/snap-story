@@ -5,7 +5,7 @@ import Title from '../_zlib/components/Title';
 import useTweets from '../_zlib/hooks/useTweets';
 
 export default function Home() {
-  const { user, tweets } = useTweets();
+  const { user, tweets } = useTweets('all');
 
   return (
     <Wrapper className='page'>

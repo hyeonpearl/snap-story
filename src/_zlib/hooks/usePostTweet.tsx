@@ -28,6 +28,7 @@ export default function usePostTweet() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const user = auth.currentUser;
+    const date = new Date();
 
     if (!user || isLoading || tweet === '' || tweet.length > 180) return;
 
@@ -36,10 +37,11 @@ export default function usePostTweet() {
       const doc = await addDoc(collection(db, 'tweets'), {
         tweet,
         createdAt: Date.now(),
+        postedAt: { month: date.getMonth() + 1, day: date.getDate() },
         username: user.displayName || '익명',
         userId: user.uid,
-        userEmail: user.email,
-        picture: user.photoURL,
+        userEmail: user.email?.split('@')[0],
+        profilePicture: user.photoURL,
       });
 
       if (file) {
