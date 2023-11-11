@@ -16,6 +16,7 @@ interface Props extends TweetType {
 
 export default function Tweet({
   id,
+  postedAt,
   photo,
   tweet,
   user,
@@ -72,7 +73,7 @@ export default function Tweet({
             <Txt typography={'bold'}>{username}</Txt>
             <Spacing direction={'horizontal'} size={5} />
             <Txt typography={'p'} color={colors.gray02}>
-              {userEmail} • 00월 00일
+              {userEmail} • {postedAt.month}월 {postedAt.day}일
             </Txt>
           </Wrapper>
           {user?.uid === userId && (

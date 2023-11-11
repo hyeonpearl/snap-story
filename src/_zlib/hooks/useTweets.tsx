@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 export interface TweetType {
   id: string;
   createdAt: number;
+  postedAt: { month: number; day: number };
   photo?: string;
   tweet: string;
   userId: string;
@@ -29,6 +30,9 @@ export default function useTweets(order: 'all' | 'userId') {
   let unsubscribe: Unsubscribe | null = null;
 
   const [tweets, setTweets] = useState<TweetType[]>([]);
+
+  // const locationRef = ref(storage, `profile/${user?.uid}`);
+  // const uploadedProfile = getMetadata(locationRef).then(meta => meta.updated);
 
   const fetchTweet = async () => {
     const tweetsQuery =
@@ -49,6 +53,7 @@ export default function useTweets(order: 'all' | 'userId') {
       const tweets = snapshot.docs.map(doc => {
         const {
           createdAt,
+          postedAt,
           photo,
           tweet,
           userId,
@@ -59,6 +64,7 @@ export default function useTweets(order: 'all' | 'userId') {
         return {
           id: doc.id,
           createdAt,
+          postedAt,
           photo,
           tweet,
           userId,
