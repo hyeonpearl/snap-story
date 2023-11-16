@@ -9,7 +9,7 @@ export default function ProtectedRoute({
   const user = auth.currentUser;
 
   if (user === null) {
-    return <Navigate to={'/'} />;
+    return <Navigate to='/' />;
   }
   return children;
 }

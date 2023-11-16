@@ -37,7 +37,7 @@ export default function PostTweet() {
           <Wrapper className='buttons'>
             <Wrapper className='row'>
               <Input.Label htmlFor='file'>
-                <Icon.Photo type={'stroke'} color={colors.primary} />
+                <Icon.Photo type='stroke' color={colors.primary} />
               </Input.Label>
               <Input
                 id='file'
@@ -45,9 +45,9 @@ export default function PostTweet() {
                 accept='image/*'
                 onChange={handleFileChange}
               />
-              <Spacing direction={'horizontal'} size={10} />
+              <Spacing direction='horizontal' size={10} />
               {file && (
-                <Txt typography={'p'} color={colors.green01}>
+                <Txt typography='p' color={colors.green01}>
                   파일이 업로드되었습니다.
                 </Txt>
               )}

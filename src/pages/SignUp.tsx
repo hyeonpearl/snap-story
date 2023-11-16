@@ -29,7 +29,7 @@ export default function SignUp() {
         <Wrapper className='sign-form'>
           <Icon src='/z.svg' width={200} height={200} />
           <Spacing direction='vertical' size={30} />
-          <Txt typography={'h1'}>지금 가입하세요.</Txt>
+          <Txt typography='h1'>지금 가입하세요.</Txt>
           <Spacing direction='vertical' size={30} />
 
           <Wrapper className='form'>
@@ -39,9 +39,9 @@ export default function SignUp() {
             </Button>
           </Wrapper>
 
-          <Spacing direction={'vertical'} size={20} />
-          <LineBreak text={'또는'} />
-          <Spacing direction={'vertical'} size={20} />
+          <Spacing direction='vertical' size={20} />
+          <LineBreak text='또는' />
+          <Spacing direction='vertical' size={20} />
 
           <Form className='sign-form' onSubmit={handleSignUp}>
             <Input
@@ -72,14 +72,14 @@ export default function SignUp() {
               계정 만들기
             </Button>
             {error ? (
-              <Txt typography={'p'} color={colors.red01}>
+              <Txt typography='p' color={colors.red01}>
                 {error}
               </Txt>
             ) : null}
-            <Spacing direction={'vertical'} size={20} />
+            <Spacing direction='vertical' size={20} />
 
             <Txt typography='h4'>이미 가입하셨나요?</Txt>
-            <Spacing direction={'vertical'} size={5} />
+            <Spacing direction='vertical' size={5} />
             <Button className='secondary' onClick={moveToSignIn}>
               로그인
             </Button>
