@@ -6,25 +6,21 @@ import { updateProfile } from 'firebase/auth';
 export default function useProfile() {
   const user = auth.currentUser;
 
-  let formattedDate = null;
   const accountDate = user?.metadata?.creationTime
     ? new Date(user.metadata.creationTime)
     : null;
-  if (accountDate) {
-    formattedDate = accountDate.toLocaleDateString('ko-KR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  }
+  const formattedDate = accountDate?.toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 
-  const initialProfile = {
+  const [profile, setProfile] = useState({
     username: user?.displayName,
     email: user?.email,
     profilePicture: user?.photoURL,
     creationTime: formattedDate,
-  };
-  const [profile, setProfile] = useState(initialProfile);
+  });
 
   const handleNameChange = async () => {
     const name = prompt('이름을 입력해주세요.', user?.displayName ?? '익명');

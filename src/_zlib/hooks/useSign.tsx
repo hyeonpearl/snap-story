@@ -11,10 +11,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 export default function useSign() {
-  const initialForm = { name: '', email: '', password: '' };
-
   const [isLoading, setIsLoading] = useState(false);
-  const [form, setForm] = useState(initialForm);
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
