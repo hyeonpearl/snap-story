@@ -16,10 +16,10 @@ export default function Profile() {
 
   return (
     <Wrapper className='page'>
-      <Title title={'프로필'} />
-      <Spacing direction={'vertical'} size={30} />
+      <Title title='프로필' />
+      <Spacing direction='vertical' size={30} />
       <Wrapper className='row'>
-        <Spacing direction={'horizontal'} size={30} />
+        <Spacing direction='horizontal' size={30} />
         <Input.Label className='profile' htmlFor='picture'>
           {profile.profilePicture ? (
             <Icon width={50} height={50} src={profile.profilePicture} />
@@ -38,20 +38,20 @@ export default function Profile() {
       <Wrapper className='profile-info'>
         <Wrapper className='profile-detail'>
           <Wrapper className='row-spacing'>
-            <Txt typography={'h4'}>{profile.username ?? '익명'}</Txt>
+            <Txt typography='h4'>{profile.username ?? '익명'}</Txt>
             <Button className='secondary' onClick={handleNameChange}>
               이름 변경
             </Button>
           </Wrapper>
 
-          <Txt typography={'p'} color={colors.gray02}>
+          <Txt typography='p' color={colors.gray02}>
             @{profile.email?.split('@')[0]}
           </Txt>
-          <Spacing direction={'vertical'} size={20} />
+          <Spacing direction='vertical' size={20} />
 
           <Wrapper className='profile-date'>
-            <Icon.Calendar type={'stroke'} color={colors.gray02} />
-            <Txt typography={'p'} color={colors.gray02}>
+            <Icon.Calendar type='stroke' color={colors.gray02} />
+            <Txt typography='p' color={colors.gray02}>
               가입일 : {profile.creationTime}
             </Txt>
           </Wrapper>

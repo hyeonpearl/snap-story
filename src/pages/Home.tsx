@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <Wrapper className='page'>
-      <Title title={'홈'} />
+      <Title title='홈' />
       <PostTweet />
       <TimeLine user={user} tweets={tweets} />
     </Wrapper>

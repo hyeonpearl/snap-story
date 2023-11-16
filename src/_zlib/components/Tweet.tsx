@@ -70,32 +70,32 @@ export default function Tweet({
       <Wrapper className='column'>
         <Wrapper className='row-spacing'>
           <Wrapper className='row'>
-            <Txt typography={'bold'}>{username}</Txt>
-            <Spacing direction={'horizontal'} size={5} />
-            <Txt typography={'p'} color={colors.gray02}>
+            <Txt typography='bold'>{username}</Txt>
+            <Spacing direction='horizontal' size={5} />
+            <Txt typography='p' color={colors.gray02}>
               @{userEmail} • {postedAt.month}월 {postedAt.day}일
             </Txt>
           </Wrapper>
           {user?.uid === userId && (
             <Menu>
               <Menu.Item className='tweet-control' onClick={onEdit}>
-                <Icon.Edit type={'stroke'} color={colors.gray02} />
+                <Icon.Edit type='stroke' color={colors.gray02} />
               </Menu.Item>
               <Menu.Item className='tweet-control' onClick={onDelete}>
-                <Icon.Delete type={'stroke'} color={colors.gray02} />
+                <Icon.Delete type='stroke' color={colors.gray02} />
               </Menu.Item>
             </Menu>
           )}
         </Wrapper>
-        <Spacing direction={'vertical'} size={8} />
+        <Spacing direction='vertical' size={8} />
 
         <Wrapper className='row'>
-          <Txt typography={'p'}>{tweet}</Txt>
+          <Txt typography='p'>{tweet}</Txt>
         </Wrapper>
         {photo && (
           <>
             <Wrapper className='column-center'>
-              <Spacing direction={'vertical'} size={20} />
+              <Spacing direction='vertical' size={20} />
               <Icon className='upload' src={photo} width={1} height={1} />
             </Wrapper>
           </>
