@@ -1,6 +1,12 @@
-# Z
+<div align='center'>
+ <img src='https://github.com/hyeonpearl/z/assets/100837398/c181a2c5-441c-4267-8c3c-0767787963fa' />
+</div>
 
-X(트위터)의 클론 코딩 레포지토리입니다.
+<br />
+
+# Z (Zwitter)
+
+학습 목적으로 제작된 X(트위터)의 클론 코딩 레포지토리입니다.
 
 ## Tech Stack
 
@@ -54,3 +60,7 @@ src
  ┣ main.tsx
  ┗ vite-env.d.ts
 ```
+
+## Reference
+
+[X](https://twitter.com/)
