@@ -16,6 +16,40 @@ const formatTweetDate = (date: Date) => ({
   day: date.getDate(),
 });
 
+const uploadFileAndReturnURL = async (
+  userUid: string,
+  tweetId: string,
+  file: File
+): Promise<string> => {
+  const locationRef = ref(storage, `tweets/${userUid}/${tweetId}`);
+  const uploaded = await uploadBytes(locationRef, file);
+  return getDownloadURL(uploaded.ref);
+};
+
+const postTweet = async (
+  userUid: string,
+  tweet: string,
+  file: File | null
+): Promise<void> => {
+  const date = new Date();
+  const tweetData = {
+    tweet,
+    createdAt: Date.now(),
+    postedAt: formatTweetDate(date),
+    username: auth.currentUser?.displayName || '익명',
+    userId: userUid,
+    userEmail: auth.currentUser?.email?.split('@')[0],
+    profilePicture: auth.currentUser?.photoURL,
+  };
+
+  const docRef = await addDoc(collection(db, 'tweets'), tweetData);
+
+  if (file) {
+    const url = await uploadFileAndReturnURL(userUid, docRef.id, file);
+    await updateDoc(docRef, { photo: url });
+  }
+};
+
 export default function usePostTweet() {
   const [isLoading, setIsLoading] = useState(false);
   const [tweet, setTweet] = useState('');
@@ -31,36 +65,16 @@ export default function usePostTweet() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const user = auth.currentUser;
-    const date = new Date();
 
     if (!user || isLoading || tweet === '' || tweet.length > 180) return;
 
     try {
       setIsLoading(true);
-      const doc = await addDoc(collection(db, 'tweets'), {
-        tweet,
-        createdAt: Date.now(),
-        postedAt: formatTweetDate(date),
-        username: user.displayName || '익명',
-        userId: user.uid,
-        userEmail: user.email?.split('@')[0],
-        profilePicture: user.photoURL,
-      });
-
-      const validFile = validateFileSize(file);
-
-      if (validFile) {
-        const locationRef = ref(storage, `tweets/${user.uid}/${doc.id}`);
-        const uploaded = await uploadBytes(locationRef, validFile);
-        const url = await getDownloadURL(uploaded.ref);
-
-        await updateDoc(doc, { photo: url });
-      }
-
+      await postTweet(user.uid, tweet, validateFileSize(file));
       setTweet('');
       setFile(null);
     } catch (error) {
-      console.log(error);
+      console.error('트윗을 게시하는 도중 오류가 발생했습니다:', error);
     } finally {
       setIsLoading(false);
     }

@@ -1,25 +1,39 @@
 import { auth, storage } from '../server/firebase';
 import { useState } from 'react';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { updateProfile } from 'firebase/auth';
+import { User, updateProfile } from 'firebase/auth';
 
-export default function useProfile() {
-  const user = auth.currentUser;
+type UpdateProfilePictureFn = (newPictureUrl: string) => Promise<void>;
 
-  const accountDate = user?.metadata?.creationTime
-    ? new Date(user.metadata.creationTime)
-    : null;
-  const formattedDate = accountDate?.toLocaleDateString('ko-KR', {
+const MAX_FILE_SIZE = 1024 * 1024;
+
+function formattedDate(date: Date | null) {
+  return date?.toLocaleDateString('ko-KR', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
+}
+
+async function uploadProfilePicture(user: User, file: File) {
+  const locationRef = ref(storage, `profile/${user?.uid}`);
+  const result = await uploadBytes(locationRef, file);
+  return getDownloadURL(result.ref);
+}
+
+export default function useProfile(
+  updateProfilePicture: UpdateProfilePictureFn
+) {
+  const user = auth.currentUser;
+  const accountDate = user?.metadata?.creationTime
+    ? new Date(user.metadata.creationTime)
+    : null;
 
   const [profile, setProfile] = useState({
     username: user?.displayName,
     email: user?.email,
     profilePicture: user?.photoURL,
-    creationTime: formattedDate,
+    creationTime: formattedDate(accountDate),
   });
 
   const handleNameChange = async () => {
@@ -31,10 +45,12 @@ export default function useProfile() {
       ...prev,
       username: name,
     }));
+
     await updateProfile(user, {
       displayName: name,
     });
   };
+
   const handlePictureChange = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -45,22 +61,26 @@ export default function useProfile() {
     if (files && files.length === 1) {
       const file = files[0];
 
-      if (file && file?.size > 1024 * 1024) {
+      if (file && file?.size > MAX_FILE_SIZE) {
         alert('1MB 미만 크기의 파일만 업로드 가능합니다.');
         return;
       }
 
-      const locationRef = ref(storage, `profile/${user?.uid}`);
-      const result = await uploadBytes(locationRef, file);
-      const pictureUrl = await getDownloadURL(result.ref);
+      try {
+        const pictureUrl = await uploadProfilePicture(user, file);
 
-      setProfile(prev => ({
-        ...prev,
-        profilePicture: pictureUrl,
-      }));
-      await updateProfile(user, {
-        photoURL: pictureUrl,
-      });
+        setProfile(prev => ({
+          ...prev,
+          profilePicture: pictureUrl,
+        }));
+        await updateProfile(user, {
+          photoURL: pictureUrl,
+        });
+
+        updateProfilePicture(pictureUrl);
+      } catch (error) {
+        console.error('프로필 업로드 에러 발생!', error);
+      }
     }
   };
 
