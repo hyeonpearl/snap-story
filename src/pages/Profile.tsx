@@ -11,8 +11,9 @@ import useProfile from '../_zlib/hooks/useProfile';
 import useTweets from '../_zlib/hooks/useTweets';
 
 export default function Profile() {
-  const { user, profile, handleNameChange, handlePictureChange } = useProfile();
-  const { tweets } = useTweets('userId');
+  const { tweets, updateProfilePicture } = useTweets('userId');
+  const { user, profile, handleNameChange, handlePictureChange } =
+    useProfile(updateProfilePicture);
 
   return (
     <Wrapper className='page'>
