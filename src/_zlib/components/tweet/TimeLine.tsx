@@ -1,7 +1,7 @@
 import { User } from 'firebase/auth';
-import { Wrapper } from './common/Wrapper';
+import { Wrapper } from '../common/Wrapper';
 import Tweet from './Tweet';
-import { TweetType } from '../hooks/useTweets';
+import { TweetType } from '../../hooks/useTweets';
 
 export default function TimeLine({
   user,

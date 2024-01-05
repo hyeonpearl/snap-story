@@ -1,5 +1,5 @@
-import { Txt } from './common/Txt';
-import { Wrapper } from './common/Wrapper';
+import { Txt } from './Txt';
+import { Wrapper } from './Wrapper';
 
 export default function Title({ title }: { title: string }) {
   return (

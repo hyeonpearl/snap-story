@@ -1,7 +1,7 @@
-import { Icon } from './common/Icon';
-import { Menu } from './common/Menu';
-import { Wrapper } from './common/Wrapper';
-import useSign from '../hooks/useSign';
+import { Icon } from './Icon';
+import { Menu } from './Menu';
+import { Wrapper } from './Wrapper';
+import useSign from '../../hooks/useSign';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 
 export default function PageLayout() {

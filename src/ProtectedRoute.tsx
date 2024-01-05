@@ -1,4 +1,4 @@
-import { auth } from '../server/firebase';
+import { auth } from './_zlib/server/firebase';
 import { Navigate } from 'react-router-dom';
 
 export default function ProtectedRoute({
