@@ -6,7 +6,7 @@ import { LineBreak } from '../_zlib/components/common/LineBreak';
 import { Spacing } from '../_zlib/components/common/Spacing';
 import { Txt } from '../_zlib/components/common/Txt';
 import { Wrapper } from '../_zlib/components/common/Wrapper';
-import Loading from '../_zlib/components/Loading';
+import Loading from '../_zlib/components/common/Loading';
 import colors from '../_zlib/constants/colors';
 import useSign from '../_zlib/hooks/useSign';
 

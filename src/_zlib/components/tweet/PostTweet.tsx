@@ -1,13 +1,13 @@
-import { Button } from './common/Button';
-import { Form } from './common/Form';
-import { Icon } from './common/Icon';
-import { Input } from './common/Input';
-import { Spacing } from './common/Spacing';
-import { Txt } from './common/Txt';
-import { Wrapper } from './common/Wrapper';
-import Loading from './Loading';
-import colors from '../constants/colors';
-import usePostTweet from '../hooks/usePostTweet';
+import { Button } from '../common/Button';
+import { Form } from '../common/Form';
+import { Icon } from '../common/Icon';
+import { Input } from '../common/Input';
+import { Spacing } from '../common/Spacing';
+import { Txt } from '../common/Txt';
+import { Wrapper } from '../common/Wrapper';
+import Loading from '../common/Loading';
+import colors from '../../constants/colors';
+import usePostTweet from '../../hooks/usePostTweet';
 
 export default function PostTweet() {
   const {
