@@ -20,43 +20,43 @@
 ## File Tree
 
 ```
-src
- ┣ _zlib
- ┃ ┣ components
- ┃ ┃ ┣ common
- ┃ ┃ ┃ ┣ Button.tsx
- ┃ ┃ ┃ ┣ Form.tsx
- ┃ ┃ ┃ ┣ Icon.tsx
- ┃ ┃ ┃ ┣ Input.tsx
- ┃ ┃ ┃ ┣ LineBreak.tsx
- ┃ ┃ ┃ ┣ Menu.tsx
- ┃ ┃ ┃ ┣ Spacing.tsx
- ┃ ┃ ┃ ┣ Txt.tsx
- ┃ ┃ ┃ ┗ Wrapper.tsx
+srcsrc
+ ┣ components
+ ┃ ┣ common
+ ┃ ┃ ┣ Button.tsx
+ ┃ ┃ ┣ Form.tsx
+ ┃ ┃ ┣ Icon.tsx
+ ┃ ┃ ┣ Input.tsx
+ ┃ ┃ ┣ LineBreak.tsx
  ┃ ┃ ┣ Loading.tsx
+ ┃ ┃ ┣ Menu.tsx
  ┃ ┃ ┣ PageLayout.tsx
- ┃ ┃ ┣ PostTweet.tsx
- ┃ ┃ ┣ ProtectedRoute.tsx
- ┃ ┃ ┣ TimeLine.tsx
+ ┃ ┃ ┣ Spacing.tsx
  ┃ ┃ ┣ Title.tsx
+ ┃ ┃ ┣ Txt.tsx
+ ┃ ┃ ┗ Wrapper.tsx
+ ┃ ┗ tweet
+ ┃ ┃ ┣ PostTweet.tsx
+ ┃ ┃ ┣ TimeLine.tsx
  ┃ ┃ ┗ Tweet.tsx
- ┃ ┣ constants
- ┃ ┃ ┗ colors.ts
- ┃ ┣ hooks
- ┃ ┃ ┣ usePostTweet.tsx
- ┃ ┃ ┣ useProfile.tsx
- ┃ ┃ ┣ useSign.tsx
- ┃ ┃ ┗ useTweets.tsx
- ┃ ┣ server
- ┃ ┃ ┗ firebase.ts
- ┃ ┗ styles
- ┃ ┃ ┗ GlobalStyles.tsx
+ ┣ constants
+ ┃ ┗ colors.ts
+ ┣ hooks
+ ┃ ┣ usePostTweet.tsx
+ ┃ ┣ useProfile.tsx
+ ┃ ┣ useSign.tsx
+ ┃ ┗ useTweets.tsx
  ┣ pages
  ┃ ┣ Home.tsx
  ┃ ┣ Profile.tsx
  ┃ ┣ SignIn.tsx
  ┃ ┗ SignUp.tsx
+ ┣ server
+ ┃ ┗ firebase.ts
+ ┣ styles
+ ┃ ┗ GlobalStyles.tsx
  ┣ App.tsx
+ ┣ ProtectedRoute.tsx
  ┣ main.tsx
  ┗ vite-env.d.ts
 ```
