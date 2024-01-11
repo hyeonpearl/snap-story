@@ -1,9 +1,9 @@
-import { Wrapper } from './_zlib/components/common/Wrapper';
-import Loading from './_zlib/components/common/Loading';
-import PageLayout from './_zlib/components/common/PageLayout';
+import { Wrapper } from './components/common/Wrapper';
+import Loading from './components/common/Loading';
+import PageLayout from './components/common/PageLayout';
 import ProtectedRoute from './ProtectedRoute';
-import { auth } from './_zlib/server/firebase';
-import GlobalStyles from './_zlib/styles/GlobalStyles';
+import { auth } from './server/firebase';
+import GlobalStyles from './styles/GlobalStyles';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import SignIn from './pages/SignIn';

@@ -1,8 +1,8 @@
-import { Wrapper } from '../_zlib/components/common/Wrapper';
-import PostTweet from '../_zlib/components/tweet/PostTweet';
-import TimeLine from '../_zlib/components/tweet/TimeLine';
-import Title from '../_zlib/components/common/Title';
-import useTweets from '../_zlib/hooks/useTweets';
+import { Wrapper } from '../components/common/Wrapper';
+import PostTweet from '../components/tweet/PostTweet';
+import TimeLine from '../components/tweet/TimeLine';
+import Title from '../components/common/Title';
+import useTweets from '../hooks/useTweets';
 
 export default function Home() {
   const { user, tweets } = useTweets('all');

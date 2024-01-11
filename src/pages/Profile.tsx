@@ -1,14 +1,14 @@
-import { Button } from '../_zlib/components/common/Button';
-import { Icon } from '../_zlib/components/common/Icon';
-import { Input } from '../_zlib/components/common/Input';
-import { Spacing } from '../_zlib/components/common/Spacing';
-import { Txt } from '../_zlib/components/common/Txt';
-import { Wrapper } from '../_zlib/components/common/Wrapper';
-import TimeLine from '../_zlib/components/tweet/TimeLine';
-import Title from '../_zlib/components/common/Title';
-import colors from '../_zlib/constants/colors';
-import useProfile from '../_zlib/hooks/useProfile';
-import useTweets from '../_zlib/hooks/useTweets';
+import { Button } from '../components/common/Button';
+import { Icon } from '../components/common/Icon';
+import { Input } from '../components/common/Input';
+import { Spacing } from '../components/common/Spacing';
+import { Txt } from '../components/common/Txt';
+import { Wrapper } from '../components/common/Wrapper';
+import TimeLine from '../components/tweet/TimeLine';
+import Title from '../components/common/Title';
+import colors from '../constants/colors';
+import useProfile from '../hooks/useProfile';
+import useTweets from '../hooks/useTweets';
 
 export default function Profile() {
   const { tweets, updateProfilePicture } = useTweets('userId');

@@ -1,14 +1,14 @@
-import { Button } from '../_zlib/components/common/Button';
-import { Form } from '../_zlib/components/common/Form';
-import { Icon } from '../_zlib/components/common/Icon';
-import { Input } from '../_zlib/components/common/Input';
-import { LineBreak } from '../_zlib/components/common/LineBreak';
-import { Spacing } from '../_zlib/components/common/Spacing';
-import { Txt } from '../_zlib/components/common/Txt';
-import { Wrapper } from '../_zlib/components/common/Wrapper';
-import Loading from '../_zlib/components/common/Loading';
-import colors from '../_zlib/constants/colors';
-import useSign from '../_zlib/hooks/useSign';
+import { Button } from '../components/common/Button';
+import { Form } from '../components/common/Form';
+import { Icon } from '../components/common/Icon';
+import { Input } from '../components/common/Input';
+import { LineBreak } from '../components/common/LineBreak';
+import { Spacing } from '../components/common/Spacing';
+import { Txt } from '../components/common/Txt';
+import { Wrapper } from '../components/common/Wrapper';
+import Loading from '../components/common/Loading';
+import colors from '../constants/colors';
+import useSign from '../hooks/useSign';
 
 export default function SignIn() {
   const {
