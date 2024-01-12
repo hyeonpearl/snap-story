@@ -1,91 +1,52 @@
-import { Button } from '../components/common/Button';
-import { Form } from '../components/common/Form';
-import { Icon } from '../components/common/Icon';
-import { Input } from '../components/common/Input';
-import { LineBreak } from '../components/common/LineBreak';
-import { Spacing } from '../components/common/Spacing';
-import { Txt } from '../components/common/Txt';
-import { Wrapper } from '../components/common/Wrapper';
-import Loading from '../components/common/Loading';
-import colors from '../constants/colors';
-import useSign from '../hooks/useSign';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 export default function SignUp() {
-  const {
-    isLoading,
-    form,
-    error,
-    handleFormChange,
-    handleSignUp,
-    handleSignInGithub,
-    moveToSignIn,
-  } = useSign();
-
   return (
-    <>
-      {isLoading ? (
-        <Loading text='계정 만드는 중...' />
-      ) : (
-        <Wrapper className='sign-form'>
-          <Icon src='/z.svg' width={200} height={200} />
-          <Spacing direction='vertical' size={30} />
-          <Txt typography='h1'>지금 가입하세요.</Txt>
-          <Spacing direction='vertical' size={30} />
+    <main className='container relative hidden h-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0'>
+      <Button className='absolute right-4 top-4' variant='ghost'>
+        Login
+      </Button>
 
-          <Wrapper className='form'>
-            <Button className='social' onClick={handleSignInGithub}>
-              <Icon src='github.svg' width={20} height={20} />
-              Github로 가입하기
-            </Button>
-          </Wrapper>
+      <div className='relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r bg-slate-950 '>
+        <div className='flex items-center justify-center m-auto'>
+          <img className='w-72' src='logo-blue.svg' alt='logo' />
+        </div>
+      </div>
 
-          <Spacing direction='vertical' size={20} />
-          <LineBreak text='또는' />
-          <Spacing direction='vertical' size={20} />
+      <div className='lg:p-8'>
+        <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]'>
+          <div className='flex flex-col space-y-2 text-center'>
+            <h1 className='text-2xl font-semibold tracking-tight'>
+              지금 일어나고 있는 일
+            </h1>
+            <p className='text-muted-foreground text-lg'>지금 가입하세요.</p>
+          </div>
 
-          <Form className='sign-form' onSubmit={handleSignUp}>
-            <Input
-              name='name'
-              placeholder='이름'
-              type='text'
-              value={form.name}
-              onChange={handleFormChange}
-              required
-            />
-            <Input
-              name='email'
-              placeholder='이메일'
-              type='email'
-              value={form.email}
-              onChange={handleFormChange}
-              required
-            />
-            <Input
-              name='password'
-              placeholder='비밀번호'
-              type='password'
-              value={form.password}
-              onChange={handleFormChange}
-              required
-            />
-            <Button className='primary' type='submit' required>
-              계정 만들기
-            </Button>
-            {error ? (
-              <Txt typography='p' color={colors.red01}>
-                {error}
-              </Txt>
-            ) : null}
-            <Spacing direction='vertical' size={20} />
+          <div className='grid gap-6'>
+            <form>
+              <div className='grid gap-1'>
+                <Input type='text' placeholder='Username' />
+                <Input type='email' placeholder='Email' />
+                <Input type='password' placeholder='Password' minLength={6} />
+              </div>
+            </form>
+            <Button>Create Account</Button>
 
-            <Txt typography='h4'>이미 가입하셨나요?</Txt>
-            <Spacing direction='vertical' size={5} />
-            <Button className='secondary' onClick={moveToSignIn}>
-              로그인
-            </Button>
-          </Form>
-        </Wrapper>
-      )}
-    </>
+            <div className='relative'>
+              <div className='absolute inset-0 flex items-center'>
+                <span className='w-full border-t' />
+              </div>
+              <div className='relative flex justify-center text-xs uppercase'>
+                <span className='bg-background px-2 text-muted-foreground'>
+                  OR
+                </span>
+              </div>
+            </div>
+            <Button variant='outline'>Github</Button>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }
