@@ -10,7 +10,7 @@ export default function SignUp() {
 
       <div className='relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r bg-slate-950 '>
         <div className='flex items-center justify-center m-auto'>
-          <img className='w-72' src='logo-blue.svg' alt='logo' />
+          <img className='w-72' src='logo-red.svg' alt='logo' />
         </div>
       </div>
 
