@@ -3,7 +3,6 @@ import Loading from './components/common/Loading';
 import PageLayout from './components/common/PageLayout';
 import ProtectedRoute from './ProtectedRoute';
 import { auth } from './server/firebase';
-import GlobalStyles from './styles/GlobalStyles';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import SignIn from './pages/SignIn';
@@ -49,7 +48,6 @@ export default function App() {
 
   return (
     <Wrapper className='app'>
-      <GlobalStyles />
       {isLoading ? <Loading /> : <RouterProvider router={router} />}
     </Wrapper>
   );
