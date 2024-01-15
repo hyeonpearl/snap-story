@@ -1,12 +1,65 @@
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+
+function HorizontalRule({ content }: { content: string }) {
+  return (
+    <div className='relative'>
+      <div className='absolute inset-0 flex items-center'>
+        <span className='w-full border-t' />
+      </div>
+      <div className='relative flex justify-center text-xs uppercase'>
+        <span className='bg-background px-2 text-muted-foreground'>
+          {content}
+        </span>
+      </div>
+    </div>
+  );
+}
 
 export default function SignUp() {
   return (
     <main className='container relative hidden h-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0'>
-      <Button className='absolute right-4 top-4' variant='ghost'>
-        Login
-      </Button>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button className='absolute right-4 top-4' variant='ghost'>
+            Login
+          </Button>
+        </DialogTrigger>
+
+        <DialogContent className='sm:max-w-[425px]'>
+          <DialogHeader>
+            <DialogTitle>Login</DialogTitle>
+            <DialogDescription>
+              이메일과 비밀번호를 입력해주세요.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className='grid gap-4 py-4'>
+            <Button variant='outline'>Sign In the Github</Button>
+            <HorizontalRule content='OR' />
+
+            <div className='flex flex-col gap-1'>
+              <Input type='email' placeholder='Email' />
+              <Input type='password' placeholder='Password' minLength={6} />
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button type='submit' className='w-full'>
+              Login
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <div className='relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r bg-slate-950 '>
         <div className='flex items-center justify-center m-auto'>
@@ -24,6 +77,9 @@ export default function SignUp() {
           </div>
 
           <div className='grid gap-6'>
+            <Button variant='outline'>Sign Up the Github</Button>
+            <HorizontalRule content='OR' />
+
             <form>
               <div className='grid gap-1'>
                 <Input type='text' placeholder='Username' />
@@ -32,18 +88,6 @@ export default function SignUp() {
               </div>
             </form>
             <Button>Create Account</Button>
-
-            <div className='relative'>
-              <div className='absolute inset-0 flex items-center'>
-                <span className='w-full border-t' />
-              </div>
-              <div className='relative flex justify-center text-xs uppercase'>
-                <span className='bg-background px-2 text-muted-foreground'>
-                  OR
-                </span>
-              </div>
-            </div>
-            <Button variant='outline'>Github</Button>
           </div>
         </div>
       </div>
