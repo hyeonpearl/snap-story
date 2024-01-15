@@ -1,117 +1,123 @@
-import { auth } from '../server/firebase';
+import { auth } from '@/server/firebase';
 import {
   GithubAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
-  updateProfile,
 } from 'firebase/auth';
-import { FirebaseError } from 'firebase/app';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+export const signUpFormSchema = z.object({
+  username: z
+    .string()
+    .min(2, {
+      message: '최소 2자 이상 입력해주세요.',
+    })
+    .max(10, {
+      message: '최대 10자 이하 입력해주세요.',
+    }),
+  email: z
+    .string()
+    .min(1, {
+      message: '이메일을 입력해주세요.',
+    })
+    .email({ message: '이메일 양식을 지켜주세요.' }),
+  password: z
+    .string()
+    .min(6, {
+      message: '최소 6자 이상 입력해주세요.',
+    })
+    .max(16, {
+      message: '최대 16자 이하 입력해주세요.',
+    }),
+});
+
+export const signInFormSchema = z.object({
+  email: z
+    .string()
+    .min(1, {
+      message: '이메일을 입력해주세요.',
+    })
+    .email({ message: '이메일 양식을 지켜주세요.' }),
+  password: z
+    .string()
+    .min(6, {
+      message: '최소 6자 이상 입력해주세요.',
+    })
+    .max(16, {
+      message: '최대 16자 이하 입력해주세요.',
+    }),
+});
 
 export default function useSign() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
-  const [error, setError] = useState('');
+  const signUpForm = useForm<z.infer<typeof signUpFormSchema>>({
+    resolver: zodResolver(signUpFormSchema),
+    defaultValues: {
+      username: '',
+      email: '',
+      password: '',
+    },
+  });
+  const signInForm = useForm<z.infer<typeof signInFormSchema>>({
+    resolver: zodResolver(signInFormSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
   const navigate = useNavigate();
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { name, value },
-    } = e;
-
-    switch (true) {
-      case name === 'name': {
-        setForm(prev => ({ ...prev, name: value }));
-        break;
-      }
-      case name === 'email': {
-        setForm(prev => ({ ...prev, email: value }));
-        break;
-      }
-      case name === 'password': {
-        setForm(prev => ({ ...prev, password: value }));
-        break;
-      }
-      default: {
-        return;
-      }
-    }
-  };
-
-  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError('');
-    if (
-      isLoading ||
-      form.name === '' ||
-      form.email === '' ||
-      form.password === ''
-    )
-      return;
-
+  async function handleSignUp(data: z.infer<typeof signUpFormSchema>) {
     try {
-      setIsLoading(true);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const credentials = await createUserWithEmailAndPassword(
         auth,
-        form.email,
-        form.password
+        data.email,
+        data.password
       );
-      await updateProfile(credentials.user, { displayName: form.name });
       navigate('/home');
+      signUpForm.reset();
     } catch (error) {
-      if (error instanceof FirebaseError) setError(error.message);
-    } finally {
-      setIsLoading(false);
+      console.log(error);
     }
-  };
-  const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError('');
-    if (isLoading || form.email === '' || form.password === '') return;
+  }
 
+  async function handleSignIn(data: z.infer<typeof signInFormSchema>) {
     try {
-      setIsLoading(true);
-      await signInWithEmailAndPassword(auth, form.email, form.password);
+      await signInWithEmailAndPassword(auth, data.email, data.password);
       navigate('/home');
+      signInForm.reset();
     } catch (error) {
-      if (error instanceof FirebaseError) setError(error.message);
-    } finally {
-      setIsLoading(false);
+      console.log(error);
     }
-  };
+  }
   const handleSignInGithub = async () => {
     try {
       const provider = new GithubAuthProvider();
       await signInWithPopup(auth, provider);
       navigate('/home');
     } catch (error) {
-      if (error instanceof FirebaseError) setError(error.message);
+      console.log(error);
     }
   };
   const handleSignOut = async () => {
     const ok = confirm('로그아웃하시겠습니까?');
     if (ok) {
       await auth.signOut();
-      navigate('/signin');
+      navigate('/');
     }
   };
 
-  const moveToSignUp = () => navigate('/');
-  const moveToSignIn = () => navigate('/signin');
-
   return {
-    isLoading,
-    form,
-    error,
-    handleFormChange,
+    signUpForm,
+    signInForm,
     handleSignUp,
     handleSignIn,
     handleSignInGithub,
     handleSignOut,
-    moveToSignUp,
-    moveToSignIn,
   };
 }

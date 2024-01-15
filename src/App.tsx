@@ -1,15 +1,11 @@
-import { Wrapper } from './components/common/Wrapper';
-import Loading from './components/common/Loading';
 import PageLayout from './components/common/PageLayout';
-import ProtectedRoute from './ProtectedRoute';
-import { auth } from './server/firebase';
-import Home from './pages/Home';
-import Profile from './pages/Profile';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-
+import ProtectedRoute from '@/ProtectedRoute';
+import { auth } from '@/server/firebase';
+import Auth from '@/pages/Auth';
+import Home from '@/pages/Home';
+import Profile from '@/pages/Profile';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const router = createBrowserRouter([
   {
@@ -30,16 +26,12 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-  { path: '/signin', element: <SignIn /> },
-  { path: '/', element: <SignUp /> },
+  { path: '/', element: <Auth /> },
 ]);
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
   const initialFirebase = async () => {
     await auth.authStateReady();
-    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -47,8 +39,8 @@ export default function App() {
   }, []);
 
   return (
-    <Wrapper className='app'>
-      {isLoading ? <Loading /> : <RouterProvider router={router} />}
-    </Wrapper>
+    <div className='h-screen'>
+      <RouterProvider router={router} />
+    </div>
   );
 }
