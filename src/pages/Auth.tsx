@@ -9,14 +9,15 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { FormProvider } from 'react-hook-form';
 import {
   FormControl,
   FormField,
   FormItem,
   FormMessage,
 } from '@/components/ui/form';
-import useSign from '@/hooks/useSign';
+import { FormProvider } from 'react-hook-form';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import useAuth from '@/hooks/useAuth';
 
 function HorizontalRule({ content }: { content: string }) {
   return (
@@ -40,7 +41,7 @@ export default function SignUp() {
     handleSignUp,
     handleSignIn,
     handleSignInGithub,
-  } = useSign();
+  } = useAuth();
 
   return (
     <main className='container relative hidden h-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0'>
@@ -61,6 +62,7 @@ export default function SignUp() {
 
           <div className='grid gap-4 py-4'>
             <Button variant='outline' onClick={handleSignInGithub}>
+              <GitHubLogoIcon className='mr-2' />
               Sign In the Github
             </Button>
             <HorizontalRule content='OR' />
@@ -130,6 +132,7 @@ export default function SignUp() {
 
           <div className='grid gap-6'>
             <Button variant='outline' onClick={handleSignInGithub}>
+              <GitHubLogoIcon className='mr-2' />
               Sign Up the Github
             </Button>
             <HorizontalRule content='OR' />
