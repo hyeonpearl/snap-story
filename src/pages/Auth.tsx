@@ -16,7 +16,7 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form';
-import useSign from '@/hooks/useSign';
+import useAuth from '@/hooks/useAuth';
 
 function HorizontalRule({ content }: { content: string }) {
   return (
@@ -40,7 +40,7 @@ export default function SignUp() {
     handleSignUp,
     handleSignIn,
     handleSignInGithub,
-  } = useSign();
+  } = useAuth();
 
   return (
     <main className='container relative hidden h-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0'>
