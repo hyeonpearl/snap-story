@@ -1,9 +1,9 @@
-import PageLayout from './components/common/PageLayout';
-import ProtectedRoute from '@/ProtectedRoute';
-import { auth } from '@/server/firebase';
+import { PageLayout } from '@/components/layout/PageLayout';
 import Auth from '@/pages/Auth';
 import Home from '@/pages/Home';
 import Profile from '@/pages/Profile';
+import { auth } from '@/server/firebase';
+import ProtectedRoute from '@/ProtectedRoute';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { useEffect } from 'react';
 
@@ -39,7 +39,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className='h-screen'>
+    <div className='flex h-screen'>
       <RouterProvider router={router} />
     </div>
   );
