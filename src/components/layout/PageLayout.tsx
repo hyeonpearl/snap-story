@@ -20,7 +20,7 @@ export function PageLayout() {
     <nav className='flex flex-col w-1/5 h-full p-3 border-r gap-4 max-w-60'>
       <div className='flex items-center justify-center'>
         <img
-          src='/logo-red.svg'
+          src='/logo.svg'
           alt='logo'
           className='w-20 h-20 hover:bg-accent p-1 rounded-lg cursor-pointer'
         />
@@ -56,7 +56,7 @@ export function PageLayout() {
           <div className='flex justify-between items-center mt-auto p-2 rounded-lg hover:bg-slate-100 cursor-pointer'>
             <div className='flex items-center'>
               <Avatar>
-                <AvatarImage src='/logo-red.svg' alt='profile' />
+                <AvatarImage src='/logo.svg' alt='profile' />
                 <AvatarFallback>Avatar</AvatarFallback>
               </Avatar>
               <div className='indent-5 text-sm'>
