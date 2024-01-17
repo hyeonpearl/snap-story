@@ -1,3 +1,4 @@
+import { HorizontalRule } from '@/components/layout/HorizontalRule';
 import {
   Dialog,
   DialogContent,
@@ -15,24 +16,9 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form';
-import { FormProvider } from 'react-hook-form';
-import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import useAuth from '@/hooks/useAuth';
-
-function HorizontalRule({ content }: { content: string }) {
-  return (
-    <div className='relative'>
-      <div className='absolute inset-0 flex items-center'>
-        <span className='w-full border-t' />
-      </div>
-      <div className='relative flex justify-center text-xs uppercase'>
-        <span className='bg-background px-2 text-muted-foreground'>
-          {content}
-        </span>
-      </div>
-    </div>
-  );
-}
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import { FormProvider } from 'react-hook-form';
 
 export default function SignUp() {
   const {
@@ -51,7 +37,6 @@ export default function SignUp() {
             Login
           </Button>
         </DialogTrigger>
-
         <DialogContent className='sm:max-w-[425px]'>
           <DialogHeader>
             <DialogTitle>Login</DialogTitle>
@@ -59,7 +44,6 @@ export default function SignUp() {
               이메일과 비밀번호를 입력해주세요.
             </DialogDescription>
           </DialogHeader>
-
           <div className='grid gap-4 py-4'>
             <Button variant='outline' onClick={handleSignInGithub}>
               <GitHubLogoIcon className='mr-2' />
@@ -102,7 +86,6 @@ export default function SignUp() {
               </form>
             </FormProvider>
           </div>
-
           <DialogFooter>
             <Button
               type='submit'
