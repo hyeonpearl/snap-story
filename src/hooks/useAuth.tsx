@@ -72,12 +72,7 @@ export default function useAuth() {
 
   async function handleSignUp(data: z.infer<typeof signUpFormSchema>) {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const credentials = await createUserWithEmailAndPassword(
-        auth,
-        data.email,
-        data.password
-      );
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
       navigate('/home');
       signUpForm.reset();
     } catch (error) {
