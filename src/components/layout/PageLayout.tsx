@@ -15,6 +15,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import useAuth from '@/hooks/useAuth';
 import {
   HomeIcon,
   MagnifyingGlassIcon,
@@ -26,6 +27,8 @@ import {
 import { Link } from 'react-router-dom';
 
 export function PageLayout() {
+  const { handleSignOut } = useAuth();
+
   return (
     <nav className='flex flex-col w-1/5 h-full p-3 border-r gap-4 max-w-60'>
       <div className='flex items-center justify-center'>
@@ -79,7 +82,7 @@ export function PageLayout() {
         </PopoverTrigger>
         <PopoverContent className='max-w-60'>
           <AlertDialog>
-            <AlertDialogTrigger className='w-full'>
+            <AlertDialogTrigger asChild className='w-full'>
               <Button variant='destructive' className='w-full'>
                 Sign Out
               </Button>
@@ -93,7 +96,9 @@ export function PageLayout() {
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                 <Button variant='destructive' asChild>
-                  <AlertDialogAction>Sign Out</AlertDialogAction>
+                  <AlertDialogAction onClick={handleSignOut}>
+                    Sign Out
+                  </AlertDialogAction>
                 </Button>
               </AlertDialogFooter>
             </AlertDialogContent>

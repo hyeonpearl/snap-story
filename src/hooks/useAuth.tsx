@@ -53,6 +53,7 @@ export const signInFormSchema = z.object({
 });
 
 export default function useAuth() {
+  const navigate = useNavigate();
   const signUpForm = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
     defaultValues: {
@@ -69,8 +70,6 @@ export default function useAuth() {
     },
   });
 
-  const navigate = useNavigate();
-
   async function handleSignUp(data: z.infer<typeof signUpFormSchema>) {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -85,7 +84,6 @@ export default function useAuth() {
       console.log(error);
     }
   }
-
   async function handleSignIn(data: z.infer<typeof signInFormSchema>) {
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
@@ -95,7 +93,7 @@ export default function useAuth() {
       console.log(error);
     }
   }
-  const handleSignInGithub = async () => {
+  async function handleSignInGithub() {
     try {
       const provider = new GithubAuthProvider();
       await signInWithPopup(auth, provider);
@@ -103,14 +101,11 @@ export default function useAuth() {
     } catch (error) {
       console.log(error);
     }
-  };
-  const handleSignOut = async () => {
-    const ok = confirm('로그아웃하시겠습니까?');
-    if (ok) {
-      await auth.signOut();
-      navigate('/');
-    }
-  };
+  }
+  async function handleSignOut() {
+    await auth.signOut();
+    navigate('/');
+  }
 
   return {
     signUpForm,
