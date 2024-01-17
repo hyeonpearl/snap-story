@@ -1,3 +1,13 @@
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -5,7 +15,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import useAuth from '@/hooks/useAuth';
 import {
   HomeIcon,
   MagnifyingGlassIcon,
@@ -17,8 +26,6 @@ import {
 import { Link } from 'react-router-dom';
 
 export function PageLayout() {
-  const { handleSignOut } = useAuth();
-
   return (
     <nav className='flex flex-col w-1/5 h-full p-3 border-r gap-4 max-w-60'>
       <div className='flex items-center justify-center'>
@@ -71,13 +78,26 @@ export function PageLayout() {
           </div>
         </PopoverTrigger>
         <PopoverContent className='max-w-60'>
-          <Button
-            variant='destructive'
-            className='w-full'
-            onClick={handleSignOut}
-          >
-            Sign Out
-          </Button>
+          <AlertDialog>
+            <AlertDialogTrigger className='w-full'>
+              <Button variant='destructive' className='w-full'>
+                Sign Out
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>
+                  정말로 로그아웃하시겠습니까?
+                </AlertDialogTitle>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <Button variant='destructive' asChild>
+                  <AlertDialogAction>Sign Out</AlertDialogAction>
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </PopoverContent>
       </Popover>
     </nav>
