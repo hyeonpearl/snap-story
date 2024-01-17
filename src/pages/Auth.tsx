@@ -115,9 +115,9 @@ export default function SignUp() {
         </DialogContent>
       </Dialog>
 
-      <div className='relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r bg-slate-950 '>
+      <div className='relative hidden h-full flex-col p-10  bg-primary text-primary-foreground lg:flex dark:border-r'>
         <div className='flex items-center justify-center m-auto'>
-          <img className='w-72' src='logo-red.svg' alt='logo' />
+          <img className='w-72' src='logo-white.svg' alt='logo' />
         </div>
       </div>
 

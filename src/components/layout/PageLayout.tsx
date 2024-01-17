@@ -1,3 +1,13 @@
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -5,26 +15,34 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import useAuth from '@/hooks/useAuth';
 import {
   HomeIcon,
   MagnifyingGlassIcon,
   BellIcon,
   EnvelopeClosedIcon,
   PersonIcon,
-  TwitterLogoIcon,
   DotsHorizontalIcon,
 } from '@radix-ui/react-icons';
+import { Link } from 'react-router-dom';
 
 export function PageLayout() {
+  const { handleSignOut } = useAuth();
+
   return (
-    <nav className='flex flex-col w-1/5 h-full p-3 border-r gap-4'>
-      <Button variant='ghost'>
-        <img src='/logo-red.svg' alt='logo' className='mr-2 w-5 h-5 ' />
-        Cloning X
-      </Button>
-      <Button variant='ghost'>
-        <HomeIcon className='mr-2 w-5 h-5' />
-        Home
+    <nav className='flex flex-col w-1/5 h-full p-3 border-r gap-4 max-w-60'>
+      <div className='flex items-center justify-center'>
+        <img
+          src='/logo.svg'
+          alt='logo'
+          className='w-20 h-20 hover:bg-accent p-1 rounded-lg cursor-pointer'
+        />
+      </div>
+      <Button variant='ghost' asChild>
+        <Link to='/home'>
+          <HomeIcon className='mr-2 w-5 h-5' />
+          Home
+        </Link>
       </Button>
       <Button variant='ghost'>
         <MagnifyingGlassIcon className='mr-2 w-5 h-5' />
@@ -38,20 +56,20 @@ export function PageLayout() {
         <EnvelopeClosedIcon className='mr-2 w-5 h-5' />
         Messages
       </Button>
-      <Button variant='ghost'>
-        <PersonIcon className='mr-2 w-5 h-5' />
-        Profile
+      <Button variant='ghost' asChild>
+        <Link to='/profile'>
+          <PersonIcon className='mr-2 w-5 h-5' />
+          Profile
+        </Link>
       </Button>
-      <Button>
-        <TwitterLogoIcon className='mr-2 w-5 h-5' />
-        Post
-      </Button>
+      <Button>Post</Button>
+
       <Popover>
         <PopoverTrigger asChild>
-          <div className='flex justify-between items-center mt-auto p-2 rounded-lg hover:bg-slate-100'>
+          <div className='flex justify-between items-center mt-auto p-2 rounded-lg hover:bg-slate-100 cursor-pointer'>
             <div className='flex items-center'>
               <Avatar>
-                <AvatarImage src='/logo-red.svg' alt='profile' />
+                <AvatarImage src='/logo.svg' alt='profile' />
                 <AvatarFallback>Avatar</AvatarFallback>
               </Avatar>
               <div className='indent-5 text-sm'>
@@ -62,10 +80,29 @@ export function PageLayout() {
             <DotsHorizontalIcon />
           </div>
         </PopoverTrigger>
-        <PopoverContent>
-          <Button variant='destructive' className='w-full'>
-            Sign Out
-          </Button>
+        <PopoverContent className='max-w-60'>
+          <AlertDialog>
+            <AlertDialogTrigger asChild className='w-full'>
+              <Button variant='destructive' className='w-full'>
+                Sign Out
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>
+                  정말로 로그아웃하시겠습니까?
+                </AlertDialogTitle>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <Button variant='destructive' asChild>
+                  <AlertDialogAction onClick={handleSignOut}>
+                    Sign Out
+                  </AlertDialogAction>
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </PopoverContent>
       </Popover>
     </nav>
