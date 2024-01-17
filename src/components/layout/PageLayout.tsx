@@ -5,26 +5,31 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { Link } from 'react-router-dom';
 import {
   HomeIcon,
   MagnifyingGlassIcon,
   BellIcon,
   EnvelopeClosedIcon,
   PersonIcon,
-  TwitterLogoIcon,
   DotsHorizontalIcon,
 } from '@radix-ui/react-icons';
 
 export function PageLayout() {
   return (
-    <nav className='flex flex-col w-1/5 h-full p-3 border-r gap-4'>
-      <Button variant='ghost'>
-        <img src='/logo-red.svg' alt='logo' className='mr-2 w-5 h-5 ' />
-        Cloning X
-      </Button>
-      <Button variant='ghost'>
-        <HomeIcon className='mr-2 w-5 h-5' />
-        Home
+    <nav className='flex flex-col w-1/5 h-full p-3 border-r gap-4 max-w-60'>
+      <div className='flex items-center justify-center'>
+        <img
+          src='/logo-red.svg'
+          alt='logo'
+          className='w-20 h-20 hover:bg-accent p-1 rounded-lg cursor-pointer'
+        />
+      </div>
+      <Button variant='ghost' asChild>
+        <Link to='/home'>
+          <HomeIcon className='mr-2 w-5 h-5' />
+          Home
+        </Link>
       </Button>
       <Button variant='ghost'>
         <MagnifyingGlassIcon className='mr-2 w-5 h-5' />
@@ -38,17 +43,17 @@ export function PageLayout() {
         <EnvelopeClosedIcon className='mr-2 w-5 h-5' />
         Messages
       </Button>
-      <Button variant='ghost'>
-        <PersonIcon className='mr-2 w-5 h-5' />
-        Profile
+      <Button variant='ghost' asChild>
+        <Link to='/profile'>
+          <PersonIcon className='mr-2 w-5 h-5' />
+          Profile
+        </Link>
       </Button>
-      <Button>
-        <TwitterLogoIcon className='mr-2 w-5 h-5' />
-        Post
-      </Button>
+      <Button>Post</Button>
+
       <Popover>
         <PopoverTrigger asChild>
-          <div className='flex justify-between items-center mt-auto p-2 rounded-lg hover:bg-slate-100'>
+          <div className='flex justify-between items-center mt-auto p-2 rounded-lg hover:bg-slate-100 cursor-pointer'>
             <div className='flex items-center'>
               <Avatar>
                 <AvatarImage src='/logo-red.svg' alt='profile' />
@@ -62,7 +67,7 @@ export function PageLayout() {
             <DotsHorizontalIcon />
           </div>
         </PopoverTrigger>
-        <PopoverContent>
+        <PopoverContent className='max-w-60'>
           <Button variant='destructive' className='w-full'>
             Sign Out
           </Button>
