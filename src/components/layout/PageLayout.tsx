@@ -5,7 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Link } from 'react-router-dom';
+import useAuth from '@/hooks/useAuth';
 import {
   HomeIcon,
   MagnifyingGlassIcon,
@@ -14,8 +14,11 @@ import {
   PersonIcon,
   DotsHorizontalIcon,
 } from '@radix-ui/react-icons';
+import { Link } from 'react-router-dom';
 
 export function PageLayout() {
+  const { handleSignOut } = useAuth();
+
   return (
     <nav className='flex flex-col w-1/5 h-full p-3 border-r gap-4 max-w-60'>
       <div className='flex items-center justify-center'>
@@ -68,7 +71,11 @@ export function PageLayout() {
           </div>
         </PopoverTrigger>
         <PopoverContent className='max-w-60'>
-          <Button variant='destructive' className='w-full'>
+          <Button
+            variant='destructive'
+            className='w-full'
+            onClick={handleSignOut}
+          >
             Sign Out
           </Button>
         </PopoverContent>

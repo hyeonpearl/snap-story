@@ -52,7 +52,7 @@ export const signInFormSchema = z.object({
     }),
 });
 
-export default function useSign() {
+export default function useAuth() {
   const signUpForm = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
     defaultValues: {
