@@ -39,7 +39,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className='flex h-screen'>
+    <div className='w-screen h-screen'>
       <RouterProvider router={router} />
     </div>
   );

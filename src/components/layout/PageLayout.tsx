@@ -41,7 +41,7 @@ export function PageLayout() {
   const { open, setOpen, postTweetForm, onSubmit } = usePostTweet();
 
   return (
-    <nav className='flex flex-col w-1/5 h-full p-3 border-r gap-4 max-w-60'>
+    <nav className='fixed w-60 h-full max-w-60 flex flex-col p-3 border-r gap-4 bg-white'>
       <div className='flex items-center justify-center'>
         <img
           src='/logo.svg'
@@ -135,7 +135,7 @@ export function PageLayout() {
               </Avatar>
               <div className='indent-5 text-sm'>
                 <div>Display Name</div>
-                <div className='text-gray-500'>@email</div>
+                <div className='text-muted-foreground'>@email</div>
               </div>
             </div>
             <DotsHorizontalIcon />
