@@ -38,7 +38,7 @@ import { usePostTweet } from '@/hooks/Tweet/usePostTweet';
 
 export function PageLayout() {
   const { handleSignOut } = useAuth();
-  const { postTweetForm, onSubmit } = usePostTweet();
+  const { open, setOpen, postTweetForm, onSubmit } = usePostTweet();
 
   return (
     <nav className='flex flex-col w-1/5 h-full p-3 border-r gap-4 max-w-60'>
@@ -73,7 +73,7 @@ export function PageLayout() {
           Profile
         </Link>
       </Button>
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button>Post</Button>
         </DialogTrigger>
