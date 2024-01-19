@@ -10,17 +10,14 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import useAuth from '@/hooks/useAuth';
 import {
@@ -30,6 +27,7 @@ import {
   EnvelopeClosedIcon,
   PersonIcon,
   DotsHorizontalIcon,
+  ImageIcon,
 } from '@radix-ui/react-icons';
 import { FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -37,8 +35,11 @@ import { FormControl, FormField, FormItem, FormMessage } from '../ui/form';
 import { usePostTweet } from '@/hooks/Tweet/usePostTweet';
 
 export function PageLayout() {
-  const { handleSignOut } = useAuth();
+  const { user, handleSignOut } = useAuth();
   const { open, setOpen, postTweetForm, onSubmit } = usePostTweet();
+  const USER_NAME = user?.displayName || '익명';
+  const USER_EMAIL = user?.email?.split('@')[0];
+  const USER_PHOTO = user?.photoURL || '';
 
   return (
     <nav className='fixed w-60 h-full max-w-60 flex flex-col p-3 border-r gap-4 bg-white'>
@@ -80,14 +81,14 @@ export function PageLayout() {
         <DialogContent className='sm:max-w-[425px]'>
           <div className='flex items-center'>
             <Avatar>
-              <AvatarImage />
+              <AvatarImage src={USER_PHOTO} alt='profile-picture' />
               <AvatarFallback>
                 <PersonIcon />
               </AvatarFallback>
             </Avatar>
             <div className='indent-5 text-sm'>
-              <div>Display Name</div>
-              <div className='text-gray-500'>@email</div>
+              <div>{USER_NAME}</div>
+              <div className='text-gray-500'>@{USER_EMAIL}</div>
             </div>
           </div>
           <FormProvider {...postTweetForm}>
@@ -111,16 +112,46 @@ export function PageLayout() {
                   </FormItem>
                 )}
               />
+              <div className='flex flex-col-reverse items-center sm:flex-row sm:justify-between sm:space-x-2 pt-4'>
+                <FormField
+                  control={postTweetForm.control}
+                  name='image'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div>
+                          <Label
+                            htmlFor='picture'
+                            className='mr-auto cursor-pointer text-gray-500 hover:text-primary'
+                          >
+                            <ImageIcon className='w-8 h-full' />
+                          </Label>
+                          <Input
+                            id='picture'
+                            type='file'
+                            accept='image/*'
+                            className='hidden'
+                            onChange={e =>
+                              field.onChange(
+                                e.target.files ? e.target.files[0] : undefined
+                              )
+                            }
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type='submit'
+                  onClick={postTweetForm.handleSubmit(onSubmit)}
+                >
+                  Post
+                </Button>
+              </div>
             </form>
           </FormProvider>
-          <DialogFooter>
-            <Button
-              type='submit'
-              onClick={postTweetForm.handleSubmit(onSubmit)}
-            >
-              Post
-            </Button>
-          </DialogFooter>
         </DialogContent>
       </Dialog>
       <Popover>
@@ -128,14 +159,14 @@ export function PageLayout() {
           <div className='flex justify-between items-center mt-auto p-2 rounded-lg hover:bg-slate-100 cursor-pointer'>
             <div className='flex items-center'>
               <Avatar>
-                <AvatarImage src='#' alt='profile' />
+                <AvatarImage src={USER_PHOTO} alt='profile-picture' />
                 <AvatarFallback>
                   <PersonIcon />
                 </AvatarFallback>
               </Avatar>
               <div className='indent-5 text-sm'>
-                <div>Display Name</div>
-                <div className='text-muted-foreground'>@email</div>
+                <div>{USER_NAME}</div>
+                <div className='text-gray-500'>@{USER_EMAIL}</div>
               </div>
             </div>
             <DotsHorizontalIcon />
