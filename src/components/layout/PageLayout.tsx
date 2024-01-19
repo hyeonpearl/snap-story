@@ -12,6 +12,12 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/form';
+import {
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -20,6 +26,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import useAuth from '@/hooks/useAuth';
+import { usePostTweet } from '@/hooks/usePostTweet';
 import {
   HomeIcon,
   MagnifyingGlassIcon,
@@ -31,8 +38,6 @@ import {
 } from '@radix-ui/react-icons';
 import { FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { FormControl, FormField, FormItem, FormMessage } from '../ui/form';
-import { usePostTweet } from '@/hooks/Tweet/usePostTweet';
 
 export function PageLayout() {
   const { user, handleSignOut } = useAuth();

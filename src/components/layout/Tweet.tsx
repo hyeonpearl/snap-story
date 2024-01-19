@@ -1,7 +1,7 @@
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
-import { ITweet } from '@/hooks/Tweet/useLoadTweet';
+import { ITweet } from '@/hooks/useLoadTweet';
 import { DotsHorizontalIcon, PersonIcon } from '@radix-ui/react-icons';
 import { User } from 'firebase/auth';
 

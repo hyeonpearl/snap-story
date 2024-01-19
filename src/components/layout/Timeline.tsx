@@ -1,5 +1,5 @@
 import { Tweet } from './Tweet';
-import { ITweet } from '@/hooks/Tweet/useLoadTweet';
+import { ITweet } from '@/hooks/useLoadTweet';
 import { User } from 'firebase/auth';
 
 export function Timeline({

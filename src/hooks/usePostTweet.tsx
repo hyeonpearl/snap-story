@@ -1,39 +1,58 @@
-import { auth, db, storage } from '../server/firebase';
+import { auth, db, storage } from '@/server/firebase';
 import { addDoc, collection, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 
-const validateFileSize = (file: File | null) => {
-  if (file && file.size > 1024 * 1024) {
-    alert('1MB 미만 크기의 파일만 업로드 가능합니다.');
-    return null;
-  }
-  return file;
-};
+const FILE_SIZE = 1024 * 1024;
 
-const formatTweetDate = (date: Date) => ({
-  month: date.getMonth() + 1,
-  day: date.getDate(),
+export const postTweetFormSchema = z.object({
+  tweet: z
+    .string({ required_error: '포스트를 작성해주세요.' })
+    .min(5, {
+      message: '5자 이상 작성해주세요.',
+    })
+    .max(100, {
+      message: '100자 이하로 작성해주세요.',
+    }),
+  image: z
+    .instanceof(File)
+    .refine(file => validateFileSize(file), {
+      message: '1MB 미만 크기의 파일만 업로드 가능합니다.',
+    })
+    .optional(),
 });
 
-const uploadFileAndReturnURL = async (
+function validateFileSize(file: File | null) {
+  if (file && file.size > FILE_SIZE) {
+    return undefined;
+  }
+  return file;
+}
+function formatTweetDate(date: Date) {
+  return {
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+  };
+}
+async function uploadFileAndReturnURL(
   userUid: string,
   tweetId: string,
   file: File
-): Promise<string> => {
+): Promise<string> {
   const locationRef = ref(storage, `tweets/${userUid}/${tweetId}`);
   const uploaded = await uploadBytes(locationRef, file);
   return getDownloadURL(uploaded.ref);
-};
-
-const postTweet = async (
+}
+async function postTweet(
   userUid: string,
-  tweet: string,
-  file: File | null
-): Promise<void> => {
+  data: z.infer<typeof postTweetFormSchema>
+) {
   const date = new Date();
   const tweetData = {
-    tweet,
+    tweet: data.tweet,
     createdAt: Date.now(),
     postedAt: formatTweetDate(date),
     username: auth.currentUser?.displayName || '익명',
@@ -44,48 +63,33 @@ const postTweet = async (
 
   const docRef = await addDoc(collection(db, 'tweets'), tweetData);
 
-  if (file) {
-    const url = await uploadFileAndReturnURL(userUid, docRef.id, file);
+  if (data.image) {
+    const url = await uploadFileAndReturnURL(userUid, docRef.id, data.image);
     await updateDoc(docRef, { photo: url });
   }
-};
+}
 
-export default function usePostTweet() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [tweet, setTweet] = useState('');
-  const [file, setFile] = useState<File | null>(null);
-
-  const handleTweetChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTweet(e.target.value);
-  };
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
-    if (files && files.length === 1) setFile(files[0]);
-  };
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+export function usePostTweet() {
+  const [open, setOpen] = useState(false);
+  const postTweetForm = useForm<z.infer<typeof postTweetFormSchema>>({
+    resolver: zodResolver(postTweetFormSchema),
+    defaultValues: {
+      tweet: '',
+      image: new File([], ''),
+    },
+  });
+  async function onSubmit(data: z.infer<typeof postTweetFormSchema>) {
     const user = auth.currentUser;
-
-    if (!user || isLoading || tweet === '' || tweet.length > 180) return;
+    if (!user) return;
 
     try {
-      setIsLoading(true);
-      await postTweet(user.uid, tweet, validateFileSize(file));
-      setTweet('');
-      setFile(null);
+      postTweet(user.uid, data);
+      setOpen(false);
+      postTweetForm.reset();
     } catch (error) {
-      console.error('트윗을 게시하는 도중 오류가 발생했습니다:', error);
-    } finally {
-      setIsLoading(false);
+      console.log(error);
     }
-  };
+  }
 
-  return {
-    isLoading,
-    tweet,
-    file,
-    handleTweetChange,
-    handleFileChange,
-    handleSubmit,
-  };
+  return { open, setOpen, postTweetForm, onSubmit };
 }
