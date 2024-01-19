@@ -53,6 +53,7 @@ export const signInFormSchema = z.object({
 });
 
 export default function useAuth() {
+  const user = auth.currentUser;
   const navigate = useNavigate();
   const signUpForm = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
@@ -103,6 +104,7 @@ export default function useAuth() {
   }
 
   return {
+    user,
     signUpForm,
     signInForm,
     handleSignUp,
