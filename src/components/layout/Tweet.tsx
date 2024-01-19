@@ -1,3 +1,4 @@
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { ITweet } from '@/hooks/Tweet/useLoadTweet';
@@ -10,6 +11,7 @@ interface Props extends ITweet {
 
 export function Tweet({
   postedAt,
+  photo,
   tweet,
   username,
   userEmail,
@@ -38,6 +40,11 @@ export function Tweet({
       </CardHeader>
       <CardContent>
         <p>{tweet}</p>
+        {photo && (
+          <AspectRatio ratio={1 / 1} className='border rounded mt-3'>
+            <img src={photo} className='w-full h-full rounded' />
+          </AspectRatio>
+        )}
       </CardContent>
     </Card>
   );
