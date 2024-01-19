@@ -1,14 +1,14 @@
-import { auth } from '@/server/firebase';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   GithubAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { auth } from '@/server/firebase';
 
 export const signUpFormSchema = z.object({
   username: z
@@ -52,7 +52,7 @@ export const signInFormSchema = z.object({
     }),
 });
 
-export default function useAuth() {
+export function useAuth() {
   const user = auth.currentUser;
   const navigate = useNavigate();
   const signUpForm = useForm<z.infer<typeof signUpFormSchema>>({

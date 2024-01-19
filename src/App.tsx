@@ -1,11 +1,11 @@
+import { useEffect } from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { PageLayout } from '@/components/layout/PageLayout';
 import Auth from '@/pages/Auth';
 import Home from '@/pages/Home';
 import Profile from '@/pages/Profile';
 import { auth } from '@/server/firebase';
 import ProtectedRoute from '@/ProtectedRoute';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { useEffect } from 'react';
 
 const router = createBrowserRouter([
   {

@@ -1,4 +1,4 @@
-import { auth, db } from '@/server/firebase';
+import { useEffect, useRef, useState } from 'react';
 import { Unsubscribe } from 'firebase/auth';
 import {
   collection,
@@ -10,7 +10,7 @@ import {
   where,
   writeBatch,
 } from 'firebase/firestore';
-import { useEffect, useRef, useState } from 'react';
+import { auth, db } from '@/server/firebase';
 
 export interface ITweet {
   id: string;

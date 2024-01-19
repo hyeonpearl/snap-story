@@ -1,5 +1,5 @@
 import { Timeline } from '@/components/layout/Timeline';
-import { useLoadTweet } from '@/hooks/useLoadTweet';
+import { useLoadTweet } from '@/hooks';
 
 export default function Home() {
   const { user, tweets } = useLoadTweet('all');
