@@ -1,3 +1,5 @@
+import { FormProvider } from 'react-hook-form';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { HorizontalRule } from '@/components/layout/HorizontalRule';
 import {
   Dialog,
@@ -16,9 +18,7 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form';
-import useAuth from '@/hooks/useAuth';
-import { GitHubLogoIcon } from '@radix-ui/react-icons';
-import { FormProvider } from 'react-hook-form';
+import { useAuth } from '@/hooks';
 
 export default function SignUp() {
   const {
