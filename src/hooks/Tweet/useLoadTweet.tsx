@@ -2,11 +2,13 @@ import { auth, db } from '@/server/firebase';
 import { Unsubscribe } from 'firebase/auth';
 import {
   collection,
+  doc,
   limit,
   onSnapshot,
   orderBy,
   query,
   where,
+  writeBatch,
 } from 'firebase/firestore';
 import { useEffect, useRef, useState } from 'react';
 
@@ -26,6 +28,17 @@ export function useLoadTweet(order: 'all' | 'userId') {
   const user = auth.currentUser;
   const unsubscribeRef = useRef<Unsubscribe | null>(null);
   const [tweets, setTweets] = useState<ITweet[]>([]);
+
+  async function updateProfilePicture(newPictureUrl: string) {
+    const batch = writeBatch(db);
+
+    tweets.forEach(tweet => {
+      const tweetRef = doc(db, 'tweets', tweet.id);
+      batch.update(tweetRef, { profilePicture: newPictureUrl });
+    });
+
+    await batch.commit();
+  }
 
   useEffect(() => {
     async function fetchTweet() {
@@ -78,5 +91,5 @@ export function useLoadTweet(order: 'all' | 'userId') {
     };
   }, [order, user]);
 
-  return { user, tweets };
+  return { user, tweets, updateProfilePicture };
 }
