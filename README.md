@@ -18,9 +18,9 @@
 - Firebase
 
 ## File Tree
-
+#### @1.0.0
 ```
-srcsrc
+src
  ┣ components
  ┃ ┣ common
  ┃ ┃ ┣ Button.tsx
