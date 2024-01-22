@@ -5,8 +5,19 @@ import {
   PersonIcon,
   TrashIcon,
 } from '@radix-ui/react-icons';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   DropdownMenu,
@@ -24,6 +35,8 @@ export function Tweet({
   postedAt,
   photo,
   tweet,
+  user,
+  userId,
   username,
   userEmail,
   profilePicture,
@@ -40,28 +53,47 @@ export function Tweet({
         <div className='w-full'>
           <div className='flex items-start'>
             <span>
-              {username}{' '}
+              {username}
               <strong className='ml-1 text-gray-500 font-normal'>
                 @{userEmail} • {postedAt.month}월 {postedAt.day}일
               </strong>
             </span>
-            <div className='text-center cursor-pointer p-1 ml-auto rounded hover:text-primary'>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <DotsHorizontalIcon />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem>
-                    <Pencil1Icon className='mr-2 h-4 w-4' />
-                    <span>Edit Tweet</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <TrashIcon className='mr-2 h-4 w-4' />
-                    <span>Delete Tweet</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+            {user?.uid === userId && (
+              <div className='text-center cursor-pointer p-1 ml-auto rounded hover:text-primary'>
+                <AlertDialog>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <DotsHorizontalIcon />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem>
+                        <Pencil1Icon className='mr-2 h-4 w-4' />
+                        <span>Edit Tweet</span>
+                      </DropdownMenuItem>
+                      <AlertDialogTrigger asChild>
+                        <DropdownMenuItem>
+                          <TrashIcon className='mr-2 h-4 w-4' />
+                          <span>Delete Tweet</span>
+                        </DropdownMenuItem>
+                      </AlertDialogTrigger>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>
+                        정말로 삭제하시겠습니까?
+                      </AlertDialogTitle>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <Button variant='destructive' asChild>
+                        <AlertDialogAction>Delete</AlertDialogAction>
+                      </Button>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </div>
+            )}
           </div>
           <p className='text-sm'>{tweet}</p>
           {photo && (
