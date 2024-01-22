@@ -70,6 +70,7 @@ async function postTweet(
 }
 
 export function usePostTweet() {
+  const user = auth.currentUser;
   const [open, setOpen] = useState(false);
   const postTweetForm = useForm<z.infer<typeof postTweetFormSchema>>({
     resolver: zodResolver(postTweetFormSchema),
@@ -79,7 +80,6 @@ export function usePostTweet() {
     },
   });
   async function onSubmit(data: z.infer<typeof postTweetFormSchema>) {
-    const user = auth.currentUser;
     if (!user) return;
 
     try {

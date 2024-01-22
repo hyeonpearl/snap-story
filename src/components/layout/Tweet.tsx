@@ -25,13 +25,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ITweet } from '@/hooks';
+import { ITweet, useTweetManagement } from '@/hooks';
 
 interface Props extends ITweet {
   user?: User | null;
 }
 
 export function Tweet({
+  id,
   postedAt,
   photo,
   tweet,
@@ -41,6 +42,8 @@ export function Tweet({
   userEmail,
   profilePicture,
 }: Props) {
+  const { deleteTweet } = useTweetManagement();
+
   return (
     <Card>
       <CardContent className='flex pt-6'>
@@ -87,7 +90,11 @@ export function Tweet({
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
                       <Button variant='destructive' asChild>
-                        <AlertDialogAction>Delete</AlertDialogAction>
+                        <AlertDialogAction
+                          onClick={() => deleteTweet(id, userId, photo)}
+                        >
+                          Delete
+                        </AlertDialogAction>
                       </Button>
                     </AlertDialogFooter>
                   </AlertDialogContent>
