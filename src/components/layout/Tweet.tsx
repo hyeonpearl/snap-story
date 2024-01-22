@@ -1,8 +1,19 @@
 import { User } from 'firebase/auth';
-import { DotsHorizontalIcon, PersonIcon } from '@radix-ui/react-icons';
+import {
+  DotsHorizontalIcon,
+  Pencil1Icon,
+  PersonIcon,
+  TrashIcon,
+} from '@radix-ui/react-icons';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { ITweet } from '@/hooks';
 
 interface Props extends ITweet {
@@ -35,7 +46,21 @@ export function Tweet({
               </strong>
             </span>
             <div className='text-center cursor-pointer p-1 ml-auto rounded hover:text-primary'>
-              <DotsHorizontalIcon />
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <DotsHorizontalIcon />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>
+                    <Pencil1Icon className='mr-2 h-4 w-4' />
+                    <span>Edit Tweet</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <TrashIcon className='mr-2 h-4 w-4' />
+                    <span>Delete Tweet</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
           <p className='text-sm'>{tweet}</p>
