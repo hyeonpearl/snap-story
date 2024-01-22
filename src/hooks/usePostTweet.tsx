@@ -63,7 +63,7 @@ async function postTweet(
 
   const docRef = await addDoc(collection(db, 'tweets'), tweetData);
 
-  if (data.image) {
+  if (data.image?.name) {
     const url = await uploadFileAndReturnURL(userUid, docRef.id, data.image);
     await updateDoc(docRef, { photo: url });
   }

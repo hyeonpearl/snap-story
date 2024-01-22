@@ -41,7 +41,11 @@ export function Tweet({
           <p className='text-sm'>{tweet}</p>
           {photo && (
             <AspectRatio ratio={1 / 1} className='border rounded mt-3'>
-              <img src={photo} className='w-full h-full rounded' />
+              <img
+                src={photo}
+                className='w-full h-full rounded'
+                alt='tweet-photo'
+              />
             </AspectRatio>
           )}
         </div>
