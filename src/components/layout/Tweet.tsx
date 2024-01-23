@@ -1,6 +1,7 @@
 import { User } from 'firebase/auth';
 import {
   DotsHorizontalIcon,
+  ImageIcon,
   Pencil1Icon,
   PersonIcon,
   TrashIcon,
@@ -20,11 +21,21 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { ITweet, useTweetManagement } from '@/hooks';
 
 interface Props extends ITweet {
@@ -64,40 +75,85 @@ export function Tweet({
             {user?.uid === userId && (
               <div className='text-center cursor-pointer p-1 ml-auto rounded hover:text-primary'>
                 <AlertDialog>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <DotsHorizontalIcon />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuItem>
-                        <Pencil1Icon className='mr-2 h-4 w-4' />
-                        <span>Edit Tweet</span>
-                      </DropdownMenuItem>
-                      <AlertDialogTrigger asChild>
-                        <DropdownMenuItem>
-                          <TrashIcon className='mr-2 h-4 w-4' />
-                          <span>Delete Tweet</span>
-                        </DropdownMenuItem>
-                      </AlertDialogTrigger>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        정말로 삭제하시겠습니까?
-                      </AlertDialogTitle>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <Button variant='destructive' asChild>
-                        <AlertDialogAction
-                          onClick={() => deleteTweet(id, userId, photo)}
-                        >
-                          Delete
-                        </AlertDialogAction>
-                      </Button>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
+                  <Dialog>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <DotsHorizontalIcon />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DialogTrigger asChild>
+                          <DropdownMenuItem>
+                            <Pencil1Icon className='mr-2 h-4 w-4' />
+                            <span>Edit Tweet</span>
+                          </DropdownMenuItem>
+                        </DialogTrigger>
+                        <AlertDialogTrigger asChild>
+                          <DropdownMenuItem>
+                            <TrashIcon className='mr-2 h-4 w-4' />
+                            <span>Delete Tweet</span>
+                          </DropdownMenuItem>
+                        </AlertDialogTrigger>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                    <DialogContent className='sm:max-w-[425px]'>
+                      <DialogHeader>
+                        <DialogTitle>Edit</DialogTitle>
+                      </DialogHeader>
+                      <div className='flex items-center mt-4'>
+                        <Avatar>
+                          <AvatarImage alt='profile-picture' />
+                          <AvatarFallback>
+                            <PersonIcon />
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className='indent-5 text-sm'>
+                          <div>USER_NAME</div>
+                          <div className='text-gray-500'>@USER_EMAIL</div>
+                        </div>
+                      </div>
+
+                      <form className='flex-2 flex-auto'>
+                        <Textarea
+                          placeholder='무슨 일이 일어났나요?'
+                          className='resize-none h-28 mb-4'
+                        />
+                        <div className='flex flex-col-reverse items-center sm:flex-row sm:justify-between sm:space-x-2 pt-4'>
+                          <div>
+                            <Label
+                              htmlFor='picture'
+                              className='mr-auto cursor-pointer text-gray-500 hover:text-primary'
+                            >
+                              <ImageIcon className='w-8 h-full' />
+                            </Label>
+                            <Input
+                              id='picture'
+                              type='file'
+                              accept='image/*'
+                              className='hidden'
+                            />
+                          </div>
+                          <Button type='submit'>Post</Button>
+                        </div>
+                      </form>
+                    </DialogContent>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          정말로 삭제하시겠습니까?
+                        </AlertDialogTitle>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <Button variant='destructive' asChild>
+                          <AlertDialogAction
+                            onClick={() => deleteTweet(id, userId, photo)}
+                          >
+                            Delete
+                          </AlertDialogAction>
+                        </Button>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </Dialog>
                 </AlertDialog>
               </div>
             )}
