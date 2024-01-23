@@ -21,7 +21,13 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import {
   FormControl,
   FormField,
@@ -41,6 +47,7 @@ import { useAuth, usePostTweet } from '@/hooks';
 export function PageLayout() {
   const { user, handleSignOut } = useAuth();
   const { open, setOpen, postTweetForm, onSubmit } = usePostTweet();
+
   const USER_NAME = user?.displayName || '익명';
   const USER_EMAIL = user?.email?.split('@')[0];
   const USER_PHOTO = user?.photoURL || '';
@@ -83,7 +90,10 @@ export function PageLayout() {
           <Button>Post</Button>
         </DialogTrigger>
         <DialogContent className='sm:max-w-[425px]'>
-          <div className='flex items-center'>
+          <DialogHeader>
+            <DialogTitle>Post</DialogTitle>
+          </DialogHeader>
+          <div className='flex items-center mt-4'>
             <Avatar>
               <AvatarImage src={USER_PHOTO} alt='profile-picture' />
               <AvatarFallback>
@@ -108,7 +118,7 @@ export function PageLayout() {
                     <FormControl>
                       <Textarea
                         placeholder='무슨 일이 일어났나요?'
-                        className='resize-none h-28'
+                        className='resize-none h-28 mb-4'
                         {...field}
                       />
                     </FormControl>

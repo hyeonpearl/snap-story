@@ -20,7 +20,13 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -90,7 +96,10 @@ export function Tweet({
                       </DropdownMenuContent>
                     </DropdownMenu>
                     <DialogContent className='sm:max-w-[425px]'>
-                      <div className='flex items-center'>
+                      <DialogHeader>
+                        <DialogTitle>Edit</DialogTitle>
+                      </DialogHeader>
+                      <div className='flex items-center mt-4'>
                         <Avatar>
                           <AvatarImage alt='profile-picture' />
                           <AvatarFallback>
@@ -106,9 +115,8 @@ export function Tweet({
                       <form className='flex-2 flex-auto'>
                         <Textarea
                           placeholder='무슨 일이 일어났나요?'
-                          className='resize-none h-28'
+                          className='resize-none h-28 mb-4'
                         />
-
                         <div className='flex flex-col-reverse items-center sm:flex-row sm:justify-between sm:space-x-2 pt-4'>
                           <div>
                             <Label
