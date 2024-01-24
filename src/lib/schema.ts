@@ -49,11 +49,11 @@ const SignInFormSchema = z.object({
 const SnapFormSchema = z.object({
   snap: z
     .string({ required_error: '포스트를 작성해주세요.' })
-    .min(5, {
-      message: '5자 이상 작성해주세요.',
+    .min(3, {
+      message: '3자 이상 작성해주세요.',
     })
-    .max(100, {
-      message: '100자 이하로 작성해주세요.',
+    .max(300, {
+      message: '300자 이하로 작성해주세요.',
     }),
   image: z
     .instanceof(File)
