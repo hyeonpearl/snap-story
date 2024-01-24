@@ -37,6 +37,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { ITweet, useTweetManagement } from '@/hooks';
+import { FormProvider } from 'react-hook-form';
+import { FormControl, FormField, FormItem, FormMessage } from '../ui/form';
 
 interface Props extends ITweet {
   user?: User | null;
@@ -53,7 +55,8 @@ export function Tweet({
   userEmail,
   profilePicture,
 }: Props) {
-  const { deleteTweet } = useTweetManagement();
+  const { open, setOpen, editTweetForm, onEdit, deleteTweet } =
+    useTweetManagement();
 
   return (
     <Card>
@@ -75,7 +78,7 @@ export function Tweet({
             {user?.uid === userId && (
               <div className='text-center cursor-pointer p-1 ml-auto rounded hover:text-primary'>
                 <AlertDialog>
-                  <Dialog>
+                  <Dialog open={open} onOpenChange={setOpen}>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <DotsHorizontalIcon />
@@ -101,40 +104,68 @@ export function Tweet({
                       </DialogHeader>
                       <div className='flex items-center mt-4'>
                         <Avatar>
-                          <AvatarImage alt='profile-picture' />
+                          <AvatarImage
+                            src={profilePicture}
+                            alt='profile-picture'
+                          />
                           <AvatarFallback>
                             <PersonIcon />
                           </AvatarFallback>
                         </Avatar>
                         <div className='indent-5 text-sm'>
-                          <div>USER_NAME</div>
-                          <div className='text-gray-500'>@USER_EMAIL</div>
+                          <div>{username}</div>
+                          <div className='text-gray-500'>@{userEmail}</div>
                         </div>
                       </div>
-
-                      <form className='flex-2 flex-auto'>
-                        <Textarea
-                          placeholder='무슨 일이 일어났나요?'
-                          className='resize-none h-28 mb-4'
-                        />
-                        <div className='flex flex-col-reverse items-center sm:flex-row sm:justify-between sm:space-x-2 pt-4'>
-                          <div>
-                            <Label
-                              htmlFor='picture'
-                              className='mr-auto cursor-pointer text-gray-500 hover:text-primary'
+                      <FormProvider {...editTweetForm}>
+                        <form
+                          className='flex-2 flex-auto'
+                          onSubmit={editTweetForm.handleSubmit(data =>
+                            onEdit(id, data)
+                          )}
+                        >
+                          <FormField
+                            control={editTweetForm.control}
+                            name='tweet'
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormControl>
+                                  <Textarea
+                                    placeholder='무슨 일이 일어났나요?'
+                                    className='resize-none h-28 mb-4'
+                                    {...field}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          <div className='flex flex-col-reverse items-center sm:flex-row sm:justify-between sm:space-x-2 pt-4'>
+                            <div>
+                              <Label
+                                htmlFor='picture'
+                                className='mr-auto cursor-pointer text-gray-500 hover:text-primary'
+                              >
+                                <ImageIcon className='w-8 h-full' />
+                              </Label>
+                              <Input
+                                id='picture'
+                                type='file'
+                                accept='image/*'
+                                className='hidden'
+                              />
+                            </div>
+                            <Button
+                              type='submit'
+                              onSubmit={editTweetForm.handleSubmit(data =>
+                                onEdit(id, data)
+                              )}
                             >
-                              <ImageIcon className='w-8 h-full' />
-                            </Label>
-                            <Input
-                              id='picture'
-                              type='file'
-                              accept='image/*'
-                              className='hidden'
-                            />
+                              Post
+                            </Button>
                           </div>
-                          <Button type='submit'>Post</Button>
-                        </div>
-                      </form>
+                        </form>
+                      </FormProvider>
                     </DialogContent>
                     <AlertDialogContent>
                       <AlertDialogHeader>

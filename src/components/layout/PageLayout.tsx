@@ -46,7 +46,7 @@ import { useAuth, usePostTweet } from '@/hooks';
 
 export function PageLayout() {
   const { user, handleSignOut } = useAuth();
-  const { open, setOpen, postTweetForm, onSubmit } = usePostTweet();
+  const { open, setOpen, postTweetForm, onPost } = usePostTweet();
 
   const USER_NAME = user?.displayName || '익명';
   const USER_EMAIL = user?.email?.split('@')[0];
@@ -108,7 +108,7 @@ export function PageLayout() {
           <FormProvider {...postTweetForm}>
             <form
               className='flex-2 flex-auto'
-              onSubmit={postTweetForm.handleSubmit(onSubmit)}
+              onSubmit={postTweetForm.handleSubmit(onPost)}
             >
               <FormField
                 control={postTweetForm.control}
@@ -159,7 +159,7 @@ export function PageLayout() {
                 />
                 <Button
                   type='submit'
-                  onClick={postTweetForm.handleSubmit(onSubmit)}
+                  onClick={postTweetForm.handleSubmit(onPost)}
                 >
                   Post
                 </Button>

@@ -79,7 +79,7 @@ export function usePostTweet() {
       image: new File([], ''),
     },
   });
-  async function onSubmit(data: z.infer<typeof postTweetFormSchema>) {
+  async function onPost(data: z.infer<typeof postTweetFormSchema>) {
     if (!user) return;
 
     try {
@@ -91,5 +91,5 @@ export function usePostTweet() {
     }
   }
 
-  return { open, setOpen, postTweetForm, onSubmit };
+  return { open, setOpen, postTweetForm, onPost };
 }
