@@ -1,5 +1,7 @@
+import { FormProvider } from 'react-hook-form';
 import { User } from 'firebase/auth';
 import {
+  CheckboxIcon,
   DotsHorizontalIcon,
   ImageIcon,
   Pencil1Icon,
@@ -33,12 +35,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { ITweet, useTweetManagement } from '@/hooks';
-import { FormProvider } from 'react-hook-form';
-import { FormControl, FormField, FormItem, FormMessage } from '../ui/form';
+import { FILE_SIZE } from '@/lib/schema';
 
 interface Props extends ITweet {
   user?: User | null;
@@ -55,8 +62,8 @@ export function Tweet({
   userEmail,
   profilePicture,
 }: Props) {
-  const { open, setOpen, editTweetForm, onEdit, deleteTweet } =
-    useTweetManagement();
+  const { open, setOpen, editTweetForm, file, onEdit, deleteTweet } =
+    useTweetManagement({ tweet });
 
   return (
     <Card>
@@ -152,7 +159,15 @@ export function Tweet({
                                         htmlFor='picture'
                                         className='mr-auto cursor-pointer text-gray-500 hover:text-primary'
                                       >
-                                        <ImageIcon className='w-8 h-full' />
+                                        {file &&
+                                        file.name &&
+                                        file.size < FILE_SIZE ? (
+                                          <>
+                                            <CheckboxIcon className='w-8 h-full text-primary' />
+                                          </>
+                                        ) : (
+                                          <ImageIcon className='w-8 h-full' />
+                                        )}
                                       </Label>
                                       <Input
                                         id='picture'

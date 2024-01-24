@@ -8,6 +8,7 @@ import {
   PersonIcon,
   DotsHorizontalIcon,
   ImageIcon,
+  CheckboxIcon,
 } from '@radix-ui/react-icons';
 import {
   AlertDialog,
@@ -43,10 +44,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useAuth, usePostTweet } from '@/hooks';
+import { FILE_SIZE } from '@/lib/schema';
 
 export function PageLayout() {
   const { user, handleSignOut } = useAuth();
-  const { open, setOpen, postTweetForm, onPost } = usePostTweet();
+  const { open, setOpen, postTweetForm, file, onPost } = usePostTweet();
 
   const USER_NAME = user?.displayName || '익명';
   const USER_EMAIL = user?.email?.split('@')[0];
@@ -138,7 +140,13 @@ export function PageLayout() {
                             htmlFor='picture'
                             className='mr-auto cursor-pointer text-gray-500 hover:text-primary'
                           >
-                            <ImageIcon className='w-8 h-full' />
+                            {file && file.name && file.size < FILE_SIZE ? (
+                              <>
+                                <CheckboxIcon className='w-8 h-full text-primary' />
+                              </>
+                            ) : (
+                              <ImageIcon className='w-8 h-full' />
+                            )}
                           </Label>
                           <Input
                             id='picture'

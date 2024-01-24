@@ -1,16 +1,17 @@
-import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
-import { deleteObject, ref } from 'firebase/storage';
-import { auth, db, storage } from '@/server/firebase';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { postTweetFormSchema, uploadFileAndReturnURL } from '.';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import { deleteObject, ref } from 'firebase/storage';
+import { uploadFileAndReturnURL } from '.';
+import { TweetFormSchema } from '@/lib/schema';
+import { auth, db, storage } from '@/server/firebase';
 
 async function editTweet(
   userUid: string,
   tweetId: string,
-  data: z.infer<typeof postTweetFormSchema>
+  data: z.infer<typeof TweetFormSchema>
 ) {
   try {
     const tweetRef = doc(db, 'tweets', tweetId);
@@ -42,20 +43,21 @@ async function deleteTweet(
   }
 }
 
-export function useTweetManagement() {
+export function useTweetManagement({ tweet }: { tweet: string }) {
   const user = auth.currentUser;
   const [open, setOpen] = useState(false);
-  const editTweetForm = useForm<z.infer<typeof postTweetFormSchema>>({
-    resolver: zodResolver(postTweetFormSchema),
+  const editTweetForm = useForm<z.infer<typeof TweetFormSchema>>({
+    resolver: zodResolver(TweetFormSchema),
     defaultValues: {
-      tweet: '',
+      tweet,
       image: new File([], ''),
     },
   });
+  const file = editTweetForm.watch('image');
 
   async function onEdit(
     tweetId: string,
-    data: z.infer<typeof postTweetFormSchema>
+    data: z.infer<typeof TweetFormSchema>
   ) {
     if (!user) return;
 
@@ -68,5 +70,5 @@ export function useTweetManagement() {
     }
   }
 
-  return { open, setOpen, editTweetForm, onEdit, deleteTweet };
+  return { open, setOpen, editTweetForm, file, onEdit, deleteTweet };
 }
