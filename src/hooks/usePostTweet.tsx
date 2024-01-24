@@ -19,18 +19,12 @@ const postTweetFormSchema = z.object({
     }),
   image: z
     .instanceof(File)
-    .refine(file => validateFileSize(file), {
+    .refine(file => file.size < FILE_SIZE, {
       message: '1MB 미만 크기의 파일만 업로드 가능합니다.',
     })
     .optional(),
 });
 
-function validateFileSize(file: File | null) {
-  if (file && file.size > FILE_SIZE) {
-    return undefined;
-  }
-  return file;
-}
 function formatTweetDate(date: Date) {
   return {
     month: date.getMonth() + 1,
