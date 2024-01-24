@@ -1,19 +1,25 @@
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
-import { db, storage } from '@/server/firebase';
+import { auth, db, storage } from '@/server/firebase';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { postTweetFormSchema } from '.';
+import { postTweetFormSchema, uploadFileAndReturnURL } from '.';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 async function editTweet(
+  userUid: string,
   tweetId: string,
   data: z.infer<typeof postTweetFormSchema>
 ) {
   try {
     const tweetRef = doc(db, 'tweets', tweetId);
     await updateDoc(tweetRef, { tweet: data.tweet });
+
+    if (data.image?.name) {
+      const url = await uploadFileAndReturnURL(userUid, tweetId, data.image);
+      await updateDoc(tweetRef, { photo: url });
+    }
   } catch (error) {
     console.error(error);
   }
@@ -37,6 +43,7 @@ async function deleteTweet(
 }
 
 export function useTweetManagement() {
+  const user = auth.currentUser;
   const [open, setOpen] = useState(false);
   const editTweetForm = useForm<z.infer<typeof postTweetFormSchema>>({
     resolver: zodResolver(postTweetFormSchema),
@@ -50,8 +57,10 @@ export function useTweetManagement() {
     tweetId: string,
     data: z.infer<typeof postTweetFormSchema>
   ) {
+    if (!user) return;
+
     try {
-      editTweet(tweetId, data);
+      editTweet(user?.uid, tweetId, data);
       setOpen(false);
       editTweetForm.reset();
     } catch (error) {

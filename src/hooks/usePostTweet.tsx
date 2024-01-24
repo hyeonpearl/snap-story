@@ -8,7 +8,7 @@ import { auth, db, storage } from '@/server/firebase';
 
 const FILE_SIZE = 1024 * 1024;
 
-export const postTweetFormSchema = z.object({
+const postTweetFormSchema = z.object({
   tweet: z
     .string({ required_error: '포스트를 작성해주세요.' })
     .min(5, {
@@ -69,7 +69,7 @@ async function postTweet(
   }
 }
 
-export function usePostTweet() {
+function usePostTweet() {
   const user = auth.currentUser;
   const [open, setOpen] = useState(false);
   const postTweetForm = useForm<z.infer<typeof postTweetFormSchema>>({
@@ -93,3 +93,5 @@ export function usePostTweet() {
 
   return { open, setOpen, postTweetForm, onPost };
 }
+
+export { postTweetFormSchema, uploadFileAndReturnURL, usePostTweet };

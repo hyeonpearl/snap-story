@@ -141,27 +141,45 @@ export function Tweet({
                             )}
                           />
                           <div className='flex flex-col-reverse items-center sm:flex-row sm:justify-between sm:space-x-2 pt-4'>
-                            <div>
-                              <Label
-                                htmlFor='picture'
-                                className='mr-auto cursor-pointer text-gray-500 hover:text-primary'
-                              >
-                                <ImageIcon className='w-8 h-full' />
-                              </Label>
-                              <Input
-                                id='picture'
-                                type='file'
-                                accept='image/*'
-                                className='hidden'
-                              />
-                            </div>
+                            <FormField
+                              control={editTweetForm.control}
+                              name='image'
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormControl>
+                                    <div>
+                                      <Label
+                                        htmlFor='picture'
+                                        className='mr-auto cursor-pointer text-gray-500 hover:text-primary'
+                                      >
+                                        <ImageIcon className='w-8 h-full' />
+                                      </Label>
+                                      <Input
+                                        id='picture'
+                                        type='file'
+                                        accept='image/*'
+                                        className='hidden'
+                                        onChange={e =>
+                                          field.onChange(
+                                            e.target.files
+                                              ? e.target.files[0]
+                                              : undefined
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
                             <Button
                               type='submit'
                               onSubmit={editTweetForm.handleSubmit(data =>
                                 onEdit(id, data)
                               )}
                             >
-                              Post
+                              Edit
                             </Button>
                           </div>
                         </form>
