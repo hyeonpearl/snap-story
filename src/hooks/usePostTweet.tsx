@@ -1,36 +1,12 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
+import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { addDoc, collection, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { TweetFormSchema } from '@/lib/schema';
 import { auth, db, storage } from '@/server/firebase';
 
-const FILE_SIZE = 1024 * 1024;
-
-export const postTweetFormSchema = z.object({
-  tweet: z
-    .string({ required_error: '포스트를 작성해주세요.' })
-    .min(5, {
-      message: '5자 이상 작성해주세요.',
-    })
-    .max(100, {
-      message: '100자 이하로 작성해주세요.',
-    }),
-  image: z
-    .instanceof(File)
-    .refine(file => validateFileSize(file), {
-      message: '1MB 미만 크기의 파일만 업로드 가능합니다.',
-    })
-    .optional(),
-});
-
-function validateFileSize(file: File | null) {
-  if (file && file.size > FILE_SIZE) {
-    return undefined;
-  }
-  return file;
-}
 function formatTweetDate(date: Date) {
   return {
     month: date.getMonth() + 1,
@@ -48,7 +24,7 @@ async function uploadFileAndReturnURL(
 }
 async function postTweet(
   userUid: string,
-  data: z.infer<typeof postTweetFormSchema>
+  data: z.infer<typeof TweetFormSchema>
 ) {
   const date = new Date();
   const tweetData = {
@@ -69,17 +45,19 @@ async function postTweet(
   }
 }
 
-export function usePostTweet() {
+function usePostTweet() {
   const user = auth.currentUser;
   const [open, setOpen] = useState(false);
-  const postTweetForm = useForm<z.infer<typeof postTweetFormSchema>>({
-    resolver: zodResolver(postTweetFormSchema),
+  const postTweetForm = useForm<z.infer<typeof TweetFormSchema>>({
+    resolver: zodResolver(TweetFormSchema),
     defaultValues: {
       tweet: '',
       image: new File([], ''),
     },
   });
-  async function onSubmit(data: z.infer<typeof postTweetFormSchema>) {
+  const file = postTweetForm.watch('image');
+
+  async function onPost(data: z.infer<typeof TweetFormSchema>) {
     if (!user) return;
 
     try {
@@ -91,5 +69,7 @@ export function usePostTweet() {
     }
   }
 
-  return { open, setOpen, postTweetForm, onSubmit };
+  return { open, setOpen, postTweetForm, file, onPost };
 }
+
+export { uploadFileAndReturnURL, usePostTweet };

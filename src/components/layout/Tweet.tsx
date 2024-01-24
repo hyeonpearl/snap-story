@@ -1,5 +1,7 @@
+import { FormProvider } from 'react-hook-form';
 import { User } from 'firebase/auth';
 import {
+  CheckboxIcon,
   DotsHorizontalIcon,
   ImageIcon,
   Pencil1Icon,
@@ -33,10 +35,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { ITweet, useTweetManagement } from '@/hooks';
+import { FILE_SIZE } from '@/lib/schema';
 
 interface Props extends ITweet {
   user?: User | null;
@@ -53,7 +62,8 @@ export function Tweet({
   userEmail,
   profilePicture,
 }: Props) {
-  const { deleteTweet } = useTweetManagement();
+  const { open, setOpen, editTweetForm, file, onEdit, deleteTweet } =
+    useTweetManagement({ tweet });
 
   return (
     <Card>
@@ -75,7 +85,7 @@ export function Tweet({
             {user?.uid === userId && (
               <div className='text-center cursor-pointer p-1 ml-auto rounded hover:text-primary'>
                 <AlertDialog>
-                  <Dialog>
+                  <Dialog open={open} onOpenChange={setOpen}>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <DotsHorizontalIcon />
@@ -101,40 +111,94 @@ export function Tweet({
                       </DialogHeader>
                       <div className='flex items-center mt-4'>
                         <Avatar>
-                          <AvatarImage alt='profile-picture' />
+                          <AvatarImage
+                            src={profilePicture}
+                            alt='profile-picture'
+                          />
                           <AvatarFallback>
                             <PersonIcon />
                           </AvatarFallback>
                         </Avatar>
                         <div className='indent-5 text-sm'>
-                          <div>USER_NAME</div>
-                          <div className='text-gray-500'>@USER_EMAIL</div>
+                          <div>{username}</div>
+                          <div className='text-gray-500'>@{userEmail}</div>
                         </div>
                       </div>
-
-                      <form className='flex-2 flex-auto'>
-                        <Textarea
-                          placeholder='무슨 일이 일어났나요?'
-                          className='resize-none h-28 mb-4'
-                        />
-                        <div className='flex flex-col-reverse items-center sm:flex-row sm:justify-between sm:space-x-2 pt-4'>
-                          <div>
-                            <Label
-                              htmlFor='picture'
-                              className='mr-auto cursor-pointer text-gray-500 hover:text-primary'
-                            >
-                              <ImageIcon className='w-8 h-full' />
-                            </Label>
-                            <Input
-                              id='picture'
-                              type='file'
-                              accept='image/*'
-                              className='hidden'
+                      <FormProvider {...editTweetForm}>
+                        <form
+                          className='flex-2 flex-auto'
+                          onSubmit={editTweetForm.handleSubmit(data =>
+                            onEdit(id, data)
+                          )}
+                        >
+                          <FormField
+                            control={editTweetForm.control}
+                            name='tweet'
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormControl>
+                                  <Textarea
+                                    placeholder='무슨 일이 일어났나요?'
+                                    className='resize-none h-28 mb-4'
+                                    {...field}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          <div className='flex flex-col-reverse items-center sm:flex-row sm:justify-between sm:space-x-2 pt-4'>
+                            <FormField
+                              control={editTweetForm.control}
+                              name='image'
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormControl>
+                                    <div>
+                                      <Label
+                                        htmlFor='picture'
+                                        className='mr-auto cursor-pointer text-gray-500 hover:text-primary'
+                                      >
+                                        {file &&
+                                        file.name &&
+                                        file.size < FILE_SIZE ? (
+                                          <>
+                                            <CheckboxIcon className='w-8 h-full text-primary' />
+                                          </>
+                                        ) : (
+                                          <ImageIcon className='w-8 h-full' />
+                                        )}
+                                      </Label>
+                                      <Input
+                                        id='picture'
+                                        type='file'
+                                        accept='image/*'
+                                        className='hidden'
+                                        onChange={e =>
+                                          field.onChange(
+                                            e.target.files
+                                              ? e.target.files[0]
+                                              : undefined
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
                             />
+                            <Button
+                              type='submit'
+                              onSubmit={editTweetForm.handleSubmit(data =>
+                                onEdit(id, data)
+                              )}
+                            >
+                              Edit
+                            </Button>
                           </div>
-                          <Button type='submit'>Post</Button>
-                        </div>
-                      </form>
+                        </form>
+                      </FormProvider>
                     </DialogContent>
                     <AlertDialogContent>
                       <AlertDialogHeader>
