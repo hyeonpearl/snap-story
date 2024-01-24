@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { PageLayout } from '@/components/layout/PageLayout';
+import { NavigationBar } from '@/components/layout/NavigationBar';
 import Auth from '@/pages/Auth';
 import Home from '@/pages/Home';
 import Profile from '@/pages/Profile';
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     path: '/home',
     element: (
       <ProtectedRoute>
-        <PageLayout />
+        <NavigationBar />
         <Home />
       </ProtectedRoute>
     ),
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     path: '/profile',
     element: (
       <ProtectedRoute>
-        <PageLayout />
+        <NavigationBar />
         <Profile />
       </ProtectedRoute>
     ),

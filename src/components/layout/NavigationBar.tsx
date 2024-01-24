@@ -43,12 +43,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { useAuth, usePostTweet } from '@/hooks';
+import { useAuth, usePostSnap } from '@/hooks';
 import { FILE_SIZE } from '@/lib/schema';
 
-export function PageLayout() {
+export function NavigationBar() {
   const { user, handleSignOut } = useAuth();
-  const { open, setOpen, postTweetForm, file, onPost } = usePostTweet();
+  const { open, setOpen, postSnapForm, file, onPost } = usePostSnap();
 
   const USER_NAME = user?.displayName || '익명';
   const USER_EMAIL = user?.email?.split('@')[0];
@@ -58,9 +58,9 @@ export function PageLayout() {
     <nav className='fixed w-60 h-full max-w-60 flex flex-col p-3 border-r gap-4 bg-white'>
       <div className='flex items-center justify-center'>
         <img
-          src='/logo.svg'
+          src='/snap-story.png'
           alt='logo'
-          className='w-20 h-20 hover:bg-accent p-1 rounded-lg cursor-pointer'
+          className='hover:bg-accent p-1 rounded-lg cursor-pointer'
         />
       </div>
       <Button variant='ghost' asChild>
@@ -107,14 +107,14 @@ export function PageLayout() {
               <div className='text-gray-500'>@{USER_EMAIL}</div>
             </div>
           </div>
-          <FormProvider {...postTweetForm}>
+          <FormProvider {...postSnapForm}>
             <form
               className='flex-2 flex-auto'
-              onSubmit={postTweetForm.handleSubmit(onPost)}
+              onSubmit={postSnapForm.handleSubmit(onPost)}
             >
               <FormField
-                control={postTweetForm.control}
-                name='tweet'
+                control={postSnapForm.control}
+                name='snap'
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
@@ -130,7 +130,7 @@ export function PageLayout() {
               />
               <div className='flex flex-col-reverse items-center sm:flex-row sm:justify-between sm:space-x-2 pt-4'>
                 <FormField
-                  control={postTweetForm.control}
+                  control={postSnapForm.control}
                   name='image'
                   render={({ field }) => (
                     <FormItem>
@@ -167,7 +167,7 @@ export function PageLayout() {
                 />
                 <Button
                   type='submit'
-                  onClick={postTweetForm.handleSubmit(onPost)}
+                  onClick={postSnapForm.handleSubmit(onPost)}
                 >
                   Post
                 </Button>

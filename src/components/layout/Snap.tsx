@@ -44,26 +44,26 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { ITweet, useTweetManagement } from '@/hooks';
+import { ISnap, useManageSnap } from '@/hooks';
 import { FILE_SIZE } from '@/lib/schema';
 
-interface Props extends ITweet {
+interface Props extends ISnap {
   user?: User | null;
 }
 
-export function Tweet({
+export function Snap({
   id,
   postedAt,
   photo,
-  tweet,
+  snap,
   user,
   userId,
   username,
   userEmail,
   profilePicture,
 }: Props) {
-  const { open, setOpen, editTweetForm, file, onEdit, deleteTweet } =
-    useTweetManagement({ tweet });
+  const { open, setOpen, editSnapForm, file, onEdit, deleteSnap } =
+    useManageSnap({ snap });
 
   return (
     <Card>
@@ -94,13 +94,13 @@ export function Tweet({
                         <DialogTrigger asChild>
                           <DropdownMenuItem>
                             <Pencil1Icon className='mr-2 h-4 w-4' />
-                            <span>Edit Tweet</span>
+                            <span>Edit snap</span>
                           </DropdownMenuItem>
                         </DialogTrigger>
                         <AlertDialogTrigger asChild>
                           <DropdownMenuItem>
                             <TrashIcon className='mr-2 h-4 w-4' />
-                            <span>Delete Tweet</span>
+                            <span>Delete snap</span>
                           </DropdownMenuItem>
                         </AlertDialogTrigger>
                       </DropdownMenuContent>
@@ -124,16 +124,16 @@ export function Tweet({
                           <div className='text-gray-500'>@{userEmail}</div>
                         </div>
                       </div>
-                      <FormProvider {...editTweetForm}>
+                      <FormProvider {...editSnapForm}>
                         <form
                           className='flex-2 flex-auto'
-                          onSubmit={editTweetForm.handleSubmit(data =>
+                          onSubmit={editSnapForm.handleSubmit(data =>
                             onEdit(id, data)
                           )}
                         >
                           <FormField
-                            control={editTweetForm.control}
-                            name='tweet'
+                            control={editSnapForm.control}
+                            name='snap'
                             render={({ field }) => (
                               <FormItem>
                                 <FormControl>
@@ -149,7 +149,7 @@ export function Tweet({
                           />
                           <div className='flex flex-col-reverse items-center sm:flex-row sm:justify-between sm:space-x-2 pt-4'>
                             <FormField
-                              control={editTweetForm.control}
+                              control={editSnapForm.control}
                               name='image'
                               render={({ field }) => (
                                 <FormItem>
@@ -190,7 +190,7 @@ export function Tweet({
                             />
                             <Button
                               type='submit'
-                              onSubmit={editTweetForm.handleSubmit(data =>
+                              onSubmit={editSnapForm.handleSubmit(data =>
                                 onEdit(id, data)
                               )}
                             >
@@ -210,7 +210,7 @@ export function Tweet({
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
                         <Button variant='destructive' asChild>
                           <AlertDialogAction
-                            onClick={() => deleteTweet(id, userId, photo)}
+                            onClick={() => deleteSnap(id, userId, photo)}
                           >
                             Delete
                           </AlertDialogAction>
@@ -222,16 +222,16 @@ export function Tweet({
               </div>
             )}
           </div>
-          <p className='text-sm'>{tweet}</p>
           {photo && (
             <AspectRatio ratio={1 / 1} className='border rounded mt-3'>
               <img
                 src={photo}
                 className='w-full h-full rounded'
-                alt='tweet-photo'
+                alt='snap-photo'
               />
             </AspectRatio>
           )}
+          <p className='text-sm mt-1'>{snap}</p>
         </div>
       </CardContent>
     </Card>
