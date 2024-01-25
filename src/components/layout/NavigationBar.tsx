@@ -6,7 +6,6 @@ import {
   BellIcon,
   EnvelopeClosedIcon,
   PersonIcon,
-  DotsHorizontalIcon,
   ImageIcon,
   CheckboxIcon,
 } from '@radix-ui/react-icons';
@@ -178,7 +177,7 @@ export function NavigationBar() {
       </Dialog>
       <Popover>
         <PopoverTrigger asChild>
-          <div className='flex justify-between items-center mt-auto p-2 rounded-lg hover:bg-slate-100 cursor-pointer'>
+          <div className='flex items-center mt-auto p-2 rounded-lg hover:bg-slate-100 cursor-pointer'>
             <div className='flex items-center'>
               <Avatar>
                 <AvatarImage src={USER_PHOTO} alt='profile-picture' />
@@ -191,7 +190,6 @@ export function NavigationBar() {
                 <div className='text-gray-500'>@{USER_EMAIL}</div>
               </div>
             </div>
-            <DotsHorizontalIcon />
           </div>
         </PopoverTrigger>
         <PopoverContent className='max-w-60'>

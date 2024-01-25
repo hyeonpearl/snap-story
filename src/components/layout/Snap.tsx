@@ -68,14 +68,14 @@ export function Snap({
   return (
     <Card>
       <CardContent className='flex pt-6'>
-        <Avatar className='mr-2'>
-          <AvatarImage src={profilePicture} alt='profile-picture' />
-          <AvatarFallback>
-            <PersonIcon />
-          </AvatarFallback>
-        </Avatar>
         <div className='w-full'>
-          <div className='flex items-start'>
+          <div className='flex items-center'>
+            <Avatar className='mr-2'>
+              <AvatarImage src={profilePicture} alt='profile-picture' />
+              <AvatarFallback>
+                <PersonIcon />
+              </AvatarFallback>
+            </Avatar>
             <span>
               {username}
               <strong className='ml-1 text-gray-500 font-normal'>
@@ -94,13 +94,13 @@ export function Snap({
                         <DialogTrigger asChild>
                           <DropdownMenuItem>
                             <Pencil1Icon className='mr-2 h-4 w-4' />
-                            <span>Edit snap</span>
+                            <span>Edit Snap</span>
                           </DropdownMenuItem>
                         </DialogTrigger>
                         <AlertDialogTrigger asChild>
                           <DropdownMenuItem>
                             <TrashIcon className='mr-2 h-4 w-4' />
-                            <span>Delete snap</span>
+                            <span>Delete Snap</span>
                           </DropdownMenuItem>
                         </AlertDialogTrigger>
                       </DropdownMenuContent>
@@ -231,7 +231,7 @@ export function Snap({
               />
             </AspectRatio>
           )}
-          <p className='text-sm mt-1'>{snap}</p>
+          <p className='text-sm mt-4 whitespace-pre-wrap'>{snap}</p>
         </div>
       </CardContent>
     </Card>
