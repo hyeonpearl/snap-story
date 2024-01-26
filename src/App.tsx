@@ -4,10 +4,15 @@ import { NavigationBar } from '@/components/layout/NavigationBar';
 import Auth from '@/pages/Auth';
 import Home from '@/pages/Home';
 import Profile from '@/pages/Profile';
+import Setting from '@/pages/Setting';
 import { auth } from '@/server/firebase';
 import ProtectedRoute from '@/ProtectedRoute';
 
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Auth />,
+  },
   {
     path: '/home',
     element: (
@@ -26,7 +31,15 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-  { path: '/', element: <Auth /> },
+  {
+    path: '/setting',
+    element: (
+      <ProtectedRoute>
+        <NavigationBar />
+        <Setting />
+      </ProtectedRoute>
+    ),
+  },
 ]);
 
 export default function App() {

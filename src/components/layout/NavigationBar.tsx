@@ -193,6 +193,9 @@ export function NavigationBar() {
           </div>
         </PopoverTrigger>
         <PopoverContent className='max-w-60'>
+          <Button variant='outline' className='w-full mb-1' asChild>
+            <Link to='/setting'>Setting</Link>
+          </Button>
           <AlertDialog>
             <AlertDialogTrigger asChild className='w-full'>
               <Button variant='destructive' className='w-full'>
