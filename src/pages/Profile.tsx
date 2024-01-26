@@ -1,9 +1,10 @@
-import { Timeline } from '@/components/layout/Timeline';
+import { Link } from 'react-router-dom';
+import { PersonIcon } from '@radix-ui/react-icons';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Timeline } from '@/components/layout/Timeline';
 import { useLoadSnap } from '@/hooks';
-import { PersonIcon } from '@radix-ui/react-icons';
 
 export default function Profile() {
   const { user, snaps } = useLoadSnap('userId');
@@ -30,7 +31,9 @@ export default function Profile() {
                     <span className='f font-semibold text-lg'>{USER_NAME}</span>
                     <span className='text-gray-500'>@{USER_EMAIL}</span>
                   </div>
-                  <Button>프로필 편집</Button>
+                  <Button asChild>
+                    <Link to={'/setting'}>Setting</Link>
+                  </Button>
                 </div>
                 <div className='mt-4'>게시물 {snaps.length}</div>
               </section>
