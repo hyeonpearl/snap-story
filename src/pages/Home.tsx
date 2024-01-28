@@ -1,17 +1,12 @@
-import { Wrapper } from '../components/common/Wrapper';
-import PostTweet from '../components/tweet/PostTweet';
-import TimeLine from '../components/tweet/TimeLine';
-import Title from '../components/common/Title';
-import useTweets from '../hooks/useTweets';
+import { Timeline } from '@/components/layout/Timeline';
+import { useLoadSnap } from '@/hooks';
 
 export default function Home() {
-  const { user, tweets } = useTweets('all');
+  const { user, snaps } = useLoadSnap('all');
 
   return (
-    <Wrapper className='page'>
-      <Title title='홈' />
-      <PostTweet />
-      <TimeLine user={user} tweets={tweets} />
-    </Wrapper>
+    <main className='ml-64 py-4'>
+      <Timeline user={user} snaps={snaps} />
+    </main>
   );
 }

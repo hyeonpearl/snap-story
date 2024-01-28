@@ -1,23 +1,23 @@
-import { Wrapper } from './components/common/Wrapper';
-import Loading from './components/common/Loading';
-import PageLayout from './components/common/PageLayout';
-import ProtectedRoute from './ProtectedRoute';
-import { auth } from './server/firebase';
-import GlobalStyles from './styles/GlobalStyles';
-import Home from './pages/Home';
-import Profile from './pages/Profile';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-
+import { useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { NavigationBar } from '@/components/layout/NavigationBar';
+import Auth from '@/pages/Auth';
+import Home from '@/pages/Home';
+import Profile from '@/pages/Profile';
+import Setting from '@/pages/Setting';
+import { auth } from '@/server/firebase';
+import ProtectedRoute from '@/ProtectedRoute';
 
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Auth />,
+  },
   {
     path: '/home',
     element: (
       <ProtectedRoute>
-        <PageLayout />
+        <NavigationBar />
         <Home />
       </ProtectedRoute>
     ),
@@ -26,21 +26,25 @@ const router = createBrowserRouter([
     path: '/profile',
     element: (
       <ProtectedRoute>
-        <PageLayout />
+        <NavigationBar />
         <Profile />
       </ProtectedRoute>
     ),
   },
-  { path: '/signin', element: <SignIn /> },
-  { path: '/', element: <SignUp /> },
+  {
+    path: '/setting',
+    element: (
+      <ProtectedRoute>
+        <NavigationBar />
+        <Setting />
+      </ProtectedRoute>
+    ),
+  },
 ]);
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
   const initialFirebase = async () => {
     await auth.authStateReady();
-    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -48,9 +52,8 @@ export default function App() {
   }, []);
 
   return (
-    <Wrapper className='app'>
-      <GlobalStyles />
-      {isLoading ? <Loading /> : <RouterProvider router={router} />}
-    </Wrapper>
+    <div className='w-screen h-screen'>
+      <RouterProvider router={router} />
+    </div>
   );
 }

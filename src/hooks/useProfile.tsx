@@ -1,7 +1,7 @@
-import { auth, storage } from '../server/firebase';
 import { useState } from 'react';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { User, updateProfile } from 'firebase/auth';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { auth, storage } from '@/server/firebase';
 
 type UpdateProfilePictureFn = (newPictureUrl: string) => Promise<void>;
 
