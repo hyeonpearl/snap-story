@@ -22,7 +22,7 @@ export default function Profile() {
               <Avatar className='w-36 h-36'>
                 <AvatarImage src={USER_PHOTO} className='w-full h-full' />
                 <AvatarFallback>
-                  <PersonIcon className='w-full h-full' />
+                  <PersonIcon className='w-3/4 h-3/4' />
                 </AvatarFallback>
               </Avatar>
               <section className='w-full'>
