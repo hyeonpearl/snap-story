@@ -73,7 +73,7 @@ export function Snap({
             <Avatar className='mr-2'>
               <AvatarImage src={profilePicture} alt='profile-picture' />
               <AvatarFallback>
-                <PersonIcon />
+                <PersonIcon className='w-3/4 h-3/4' />
               </AvatarFallback>
             </Avatar>
             <span>
