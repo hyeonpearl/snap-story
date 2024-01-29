@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { updateProfile } from 'firebase/auth';
-import { user, ProfileFormNameSchema, ProfileNameType } from '@/lib/schema';
+import { ProfileFormNameSchema, ProfileNameType } from '@/lib/schema';
+import { auth } from '@/server/firebase';
 
 export function useSettingProfile() {
+  const user = auth.currentUser;
   const [open, setOpen] = useState(false);
   const profileNameForm = useForm<ProfileNameType>({
     resolver: zodResolver(ProfileFormNameSchema),
