@@ -9,6 +9,7 @@ import {
 } from 'firebase/auth';
 import { auth } from '@/server/firebase';
 import {
+  user,
   SignUpType,
   SignUpFormSchema,
   SignInType,
@@ -16,7 +17,6 @@ import {
 } from '@/lib/schema';
 
 export function useAuth() {
-  const user = auth.currentUser;
   const navigate = useNavigate();
   const signUpForm = useForm<SignUpType>({
     resolver: zodResolver(SignUpFormSchema),

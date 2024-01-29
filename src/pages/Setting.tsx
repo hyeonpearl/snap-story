@@ -1,3 +1,4 @@
+import { FormProvider } from 'react-hook-form';
 import { PersonIcon } from '@radix-ui/react-icons';
 import {
   AlertDialog,
@@ -27,9 +28,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { useSettingProfile } from '@/hooks';
 
 export default function Setting() {
+  const { user, open, setOpen, profileNameForm, onChangeName } =
+    useSettingProfile();
+
   return (
     <main className='ml-64 py-6 max-w-xl grid grid-cols-1 gap-4'>
       <Card>
@@ -52,26 +64,54 @@ export default function Setting() {
             </div>
             <div className='flex flex-col justify-center mt-8'>
               <div className='flex justify-between items-center'>
-                <span>userName</span>
-                <Dialog>
+                <div>
+                  <Label>Username :</Label>
+                  <span className='ml-1 font-semibold'>
+                    {user?.displayName}
+                  </span>
+                </div>
+                <Dialog open={open} onOpenChange={setOpen}>
                   <DialogTrigger asChild>
                     <Button variant='link'>Change Username</Button>
                   </DialogTrigger>
                   <DialogContent>
                     <DialogTitle>Change Username</DialogTitle>
                     <DialogDescription>
-                      Please enter the username.
+                      Enter the username you want.
                     </DialogDescription>
-                    <div>
-                      <Input type='text' defaultValue='userName' />
-                    </div>
+                    <FormProvider {...profileNameForm}>
+                      <form
+                        onSubmit={profileNameForm.handleSubmit(onChangeName)}
+                      >
+                        <FormField
+                          control={profileNameForm.control}
+                          name='username'
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input type='text' {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </form>
+                    </FormProvider>
                     <DialogFooter>
-                      <Button>Save</Button>
+                      <Button
+                        type='submit'
+                        onClick={profileNameForm.handleSubmit(onChangeName)}
+                      >
+                        Save
+                      </Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
               </div>
-              <span>userMail</span>
+              <div>
+                <Label>Email :</Label>
+                <span className='ml-1 text-gray-500'>{user?.email}</span>
+              </div>
             </div>
           </section>
         </CardContent>
