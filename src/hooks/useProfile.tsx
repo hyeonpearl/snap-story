@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { User, updateProfile } from 'firebase/auth';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { auth, storage } from '@/server/firebase';
+import { user } from '@/lib/schema';
+import { storage } from '@/server/firebase';
 
 type UpdateProfilePictureFn = (newPictureUrl: string) => Promise<void>;
 
@@ -24,7 +25,6 @@ async function uploadProfilePicture(user: User, file: File) {
 export default function useProfile(
   updateProfilePicture: UpdateProfilePictureFn
 ) {
-  const user = auth.currentUser;
   const accountDate = user?.metadata?.creationTime
     ? new Date(user.metadata.creationTime)
     : null;

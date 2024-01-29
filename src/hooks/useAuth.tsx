@@ -4,11 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   GithubAuthProvider,
   createUserWithEmailAndPassword,
+  deleteUser,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from 'firebase/auth';
 import { auth } from '@/server/firebase';
 import {
+  user,
   SignUpType,
   SignUpFormSchema,
   SignInType,
@@ -16,7 +18,6 @@ import {
 } from '@/lib/schema';
 
 export function useAuth() {
-  const user = auth.currentUser;
   const navigate = useNavigate();
   const signUpForm = useForm<SignUpType>({
     resolver: zodResolver(SignUpFormSchema),
@@ -65,6 +66,12 @@ export function useAuth() {
     await auth.signOut();
     navigate('/');
   }
+  async function onDeleteAccount() {
+    if (!auth.currentUser) return;
+
+    await deleteUser(auth.currentUser);
+    navigate('/');
+  }
 
   return {
     user,
@@ -74,5 +81,6 @@ export function useAuth() {
     handleSignIn,
     handleSignInGithub,
     handleSignOut,
+    onDeleteAccount,
   };
 }
