@@ -22,7 +22,7 @@ export default function Profile() {
               <Avatar className='w-36 h-36'>
                 <AvatarImage src={USER_PHOTO} className='w-full h-full' />
                 <AvatarFallback>
-                  <PersonIcon className='w-full h-full' />
+                  <PersonIcon className='w-3/4 h-3/4' />
                 </AvatarFallback>
               </Avatar>
               <section className='w-full'>
@@ -32,10 +32,12 @@ export default function Profile() {
                     <span className='text-gray-500'>@{USER_EMAIL}</span>
                   </div>
                   <Button asChild>
-                    <Link to={'/setting'}>Setting</Link>
+                    <Link to={'/settings'}>Settings</Link>
                   </Button>
                 </div>
-                <div className='mt-4'>게시물 {snaps.length}</div>
+                <div className='mt-4'>
+                  <strong>{snaps.length}</strong> Snaps
+                </div>
               </section>
             </div>
           </CardContent>

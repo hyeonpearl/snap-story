@@ -4,8 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   GithubAuthProvider,
   createUserWithEmailAndPassword,
+  deleteUser,
   signInWithEmailAndPassword,
   signInWithPopup,
+  updateProfile,
 } from 'firebase/auth';
 import { auth } from '@/server/firebase';
 import {
@@ -36,7 +38,12 @@ export function useAuth() {
 
   async function handleSignUp(data: SignUpType) {
     try {
-      await createUserWithEmailAndPassword(auth, data.email, data.password);
+      const credential = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      await updateProfile(credential.user, { displayName: data.username });
       navigate('/home');
       signUpForm.reset();
     } catch (error) {
@@ -65,6 +72,12 @@ export function useAuth() {
     await auth.signOut();
     navigate('/');
   }
+  async function onDeleteAccount() {
+    if (!auth.currentUser) return;
+
+    await deleteUser(auth.currentUser);
+    navigate('/');
+  }
 
   return {
     user,
@@ -74,5 +87,6 @@ export function useAuth() {
     handleSignIn,
     handleSignInGithub,
     handleSignOut,
+    onDeleteAccount,
   };
 }

@@ -14,6 +14,7 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
@@ -182,7 +183,7 @@ export function NavigationBar() {
               <Avatar>
                 <AvatarImage src={USER_PHOTO} alt='profile-picture' />
                 <AvatarFallback>
-                  <PersonIcon />
+                  <PersonIcon className='w-3/4 h-3/4' />
                 </AvatarFallback>
               </Avatar>
               <div className='indent-5 text-sm'>
@@ -194,7 +195,7 @@ export function NavigationBar() {
         </PopoverTrigger>
         <PopoverContent className='max-w-60'>
           <Button variant='outline' className='w-full mb-1' asChild>
-            <Link to='/setting'>Setting</Link>
+            <Link to='/settings'>Settings</Link>
           </Button>
           <AlertDialog>
             <AlertDialogTrigger asChild className='w-full'>
@@ -204,9 +205,10 @@ export function NavigationBar() {
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>
-                  정말로 로그아웃하시겠습니까?
-                </AlertDialogTitle>
+                <AlertDialogTitle>Sign Out</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Are you sure you want to sign out?
+                </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>

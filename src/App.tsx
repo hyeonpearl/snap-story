@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/setting',
+    path: '/settings',
     element: (
       <ProtectedRoute>
         <NavigationBar />
