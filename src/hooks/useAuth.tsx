@@ -7,6 +7,7 @@ import {
   deleteUser,
   signInWithEmailAndPassword,
   signInWithPopup,
+  updateProfile,
 } from 'firebase/auth';
 import { auth } from '@/server/firebase';
 import {
@@ -37,7 +38,12 @@ export function useAuth() {
 
   async function handleSignUp(data: SignUpType) {
     try {
-      await createUserWithEmailAndPassword(auth, data.email, data.password);
+      const credential = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      await updateProfile(credential.user, { displayName: data.username });
       navigate('/home');
       signUpForm.reset();
     } catch (error) {
