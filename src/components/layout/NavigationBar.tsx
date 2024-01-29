@@ -44,10 +44,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useAuth, usePostSnap } from '@/hooks';
-import { user, FILE_SIZE } from '@/lib/schema';
+import { FILE_SIZE } from '@/lib/schema';
 
 export function NavigationBar() {
-  const { handleSignOut } = useAuth();
+  const { user, handleSignOut } = useAuth();
   const { open, setOpen, postSnapForm, file, onPost } = usePostSnap();
 
   const USER_NAME = user?.displayName || '익명';

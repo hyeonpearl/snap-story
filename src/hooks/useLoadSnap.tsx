@@ -10,8 +10,7 @@ import {
   where,
   writeBatch,
 } from 'firebase/firestore';
-import { db } from '@/server/firebase';
-import { user } from '@/lib/schema';
+import { auth, db } from '@/server/firebase';
 
 export interface ISnap {
   id: string;
@@ -26,6 +25,7 @@ export interface ISnap {
 }
 
 export function useLoadSnap(order: 'all' | 'userId') {
+  const user = auth.currentUser;
   const unsubscribeRef = useRef<Unsubscribe | null>(null);
   const [snaps, setSnaps] = useState<ISnap[]>([]);
 

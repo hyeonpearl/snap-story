@@ -1,11 +1,13 @@
 import { Navigate } from 'react-router-dom';
-import { user } from './lib/schema';
+import { auth } from './server/firebase';
 
 export default function ProtectedRoute({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const user = auth.currentUser;
+
   if (user === null) {
     return <Navigate to='/' />;
   }

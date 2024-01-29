@@ -4,8 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
 import { uploadFileAndReturnURL } from '.';
-import { user, SnapType, SnapFormSchema } from '@/lib/schema';
-import { db, storage } from '@/server/firebase';
+import { SnapType, SnapFormSchema } from '@/lib/schema';
+import { auth, db, storage } from '@/server/firebase';
 
 async function editSnap(userUid: string, snapId: string, data: SnapType) {
   try {
@@ -39,6 +39,7 @@ async function deleteSnap(
 }
 
 export function useManageSnap({ snap }: { snap: string }) {
+  const user = auth.currentUser;
   const [open, setOpen] = useState(false);
   const editSnapForm = useForm<SnapType>({
     resolver: zodResolver(SnapFormSchema),

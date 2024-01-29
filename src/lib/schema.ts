@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { auth } from '@/server/firebase';
 
 export type SignUpType = z.infer<typeof SignUpFormSchema>;
 export type SignInType = z.infer<typeof SignInFormSchema>;
@@ -8,8 +7,6 @@ export type ProfileNameType = z.infer<typeof ProfileFormNameSchema>;
 export type ProfilePictureType = z.infer<typeof ProfileFormPictureSchema>;
 
 const FILE_SIZE = 1024 * 1024;
-
-const user = auth.currentUser;
 
 const SignUpFormSchema = z.object({
   username: z
@@ -89,7 +86,6 @@ const ProfileFormPictureSchema = z.object({
 
 export {
   FILE_SIZE,
-  user,
   SignUpFormSchema,
   SignInFormSchema,
   SnapFormSchema,
