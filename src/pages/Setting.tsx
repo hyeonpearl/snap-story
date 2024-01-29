@@ -36,11 +36,12 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useSettingProfile } from '@/hooks';
+import { useAuth, useSettingProfile } from '@/hooks';
 
 export default function Setting() {
   const { user, open, setOpen, profileNameForm, onChangeName } =
     useSettingProfile();
+  const { onDeleteAccount } = useAuth();
 
   return (
     <main className='ml-64 py-6 max-w-xl grid grid-cols-1 gap-4'>
@@ -143,7 +144,9 @@ export default function Setting() {
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
                   <Button variant='destructive' asChild>
-                    <AlertDialogAction>Delete</AlertDialogAction>
+                    <AlertDialogAction onClick={onDeleteAccount}>
+                      Delete
+                    </AlertDialogAction>
                   </Button>
                 </AlertDialogFooter>
               </AlertDialogContent>
