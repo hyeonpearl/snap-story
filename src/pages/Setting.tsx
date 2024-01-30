@@ -22,7 +22,9 @@ import {
 } from '@/components/ui/card';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
+  DialogContentNoneX,
   DialogDescription,
   DialogFooter,
   DialogTitle,
@@ -43,6 +45,10 @@ export default function Setting() {
     useSettingProfile();
   const { onDeleteAccount } = useAuth();
 
+  const USER_NAME = user?.displayName;
+  const USER_EMAIL = user?.email;
+  const USER_PHOTO = user?.photoURL || '';
+
   return (
     <main className='ml-64 py-6 max-w-xl grid grid-cols-1 gap-4'>
       <Card>
@@ -52,24 +58,34 @@ export default function Setting() {
         </CardHeader>
         <CardContent>
           <section>
-            <div className='flex flex-col justify-center items-center'>
-              <Avatar className='w-28 h-28'>
-                <AvatarImage />
-                <AvatarFallback>
-                  <PersonIcon className='w-3/4 h-3/4' />
-                </AvatarFallback>
-              </Avatar>
-              <Button variant='link' className='mt-4'>
-                Change Profile Picture
-              </Button>
-            </div>
+            <Dialog>
+              <div className='flex flex-col justify-center items-center'>
+                <DialogTrigger asChild>
+                  <Avatar className='w-28 h-28 cursor-pointer'>
+                    <AvatarImage src={USER_PHOTO} />
+                    <AvatarFallback>
+                      <PersonIcon className='w-3/4 h-3/4' />
+                    </AvatarFallback>
+                  </Avatar>
+                </DialogTrigger>
+                <DialogTrigger asChild>
+                  <Button variant='link' className='mt-4'>
+                    Change Profile Picture
+                  </Button>
+                </DialogTrigger>
+              </div>
+              <DialogContentNoneX>
+                <Button>Change Profile Picture</Button>
+                <DialogClose asChild>
+                  <Button variant='outline'>Close</Button>
+                </DialogClose>
+              </DialogContentNoneX>
+            </Dialog>
             <div className='flex flex-col justify-center mt-8'>
               <div className='flex justify-between items-center'>
                 <div>
                   <Label>Username :</Label>
-                  <span className='ml-1 font-semibold'>
-                    {user?.displayName}
-                  </span>
+                  <span className='ml-1 font-semibold'>{USER_NAME}</span>
                 </div>
                 <Dialog open={open} onOpenChange={setOpen}>
                   <DialogTrigger asChild>
@@ -111,7 +127,7 @@ export default function Setting() {
               </div>
               <div>
                 <Label>Email :</Label>
-                <span className='ml-1 text-gray-500'>{user?.email}</span>
+                <span className='ml-1 text-gray-500'>{USER_EMAIL}</span>
               </div>
             </div>
           </section>
