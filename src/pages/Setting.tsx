@@ -75,7 +75,18 @@ export default function Setting() {
                 </DialogTrigger>
               </div>
               <DialogContentNoneX>
-                <Button>Change Profile Picture</Button>
+                <Label
+                  htmlFor='picture'
+                  className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-white bg-primary text-primary-foreground hover:bg-white hover:text-primary hover:border-input h-10 px-4 py-2 cursor-pointer'
+                >
+                  Change Profile Picture
+                </Label>
+                <Input
+                  id='picture'
+                  type='file'
+                  accept='image/*'
+                  className='hidden'
+                />
                 <DialogClose asChild>
                   <Button variant='outline'>Close</Button>
                 </DialogClose>
