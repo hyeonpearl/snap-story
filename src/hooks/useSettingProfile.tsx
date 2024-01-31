@@ -1,29 +1,74 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { updateProfile } from 'firebase/auth';
-import { ProfileFormNameSchema, ProfileNameType } from '@/lib/schema';
-import { auth } from '@/server/firebase';
+import { User, updateProfile } from 'firebase/auth';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import {
+  ProfileFormNameSchema,
+  ProfileFormPictureSchema,
+  ProfileNameType,
+  ProfilePictureType,
+} from '@/lib/schema';
+import { auth, storage } from '@/server/firebase';
+
+async function uploadProfilePicture(user: User, file: File) {
+  const locationRef = ref(storage, `profile/${user?.uid}`);
+  const result = await uploadBytes(locationRef, file);
+  return getDownloadURL(result.ref);
+}
 
 export function useSettingProfile() {
   const user = auth.currentUser;
-  const [open, setOpen] = useState(false);
+  const [nameOpen, setNameOpen] = useState(false);
+  const [pictureOpen, setPictureOpen] = useState(false);
   const profileNameForm = useForm<ProfileNameType>({
     resolver: zodResolver(ProfileFormNameSchema),
     defaultValues: { username: '' },
   });
+  const profilePictureForm = useForm<ProfilePictureType>({
+    resolver: zodResolver(ProfileFormPictureSchema),
+    defaultValues: { image: new File([], '') },
+  });
+
+  const file = profilePictureForm.watch('image');
+  console.log(file);
 
   async function onChangeName(data: ProfileNameType) {
     if (!user) return;
 
     try {
       await updateProfile(user, { displayName: data.username });
-      setOpen(false);
+      setNameOpen(false);
       profileNameForm.reset();
     } catch (error) {
       console.log(error);
     }
   }
 
-  return { user, open, setOpen, profileNameForm, onChangeName };
+  async function onChangePicture(data: ProfilePictureType) {
+    if (!user) return;
+
+    try {
+      const pictureUrl = await uploadProfilePicture(user, data.image);
+      await updateProfile(user, {
+        photoURL: pictureUrl,
+      });
+      setPictureOpen(false);
+      profilePictureForm.reset();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  return {
+    user,
+    nameOpen,
+    setNameOpen,
+    profileNameForm,
+    onChangeName,
+    pictureOpen,
+    setPictureOpen,
+    profilePictureForm,
+    onChangePicture,
+  };
 }

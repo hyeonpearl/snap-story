@@ -41,8 +41,17 @@ import { Label } from '@/components/ui/label';
 import { useAuth, useSettingProfile } from '@/hooks';
 
 export default function Setting() {
-  const { user, open, setOpen, profileNameForm, onChangeName } =
-    useSettingProfile();
+  const {
+    user,
+    nameOpen,
+    setNameOpen,
+    profileNameForm,
+    onChangeName,
+    pictureOpen,
+    setPictureOpen,
+    profilePictureForm,
+    onChangePicture,
+  } = useSettingProfile();
   const { onDeleteAccount } = useAuth();
 
   const USER_NAME = user?.displayName;
@@ -58,7 +67,7 @@ export default function Setting() {
         </CardHeader>
         <CardContent>
           <section>
-            <Dialog>
+            <Dialog open={pictureOpen} onOpenChange={setPictureOpen}>
               <div className='flex flex-col justify-center items-center'>
                 <DialogTrigger asChild>
                   <Avatar className='w-28 h-28 cursor-pointer'>
@@ -75,18 +84,38 @@ export default function Setting() {
                 </DialogTrigger>
               </div>
               <DialogContentNoneX>
-                <Label
-                  htmlFor='picture'
-                  className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-white bg-primary text-primary-foreground hover:bg-white hover:text-primary hover:border-input h-10 px-4 py-2 cursor-pointer'
+                <FormProvider {...profilePictureForm}>
+                  <form
+                    onSubmit={profilePictureForm.handleSubmit(onChangePicture)}
+                  >
+                    <FormField
+                      control={profilePictureForm.control}
+                      name='image'
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              id='picture'
+                              type='file'
+                              accept='image/*'
+                              onChange={e =>
+                                field.onChange(
+                                  e.target.files ? e.target.files[0] : undefined
+                                )
+                              }
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </form>
+                </FormProvider>
+                <Button
+                  onClick={profilePictureForm.handleSubmit(onChangePicture)}
                 >
                   Change Profile Picture
-                </Label>
-                <Input
-                  id='picture'
-                  type='file'
-                  accept='image/*'
-                  className='hidden'
-                />
+                </Button>
                 <DialogClose asChild>
                   <Button variant='outline'>Close</Button>
                 </DialogClose>
@@ -98,7 +127,7 @@ export default function Setting() {
                   <Label>Username :</Label>
                   <span className='ml-1 font-semibold'>{USER_NAME}</span>
                 </div>
-                <Dialog open={open} onOpenChange={setOpen}>
+                <Dialog open={nameOpen} onOpenChange={setNameOpen}>
                   <DialogTrigger asChild>
                     <Button variant='link'>Change Username</Button>
                   </DialogTrigger>
