@@ -38,9 +38,10 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useAuth, useSettingProfile } from '@/hooks';
+import { useAuth, useLoadSnap, useSettingProfile } from '@/hooks';
 
 export default function Setting() {
+  const { updateProfilePicture } = useLoadSnap('userId');
   const {
     user,
     nameOpen,
@@ -51,7 +52,7 @@ export default function Setting() {
     setPictureOpen,
     profilePictureForm,
     onChangePicture,
-  } = useSettingProfile();
+  } = useSettingProfile(updateProfilePicture);
   const { onDeleteAccount } = useAuth();
 
   const USER_NAME = user?.displayName;

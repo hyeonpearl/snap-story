@@ -11,13 +11,17 @@ import {
 } from '@/lib/schema';
 import { auth, storage } from '@/server/firebase';
 
+type UpdateProfilePictureFn = (newPictureUrl: string) => Promise<void>;
+
 async function uploadProfilePicture(user: User, file: File) {
   const locationRef = ref(storage, `profile/${user?.uid}`);
   const result = await uploadBytes(locationRef, file);
   return getDownloadURL(result.ref);
 }
 
-export function useSettingProfile() {
+export function useSettingProfile(
+  updateProfilePicture: UpdateProfilePictureFn
+) {
   const user = auth.currentUser;
   const [nameOpen, setNameOpen] = useState(false);
   const [pictureOpen, setPictureOpen] = useState(false);
@@ -29,9 +33,6 @@ export function useSettingProfile() {
     resolver: zodResolver(ProfileFormPictureSchema),
     defaultValues: { image: new File([], '') },
   });
-
-  const file = profilePictureForm.watch('image');
-  console.log(file);
 
   async function onChangeName(data: ProfileNameType) {
     if (!user) return;
@@ -53,6 +54,7 @@ export function useSettingProfile() {
       await updateProfile(user, {
         photoURL: pictureUrl,
       });
+      updateProfilePicture(pictureUrl);
       setPictureOpen(false);
       profilePictureForm.reset();
     } catch (error) {
