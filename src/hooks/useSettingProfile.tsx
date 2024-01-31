@@ -11,6 +11,7 @@ import {
 } from '@/lib/schema';
 import { auth, storage } from '@/server/firebase';
 
+type UpdateProfileNameFn = (newUsername: string) => Promise<void>;
 type UpdateProfilePictureFn = (newPictureUrl: string) => Promise<void>;
 
 async function uploadProfilePicture(user: User, file: File) {
@@ -20,6 +21,7 @@ async function uploadProfilePicture(user: User, file: File) {
 }
 
 export function useSettingProfile(
+  updateProfileName: UpdateProfileNameFn,
   updateProfilePicture: UpdateProfilePictureFn
 ) {
   const user = auth.currentUser;
@@ -39,6 +41,7 @@ export function useSettingProfile(
 
     try {
       await updateProfile(user, { displayName: data.username });
+      updateProfileName(data.username);
       setNameOpen(false);
       profileNameForm.reset();
     } catch (error) {

@@ -41,7 +41,7 @@ import { Label } from '@/components/ui/label';
 import { useAuth, useLoadSnap, useSettingProfile } from '@/hooks';
 
 export default function Setting() {
-  const { updateProfilePicture } = useLoadSnap('userId');
+  const { updateProfileName, updateProfilePicture } = useLoadSnap('userId');
   const {
     user,
     nameOpen,
@@ -52,7 +52,7 @@ export default function Setting() {
     setPictureOpen,
     profilePictureForm,
     onChangePicture,
-  } = useSettingProfile(updateProfilePicture);
+  } = useSettingProfile(updateProfileName, updateProfilePicture);
   const { onDeleteAccount } = useAuth();
 
   const USER_NAME = user?.displayName;
