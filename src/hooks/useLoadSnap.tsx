@@ -29,6 +29,16 @@ export function useLoadSnap(order: 'all' | 'userId') {
   const unsubscribeRef = useRef<Unsubscribe | null>(null);
   const [snaps, setSnaps] = useState<ISnap[]>([]);
 
+  async function updateProfileName(newUsername: string) {
+    const batch = writeBatch(db);
+
+    snaps.forEach(snap => {
+      const snapRef = doc(db, 'snaps', snap.id);
+      batch.update(snapRef, { username: newUsername });
+    });
+
+    await batch.commit();
+  }
   async function updateProfilePicture(newPictureUrl: string) {
     const batch = writeBatch(db);
 
@@ -91,5 +101,5 @@ export function useLoadSnap(order: 'all' | 'userId') {
     };
   }, [order, user]);
 
-  return { user, snaps, updateProfilePicture };
+  return { user, snaps, updateProfileName, updateProfilePicture };
 }
