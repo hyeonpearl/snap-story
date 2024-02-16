@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "zwitter-app"
-  }
+    "default": "snapstory-app",
+    "snapstory": "snapstory-app"
+  },
+  "targets": {},
+  "etags": {}
 }
