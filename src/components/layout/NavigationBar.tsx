@@ -65,35 +65,34 @@ export function NavigationBar() {
       </div>
       <Button variant='ghost' asChild>
         <Link to='/home'>
-          <HomeIcon className='mr-2 w-5 h-5' />
-          Home
+          <HomeIcon className='mr-2 w-5 h-5' />홈
         </Link>
       </Button>
       <Button variant='ghost'>
         <MagnifyingGlassIcon className='mr-2 w-5 h-5' />
-        Explore
+        탐색하기
       </Button>
       <Button variant='ghost'>
         <BellIcon className='mr-2 w-5 h-5' />
-        Notification
+        알림
       </Button>
       <Button variant='ghost'>
         <EnvelopeClosedIcon className='mr-2 w-5 h-5' />
-        Messages
+        메시지
       </Button>
       <Button variant='ghost' asChild>
         <Link to='/profile'>
           <PersonIcon className='mr-2 w-5 h-5' />
-          Profile
+          프로필
         </Link>
       </Button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button>Post</Button>
+          <Button>게시하기</Button>
         </DialogTrigger>
         <DialogContent className='sm:max-w-[425px]'>
           <DialogHeader>
-            <DialogTitle>Post</DialogTitle>
+            <DialogTitle>게시하기</DialogTitle>
           </DialogHeader>
           <div className='flex items-center mt-4'>
             <Avatar>
@@ -169,7 +168,7 @@ export function NavigationBar() {
                   type='submit'
                   onClick={postSnapForm.handleSubmit(onPost)}
                 >
-                  Post
+                  게시하기
                 </Button>
               </div>
             </form>
@@ -195,26 +194,26 @@ export function NavigationBar() {
         </PopoverTrigger>
         <PopoverContent className='max-w-60'>
           <Button variant='outline' className='w-full mb-1' asChild>
-            <Link to='/settings'>Settings</Link>
+            <Link to='/settings'>설정</Link>
           </Button>
           <AlertDialog>
             <AlertDialogTrigger asChild className='w-full'>
               <Button variant='destructive' className='w-full'>
-                Sign Out
+                로그아웃
               </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>Sign Out</AlertDialogTitle>
+                <AlertDialogTitle>로그아웃</AlertDialogTitle>
                 <AlertDialogDescription>
-                  Are you sure you want to sign out?
+                  정말로 로그아웃하시겠습니까?
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogCancel>취소</AlertDialogCancel>
                 <Button variant='destructive' asChild>
                   <AlertDialogAction onClick={handleSignOut}>
-                    Sign Out
+                    로그아웃
                   </AlertDialogAction>
                 </Button>
               </AlertDialogFooter>

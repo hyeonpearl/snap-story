@@ -34,12 +34,12 @@ export default function SignUp() {
       <Dialog>
         <DialogTrigger asChild>
           <Button className='absolute right-4 top-4' variant='ghost'>
-            Login
+            로그인
           </Button>
         </DialogTrigger>
         <DialogContent className='sm:max-w-[425px]'>
           <DialogHeader>
-            <DialogTitle>Login</DialogTitle>
+            <DialogTitle>로그인</DialogTitle>
             <DialogDescription>
               이메일과 비밀번호를 입력해주세요.
             </DialogDescription>
@@ -47,7 +47,7 @@ export default function SignUp() {
           <div className='grid gap-4 py-4'>
             <Button variant='outline' onClick={handleSignInGithub}>
               <GitHubLogoIcon className='mr-2' />
-              Sign In the Github
+              Github로 로그인
             </Button>
             <HorizontalRule content='OR' />
             <FormProvider {...signInForm}>
@@ -92,7 +92,7 @@ export default function SignUp() {
               onClick={signInForm.handleSubmit(handleSignIn)}
               className='w-full'
             >
-              Login
+              로그인
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -108,15 +108,17 @@ export default function SignUp() {
         <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]'>
           <div className='flex flex-col space-y-2 text-center'>
             <h1 className='text-2xl font-semibold tracking-tight'>
-              지금 일어나고 있는 일
+              순간이 간결함을 만나는 곳.
             </h1>
-            <p className='text-muted-foreground text-lg'>지금 가입하세요.</p>
+            <p className='text-muted-foreground text-lg'>
+              여러분의 삶의 하이라이트를 공유하세요.
+            </p>
           </div>
 
           <div className='grid gap-6'>
             <Button variant='outline' onClick={handleSignInGithub}>
               <GitHubLogoIcon className='mr-2' />
-              Sign Up the Github
+              Github로 계정 만들기
             </Button>
             <HorizontalRule content='OR' />
             <FormProvider {...signUpForm}>
@@ -169,7 +171,7 @@ export default function SignUp() {
                 type='button'
                 onClick={signUpForm.handleSubmit(handleSignUp)}
               >
-                Create Account
+                계정 만들기
               </Button>
             </FormProvider>
           </div>

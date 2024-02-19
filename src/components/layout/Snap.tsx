@@ -94,20 +94,20 @@ export function Snap({
                         <DialogTrigger asChild>
                           <DropdownMenuItem>
                             <Pencil1Icon className='mr-2 h-4 w-4' />
-                            <span>Edit Snap</span>
+                            <span>게시글 수정</span>
                           </DropdownMenuItem>
                         </DialogTrigger>
                         <AlertDialogTrigger asChild>
                           <DropdownMenuItem>
                             <TrashIcon className='mr-2 h-4 w-4' />
-                            <span>Delete Snap</span>
+                            <span>게시글 삭제</span>
                           </DropdownMenuItem>
                         </AlertDialogTrigger>
                       </DropdownMenuContent>
                     </DropdownMenu>
                     <DialogContent className='sm:max-w-[425px]'>
                       <DialogHeader>
-                        <DialogTitle>Edit</DialogTitle>
+                        <DialogTitle>게시글 수정</DialogTitle>
                       </DialogHeader>
                       <div className='flex items-center mt-4'>
                         <Avatar>
@@ -194,7 +194,7 @@ export function Snap({
                                 onEdit(id, data)
                               )}
                             >
-                              Edit
+                              수정하기
                             </Button>
                           </div>
                         </form>
@@ -207,12 +207,12 @@ export function Snap({
                         </AlertDialogTitle>
                       </AlertDialogHeader>
                       <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogCancel>취소</AlertDialogCancel>
                         <Button variant='destructive' asChild>
                           <AlertDialogAction
                             onClick={() => deleteSnap(id, userId, photo)}
                           >
-                            Delete
+                            삭제하기
                           </AlertDialogAction>
                         </Button>
                       </AlertDialogFooter>
