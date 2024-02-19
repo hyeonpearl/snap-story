@@ -32,11 +32,11 @@ export default function Profile() {
                     <span className='text-gray-500'>@{USER_EMAIL}</span>
                   </div>
                   <Button asChild>
-                    <Link to={'/settings'}>Settings</Link>
+                    <Link to={'/settings'}>설정</Link>
                   </Button>
                 </div>
                 <div className='mt-4'>
-                  <strong>{snaps.length}</strong> Snaps
+                  게시글 <strong>{snaps.length}</strong>
                 </div>
               </section>
             </div>

@@ -63,8 +63,8 @@ export default function Setting() {
     <main className='ml-64 py-6 max-w-xl grid grid-cols-1 gap-4'>
       <Card>
         <CardHeader>
-          <CardTitle>Settings profile</CardTitle>
-          <CardDescription>Set up your profile.</CardDescription>
+          <CardTitle>계정 설정</CardTitle>
+          <CardDescription>계정을 설정하세요.</CardDescription>
         </CardHeader>
         <CardContent>
           <section>
@@ -80,7 +80,7 @@ export default function Setting() {
                 </DialogTrigger>
                 <DialogTrigger asChild>
                   <Button variant='link' className='mt-4'>
-                    Change Profile Picture
+                    프로필 사진 변경
                   </Button>
                 </DialogTrigger>
               </div>
@@ -115,10 +115,10 @@ export default function Setting() {
                 <Button
                   onClick={profilePictureForm.handleSubmit(onChangePicture)}
                 >
-                  Change Profile Picture
+                  사진 변경하기
                 </Button>
                 <DialogClose asChild>
-                  <Button variant='outline'>Close</Button>
+                  <Button variant='outline'>취소</Button>
                 </DialogClose>
               </DialogContentNoneX>
             </Dialog>
@@ -130,12 +130,12 @@ export default function Setting() {
                 </div>
                 <Dialog open={nameOpen} onOpenChange={setNameOpen}>
                   <DialogTrigger asChild>
-                    <Button variant='link'>Change Username</Button>
+                    <Button variant='link'>사용자 이름 변경</Button>
                   </DialogTrigger>
                   <DialogContent>
-                    <DialogTitle>Change Username</DialogTitle>
+                    <DialogTitle>사용자 이름 변경</DialogTitle>
                     <DialogDescription>
-                      Enter the username you want.
+                      사용자 이름을 변경합니다.
                     </DialogDescription>
                     <FormProvider {...profileNameForm}>
                       <form
@@ -160,7 +160,7 @@ export default function Setting() {
                         type='submit'
                         onClick={profileNameForm.handleSubmit(onChangeName)}
                       >
-                        Save
+                        이름 변경하기
                       </Button>
                     </DialogFooter>
                   </DialogContent>
@@ -176,33 +176,31 @@ export default function Setting() {
       </Card>
       <Card>
         <CardHeader>
-          <CardTitle className='text-red-500'>Delete Account</CardTitle>
+          <CardTitle className='text-red-500'>계정 삭제</CardTitle>
           <CardDescription>
-            Once you delete your account, there is no going back. Please be
-            certain.
+            계정을 삭제하면 되돌릴 수 없습니다. 정말로 삭제하시겠습니까?
           </CardDescription>
         </CardHeader>
         <CardContent>
           <section>
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button variant='destructive'>Delete Account</Button>
+                <Button variant='destructive'>계정 삭제</Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle className='text-red-500'>
-                    Delete Account
+                    계정 삭제
                   </AlertDialogTitle>
                   <AlertDialogDescription>
-                    There is no going back. Are you sure you want to delete your
-                    account?
+                    계정을 삭제하면 되돌릴 수 없습니다. 정말로 삭제하시겠습니까?
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogCancel>취소</AlertDialogCancel>
                   <Button variant='destructive' asChild>
                     <AlertDialogAction onClick={onDeleteAccount}>
-                      Delete
+                      계정 삭제하기
                     </AlertDialogAction>
                   </Button>
                 </AlertDialogFooter>
