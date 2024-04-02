@@ -7,6 +7,7 @@ import Profile from '@/pages/Profile';
 import Setting from '@/pages/Setting';
 import { auth } from '@/server/firebase';
 import ProtectedRoute from '@/ProtectedRoute';
+import { Toaster } from './components/ui/toaster';
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,7 @@ export default function App() {
   return (
     <div className='w-screen h-screen'>
       <RouterProvider router={router} />
+      <Toaster />
     </div>
   );
 }
