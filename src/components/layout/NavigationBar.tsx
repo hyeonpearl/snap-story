@@ -43,16 +43,25 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
 import { useAuth, usePostSnap } from '@/hooks';
 import { FILE_SIZE } from '@/lib/schema';
 
 export function NavigationBar() {
   const { user, handleSignOut } = useAuth();
   const { open, setOpen, postSnapForm, file, onPost } = usePostSnap();
+  const { toast } = useToast();
 
   const USER_NAME = user?.displayName || '익명';
   const USER_EMAIL = user?.email?.split('@')[0];
   const USER_PHOTO = user?.photoURL || '';
+
+  const toastMessage = {
+    description: '아직 개발되지 않은 기능입니다.',
+  };
+  const sendToast = () => {
+    toast(toastMessage);
+  };
 
   return (
     <nav className='fixed w-60 h-full max-w-60 flex flex-col p-3 border-r gap-4 bg-white'>
@@ -68,15 +77,15 @@ export function NavigationBar() {
           <HomeIcon className='mr-2 w-5 h-5' />홈
         </Link>
       </Button>
-      <Button variant='ghost'>
+      <Button variant='ghost' onClick={sendToast}>
         <MagnifyingGlassIcon className='mr-2 w-5 h-5' />
         탐색하기
       </Button>
-      <Button variant='ghost'>
+      <Button variant='ghost' onClick={sendToast}>
         <BellIcon className='mr-2 w-5 h-5' />
         알림
       </Button>
-      <Button variant='ghost'>
+      <Button variant='ghost' onClick={sendToast}>
         <EnvelopeClosedIcon className='mr-2 w-5 h-5' />
         메시지
       </Button>
