@@ -57,7 +57,7 @@ export function NavigationBar() {
   const USER_PHOTO = user?.photoURL || '';
 
   const toastMessage = {
-    description: '아직 개발되지 않은 기능입니다.',
+    title: '아직 개발되지 않은 기능입니다.',
   };
   const sendToast = () => {
     toast(toastMessage);
