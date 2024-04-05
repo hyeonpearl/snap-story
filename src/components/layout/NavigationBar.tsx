@@ -46,9 +46,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth, usePostSnap } from '@/hooks';
 import { FILE_SIZE } from '@/lib/schema';
+import { useContext } from 'react';
+import { AuthContext } from '@/lib/AuthContext';
 
 export function NavigationBar() {
-  const { user, handleSignOut } = useAuth();
+  const { user } = useContext(AuthContext);
+  const { handleSignOut } = useAuth();
   const { open, setOpen, postSnapForm, file, onPost } = usePostSnap();
   const { toast } = useToast();
 

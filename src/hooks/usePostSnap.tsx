@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { addDoc, collection, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { SnapFormSchema, SnapType } from '@/lib/schema';
 import { auth, db, storage } from '@/server/firebase';
+import { AuthContext } from '@/lib/AuthContext';
 
 function formatSnapDate(date: Date) {
   return {
@@ -42,7 +43,7 @@ async function postSnap(userUid: string, data: SnapType) {
 }
 
 function usePostSnap() {
-  const user = auth.currentUser;
+  const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
   const postSnapForm = useForm<SnapType>({
     resolver: zodResolver(SnapFormSchema),

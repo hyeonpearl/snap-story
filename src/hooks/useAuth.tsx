@@ -18,7 +18,6 @@ import {
 } from '@/lib/schema';
 
 export function useAuth() {
-  const user = auth.currentUser;
   const navigate = useNavigate();
   const signUpForm = useForm<SignUpType>({
     resolver: zodResolver(SignUpFormSchema),
@@ -80,7 +79,6 @@ export function useAuth() {
   }
 
   return {
-    user,
     signUpForm,
     signInForm,
     handleSignUp,
