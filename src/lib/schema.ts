@@ -12,24 +12,24 @@ const SignUpFormSchema = z.object({
   username: z
     .string()
     .min(2, {
-      message: 'Please enter at least 2 characters.',
+      message: '최소 2자 이상으로 작성해주세요.',
     })
     .max(20, {
-      message: 'Please enter no more than 20 characters.',
+      message: '최대 20자 이하로 작성해주세요.',
     }),
   email: z
     .string()
     .min(1, {
-      message: 'Please enter your email.',
+      message: '이메일을 작성해주세요.',
     })
-    .email({ message: 'Please follow the email format.' }),
+    .email({ message: '이메일 형식에 맞춰 작성해주세요.' }),
   password: z
     .string()
     .min(6, {
-      message: 'Please enter at least 6 characters.',
+      message: '최소 6자 이상으로 작성해주세요.',
     })
     .max(16, {
-      message: 'Please enter no more than 16 characters.',
+      message: '최대 16자 이하로 작성해주세요.',
     }),
 });
 
@@ -37,50 +37,50 @@ const SignInFormSchema = z.object({
   email: z
     .string()
     .min(1, {
-      message: 'Please enter your email.',
+      message: '이메일을 작성해주세요.',
     })
-    .email({ message: 'Please follow the email format.' }),
+    .email({ message: '이메일 형식에 맞춰 작성해주세요.' }),
   password: z
     .string()
     .min(6, {
-      message: 'Please enter at least 6 characters.',
+      message: '최소 6자 이상으로 작성해주세요.',
     })
     .max(16, {
-      message: 'Please enter no more than 16 characters.',
+      message: '최대 16자 이하로 작성해주세요.',
     }),
 });
 
 const SnapFormSchema = z.object({
   snap: z
-    .string({ required_error: 'Please enter your snap.' })
+    .string({ required_error: '내용을 작성해주세요.' })
     .min(3, {
-      message: 'Please enter at least 3 characters.',
+      message: '최소 3자 이상으로 작성해주세요.',
     })
     .max(300, {
-      message: 'Please enter no more than 300 characters.',
+      message: '최대 300자 이하로 작성해주세요.',
     }),
   image: z
     .instanceof(File)
     .optional()
     .refine(file => file && file.size < FILE_SIZE, {
-      message: 'Only files with a size of less than 1MB can be uploaded.',
+      message: '1MB 이하 크기의 파일만 업로드할 수 있습니다.',
     }),
 });
 
 const ProfileFormNameSchema = z.object({
   username: z
-    .string({ required_error: 'Please enter your username.' })
+    .string({ required_error: '사용하실 이름을 작성해주세요.' })
     .min(2, {
-      message: 'Please enter at least 2 characters.',
+      message: '최소 2자 이상으로 작성해주세요.',
     })
     .max(20, {
-      message: 'Please enter no more than 20 characters.',
+      message: '최대 20자 이하로 작성해주세요.',
     }),
 });
 
 const ProfileFormPictureSchema = z.object({
   image: z.instanceof(File).refine(file => file && file.size < FILE_SIZE, {
-    message: 'Only files with a size of less than 1MB can be uploaded.',
+    message: '1MB 이하 크기의 파일만 업로드할 수 있습니다.',
   }),
 });
 

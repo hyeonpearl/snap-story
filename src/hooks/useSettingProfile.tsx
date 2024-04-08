@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { User, updateProfile } from 'firebase/auth';
@@ -9,7 +9,8 @@ import {
   ProfileNameType,
   ProfilePictureType,
 } from '@/lib/schema';
-import { auth, storage } from '@/server/firebase';
+import { storage } from '@/server/firebase';
+import { AuthContext } from '@/lib/AuthContext';
 
 type UpdateProfileNameFn = (newUsername: string) => Promise<void>;
 type UpdateProfilePictureFn = (newPictureUrl: string) => Promise<void>;
@@ -24,7 +25,7 @@ export function useSettingProfile(
   updateProfileName: UpdateProfileNameFn,
   updateProfilePicture: UpdateProfilePictureFn
 ) {
-  const user = auth.currentUser;
+  const { user } = useContext(AuthContext);
   const [nameOpen, setNameOpen] = useState(false);
   const [pictureOpen, setPictureOpen] = useState(false);
   const profileNameForm = useForm<ProfileNameType>({
@@ -66,7 +67,6 @@ export function useSettingProfile(
   }
 
   return {
-    user,
     nameOpen,
     setNameOpen,
     profileNameForm,

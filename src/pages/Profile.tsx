@@ -5,9 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Timeline } from '@/components/layout/Timeline';
 import { useLoadSnap } from '@/hooks';
+import { AuthContext } from '@/lib/AuthContext';
+import { useContext } from 'react';
 
 export default function Profile() {
-  const { user, snaps } = useLoadSnap('userId');
+  const { user } = useContext(AuthContext);
+  const { snaps } = useLoadSnap('userId');
 
   const USER_NAME = user?.displayName;
   const USER_EMAIL = user?.email?.split('@')[0];

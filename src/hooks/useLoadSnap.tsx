@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Unsubscribe } from 'firebase/auth';
 import {
   collection,
@@ -10,7 +10,8 @@ import {
   where,
   writeBatch,
 } from 'firebase/firestore';
-import { auth, db } from '@/server/firebase';
+import { db } from '@/server/firebase';
+import { AuthContext } from '@/lib/AuthContext';
 
 export interface ISnap {
   id: string;
@@ -25,7 +26,7 @@ export interface ISnap {
 }
 
 export function useLoadSnap(order: 'all' | 'userId') {
-  const user = auth.currentUser;
+  const { user } = useContext(AuthContext);
   const unsubscribeRef = useRef<Unsubscribe | null>(null);
   const [snaps, setSnaps] = useState<ISnap[]>([]);
 
@@ -101,5 +102,5 @@ export function useLoadSnap(order: 'all' | 'userId') {
     };
   }, [order, user]);
 
-  return { user, snaps, updateProfileName, updateProfilePicture };
+  return { snaps, updateProfileName, updateProfilePicture };
 }

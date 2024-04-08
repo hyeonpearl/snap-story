@@ -39,11 +39,13 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth, useLoadSnap, useSettingProfile } from '@/hooks';
+import { AuthContext } from '@/lib/AuthContext';
+import { useContext } from 'react';
 
 export default function Setting() {
+  const { user } = useContext(AuthContext);
   const { updateProfileName, updateProfilePicture } = useLoadSnap('userId');
   const {
-    user,
     nameOpen,
     setNameOpen,
     profileNameForm,
